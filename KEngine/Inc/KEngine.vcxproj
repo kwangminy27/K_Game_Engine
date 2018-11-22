@@ -169,10 +169,12 @@
     <ClInclude Include="Base\enum.h" />
     <ClInclude Include="Base\macro.h" />
     <ClInclude Include="core.h" />
+    <ClInclude Include="device_manager.h" />
     <ClInclude Include="KEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core.cpp" />
+    <ClCompile Include="device_manager.cpp" />
     <ClCompile Include="KEngine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

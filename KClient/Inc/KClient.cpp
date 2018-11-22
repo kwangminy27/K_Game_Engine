@@ -10,5 +10,7 @@ int WINAPI wWinMain(HINSTANCE _instance, HINSTANCE _prev_instance, PWSTR _cmd_li
 	core->Initialize(L"K Game Engine", L"K Game Engine", _instance);
 	core->Run();
 
+	core.reset();
+
 	return 0;
 }

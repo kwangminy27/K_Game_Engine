@@ -12,6 +12,7 @@ namespace K
 		virtual void Initialize() override;
 
 		void Initialize(std::wstring const& _class_name, std::wstring const& _window_name, HINSTANCE _instance);
+
 		void Run();
 
 	protected:
@@ -33,6 +34,7 @@ namespace K
 		void _Collision(float _time);
 		void _Render(float _time);
 
+		static bool shutdown_;
 		HINSTANCE instance_{};
 		HWND window_{};
 	};

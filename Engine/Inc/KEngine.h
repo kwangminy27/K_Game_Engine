@@ -1,12 +1,38 @@
 #pragma once
 
 // Windows API
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
 // C++ Standard Library
+#include <array>
 #include <iostream>
 #include <string>
+
+// DirectX
+#include <wrl/client.h>
+#include <dxgidebug.h>
+#include <d3d11.h>
+#include <d2d1.h>
+#include <dwrite.h>
+
+#pragma comment(lib, "dxguid")
+#pragma comment(lib, "d3d11")
+#pragma comment(lib, "d2d1")
+#pragma comment(lib, "dwrite")
+
+// DirectXMath
+#include <DirectXColors.h>
 
 // Base
 #include "Base/macro.h"
 #include "Base/enum.h"
+
+namespace K
+{
+	static void ThrowIfFailed(HRESULT _result)
+	{
+		if (FAILED(_result))
+			throw std::exception{};
+	}
+}

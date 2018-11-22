@@ -10,6 +10,9 @@
     <Filter Include="01. Core">
       <UniqueIdentifier>{ab9d6375-cfe8-4bc8-8d1e-7977301b7c04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Device">
+      <UniqueIdentifier>{e719c191-ab80-475e-972a-e688fb5da0f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -24,6 +27,9 @@
     <ClInclude Include="Base\enum.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="device_manager.h">
+      <Filter>02. Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -31,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="core.cpp">
       <Filter>01. Core</Filter>
+    </ClCompile>
+    <ClCompile Include="device_manager.cpp">
+      <Filter>02. Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

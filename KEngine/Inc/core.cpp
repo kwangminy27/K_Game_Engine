@@ -1,6 +1,10 @@
 #include "KEngine.h"
 #include "core.h"
 
+#include "device_manager.h"
+
+bool K::Core::shutdown_{};
+
 void K::Core::Initialize()
 {
 }
@@ -13,6 +17,8 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 
 		_RegisterClass(_class_name);
 		_CreateWindow(_class_name, _window_name);
+
+		DeviceManager::singleton()->Initialize(window_);
 	}
 	catch (std::exception const& _e)
 	{
@@ -27,7 +33,7 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 void K::Core::Run()
 {
 	MSG message{};
-	while (true)
+	while (!shutdown_)
 	{
 		if (PeekMessage(&message, nullptr, NULL, NULL, PM_REMOVE))
 		{
@@ -41,6 +47,7 @@ void K::Core::Run()
 
 void K::Core::_Finalize()
 {
+	DeviceManager::singleton().reset();
 }
 
 LRESULT K::Core::_WindowProc(HWND _window, UINT _message, WPARAM _w_param, LPARAM _l_param)
@@ -57,6 +64,7 @@ LRESULT K::Core::_WindowProc(HWND _window, UINT _message, WPARAM _w_param, LPARA
 		return 0;
 
 	case WM_DESTROY:
+		Core::shutdown_ = true;
 		PostQuitMessage(0);
 		return 0;
 	}
@@ -127,4 +135,8 @@ void K::Core::_Collision(float _time)
 
 void K::Core::_Render(float _time)
 {
+	auto const& device_manager = DeviceManager::singleton();
+
+	device_manager->Clear();
+	device_manager->Present();
 }
