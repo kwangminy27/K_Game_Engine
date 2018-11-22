@@ -1,0 +1,6 @@
+\Base\
+.exp
+.ilk
+.pdb
+.iobj
+.ipdb
