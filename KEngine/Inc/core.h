@@ -1,11 +1,8 @@
 #pragma once
 
-#include <KCommon.h>
-#include <singleton.h>
-
 namespace K
 {
-	class K_ENGINE_DLL Core : public Singleton<Core>
+	class K_ENGINE_DLL Core final : public Singleton<Core>
 	{
 		friend class Singleton<Core>;
 	public:
@@ -15,7 +12,7 @@ namespace K
 
 		void Run();
 
-	protected:
+	private:
 		Core() = default;
 		Core(Core const&) = delete;
 		Core(Core&&) noexcept = delete;

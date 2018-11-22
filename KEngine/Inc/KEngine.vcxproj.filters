@@ -13,6 +13,9 @@
     <Filter Include="02. Device">
       <UniqueIdentifier>{e719c191-ab80-475e-972a-e688fb5da0f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Path">
+      <UniqueIdentifier>{23b6dccc-2aba-4184-afee-e975f24170ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -30,6 +33,7 @@
     <ClInclude Include="device_manager.h">
       <Filter>02. Device</Filter>
     </ClInclude>
+    <ClInclude Include="path_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -41,5 +45,6 @@
     <ClCompile Include="device_manager.cpp">
       <Filter>02. Device</Filter>
     </ClCompile>
+    <ClCompile Include="path_manager.cpp" />
   </ItemGroup>
 </Project>

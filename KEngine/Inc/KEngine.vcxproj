@@ -171,6 +171,7 @@
     <ClInclude Include="core.h" />
     <ClInclude Include="device_manager.h" />
     <ClInclude Include="KEngine.h" />
+    <ClInclude Include="path_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core.cpp" />
@@ -179,6 +180,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="path_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\KCommon\Inc\KCommon.vcxproj">

@@ -6,8 +6,11 @@
 
 // C++ Standard Library
 #include <array>
+#include <filesystem>
 #include <iostream>
 #include <string>
+#include <unordered_map>
+#include <utility>
 
 // DirectX
 #include <wrl/client.h>
@@ -27,6 +30,11 @@
 // Base
 #include "Base/macro.h"
 #include "Base/enum.h"
+
+// KCommon
+#include <KCommon.h>
+#include <singleton.h>
+#include <tag.h>
 
 namespace K
 {

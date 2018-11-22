@@ -21,7 +21,9 @@ namespace K
 		Microsoft::WRL::ComPtr<ID3D11Device> const& device() const;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> const& context() const;
 
-	protected:
+		Microsoft::WRL::ComPtr<ID2D1RenderTarget> const& d2d_render_target() const;
+
+	private:
 		DeviceManager() = default;
 		DeviceManager(DeviceManager const&) = delete;
 		DeviceManager(DeviceManager&&) noexcept = delete;

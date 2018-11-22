@@ -48,6 +48,11 @@ Microsoft::WRL::ComPtr<ID3D11DeviceContext> const& K::DeviceManager::context() c
 	return context_;
 }
 
+Microsoft::WRL::ComPtr<ID2D1RenderTarget> const& K::DeviceManager::d2d_render_target() const
+{
+	return d2d_render_target_;
+}
+
 void K::DeviceManager::_Finalize()
 {
 #ifdef _DEBUG
