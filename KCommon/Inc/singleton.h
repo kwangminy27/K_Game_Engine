@@ -3,7 +3,7 @@
 namespace K
 {
 	template <typename T>
-	class K_COMMON_DLL Singleton
+	class Singleton
 	{
 	public:
 		static std::unique_ptr<T, std::function<void(T*)>> const& singleton();

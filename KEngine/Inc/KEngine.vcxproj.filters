@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{e83fbc41-7de8-4310-b50d-fed129e72c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{be0e3dc7-2c06-4633-aa96-0ececca14cd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Core">
+      <UniqueIdentifier>{ab9d6375-cfe8-4bc8-8d1e-7977301b7c04}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="KEngine.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="core.h">
+      <Filter>01. Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\macro.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="KEngine.cpp">
+      <Filter>PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="core.cpp">
+      <Filter>01. Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
