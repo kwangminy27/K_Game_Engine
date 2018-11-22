@@ -28,6 +28,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KCommon", "KCommon\Inc\KCom
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KEngine", "KEngine\Inc\KEngine.vcxproj", "{118A1B7F-3BD4-4D48-8C7E-B5FB11D62F99}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KClient", "KClient\Inc\KClient.vcxproj", "{016C5300-A384-4249-AC53-404F0C2D095F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -52,6 +54,14 @@ Global
 		{118A1B7F-3BD4-4D48-8C7E-B5FB11D62F99}.Release|x64.Build.0 = Release|x64
 		{118A1B7F-3BD4-4D48-8C7E-B5FB11D62F99}.Release|x86.ActiveCfg = Release|Win32
 		{118A1B7F-3BD4-4D48-8C7E-B5FB11D62F99}.Release|x86.Build.0 = Release|Win32
+		{016C5300-A384-4249-AC53-404F0C2D095F}.Debug|x64.ActiveCfg = Debug|x64
+		{016C5300-A384-4249-AC53-404F0C2D095F}.Debug|x64.Build.0 = Debug|x64
+		{016C5300-A384-4249-AC53-404F0C2D095F}.Debug|x86.ActiveCfg = Debug|Win32
+		{016C5300-A384-4249-AC53-404F0C2D095F}.Debug|x86.Build.0 = Debug|Win32
+		{016C5300-A384-4249-AC53-404F0C2D095F}.Release|x64.ActiveCfg = Release|x64
+		{016C5300-A384-4249-AC53-404F0C2D095F}.Release|x64.Build.0 = Release|x64
+		{016C5300-A384-4249-AC53-404F0C2D095F}.Release|x86.ActiveCfg = Release|Win32
+		{016C5300-A384-4249-AC53-404F0C2D095F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +69,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7B196413-A110-46BF-8D00-0C7086F46F15} = {B30220AA-E2DF-42E8-B982-C69B19F007AD}
 		{118A1B7F-3BD4-4D48-8C7E-B5FB11D62F99} = {F6031DD8-4FC0-422D-8091-7A4F01EF3C9C}
+		{016C5300-A384-4249-AC53-404F0C2D095F} = {624625B2-1CBD-4400-95AE-23FA280028B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6DF0648-6B2B-469D-B1AC-D16849AAAAC3}

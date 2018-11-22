@@ -8,5 +8,5 @@
 #include <mutex>
 #include <string>
 
-// KCommon
+// Base
 #include "Base/macro.h"
