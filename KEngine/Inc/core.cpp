@@ -3,6 +3,7 @@
 
 #include "device_manager.h"
 #include "path_manager.h"
+#include "Resource/resource_manager.h"
 
 bool K::Core::shutdown_{};
 
@@ -21,6 +22,7 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 
 		DeviceManager::singleton()->Initialize(window_);
 		PathManager::singleton()->Initialize();
+		ResourceManager::singleton()->Initialize();
 	}
 	catch (std::exception const& _e)
 	{
@@ -49,6 +51,7 @@ void K::Core::Run()
 
 void K::Core::_Finalize()
 {
+	ResourceManager::singleton().reset();
 	PathManager::singleton().reset();
 	DeviceManager::singleton().reset();
 }

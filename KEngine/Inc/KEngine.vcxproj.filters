@@ -16,6 +16,18 @@
     <Filter Include="03. Path">
       <UniqueIdentifier>{23b6dccc-2aba-4184-afee-e975f24170ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Resource">
+      <UniqueIdentifier>{624acd5b-67b2-4aa1-9459-8395f72310a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Resource\1. Mesh">
+      <UniqueIdentifier>{f6e89f13-bb83-4432-907a-079d53304c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Resource\2. Texture">
+      <UniqueIdentifier>{b1fd6ce6-2932-4bdc-8cb4-fc6035e0bcca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Resource\3. Sampler">
+      <UniqueIdentifier>{db1b4322-8ca7-4cfc-ad4c-667b4c3592f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -33,7 +45,15 @@
     <ClInclude Include="device_manager.h">
       <Filter>02. Device</Filter>
     </ClInclude>
-    <ClInclude Include="path_manager.h" />
+    <ClInclude Include="path_manager.h">
+      <Filter>03. Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\resource_manager.h">
+      <Filter>04. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\mesh.h">
+      <Filter>04. Resource\1. Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -45,6 +65,14 @@
     <ClCompile Include="device_manager.cpp">
       <Filter>02. Device</Filter>
     </ClCompile>
-    <ClCompile Include="path_manager.cpp" />
+    <ClCompile Include="path_manager.cpp">
+      <Filter>03. Path</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\resource_manager.cpp">
+      <Filter>04. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\mesh.cpp">
+      <Filter>04. Resource\1. Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

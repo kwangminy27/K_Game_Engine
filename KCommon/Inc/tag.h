@@ -16,6 +16,8 @@ namespace K
 		Tag& operator=(Tag const&) = default;
 		Tag& operator=(Tag&&) noexcept = default;
 
+		virtual void _Finalize() = 0;
+
 		std::string tag_{};
 	};
 }

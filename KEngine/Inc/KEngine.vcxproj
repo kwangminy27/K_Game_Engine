@@ -98,7 +98,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>K_ENGINE_EXPORT;_DEBUG;KENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>KEngine.h</PrecompiledHeaderFile>
@@ -150,7 +150,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>K_ENGINE_EXPORT;NDEBUG;KENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>KEngine.h</PrecompiledHeaderFile>
@@ -172,6 +172,8 @@
     <ClInclude Include="device_manager.h" />
     <ClInclude Include="KEngine.h" />
     <ClInclude Include="path_manager.h" />
+    <ClInclude Include="Resource\mesh.h" />
+    <ClInclude Include="Resource\resource_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core.cpp" />
@@ -181,6 +183,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="path_manager.cpp" />
+    <ClCompile Include="Resource\mesh.cpp" />
+    <ClCompile Include="Resource\resource_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\KCommon\Inc\KCommon.vcxproj">
