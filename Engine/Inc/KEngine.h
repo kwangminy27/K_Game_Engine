@@ -1,6 +1,7 @@
 #pragma once
 
 // Windows API
+#define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
@@ -27,6 +28,10 @@
 // DirectXMath
 #include <DirectXColors.h>
 
+// DirectXTK
+#include <DDSTextureLoader.h>
+#include <WICTextureLoader.h>
+
 // Base
 #include "Base/macro.h"
 #include "Base/enum.h"
@@ -35,6 +40,10 @@
 #include <KCommon.h>
 #include <singleton.h>
 #include <tag.h>
+
+// KPhysics
+#include <KPhysics.h>
+#include <type.h>
 
 namespace K
 {

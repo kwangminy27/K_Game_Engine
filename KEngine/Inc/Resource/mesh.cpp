@@ -94,6 +94,26 @@ void K::Mesh::SetInstanceCount(int _container_idx, int _count)
 	mesh_container_vector_.at(_container_idx)->VB_vector.at(static_cast<int>(VERTEX_BUFFER_TYPE::INSTANCE)).count = _count;
 }
 
+K::Vector3 K::Mesh::min() const
+{
+	return min_;
+}
+
+K::Vector3 K::Mesh::max() const
+{
+	return max_;
+}
+
+K::Vector3 K::Mesh::center() const
+{
+	return center_;
+}
+
+K::Vector3 K::Mesh::extent() const
+{
+	return extent_;
+}
+
 K::Mesh::Mesh(Mesh&& _other) noexcept
 {
 	mesh_container_vector_ = std::move(_other.mesh_container_vector_);
@@ -191,6 +211,23 @@ void K::Mesh::_CreateVertexBuffer(void* _data, int _stride, int _count, D3D11_US
 	ThrowIfFailed(device->CreateBuffer(&dbd, &dsd, &VB.buffer));
 
 	mesh_container->VB_vector.push_back(std::move(VB));
+
+	if (_type == VERTEX_BUFFER_TYPE::VERTEX)
+	{
+		char* vertices = static_cast<char*>(_data);
+
+		Vector3 position{};
+		for (int i = 0; i < _count; ++i)
+		{
+			memcpy_s(&position, sizeof(Vector3), vertices + _stride * i, sizeof(Vector3));
+
+			min_ = Vector3::Min(min_, position);
+			max_ = Vector3::Max(max_, position);
+		}
+
+		center_ = (max_ + min_) / 2.f;
+		extent_ = (max_ - min_) / 2.f;
+	}
 }
 
 void K::Mesh::_CreateIndexBuffer(void* _data, int _stride, int _count, D3D11_USAGE _usage, DXGI_FORMAT _format)

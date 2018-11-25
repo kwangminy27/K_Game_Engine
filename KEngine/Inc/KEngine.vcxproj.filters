@@ -54,6 +54,12 @@
     <ClInclude Include="Resource\mesh.h">
       <Filter>04. Resource\1. Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\texture.h">
+      <Filter>04. Resource\2. Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\sampler.h">
+      <Filter>04. Resource\3. Sampler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -73,6 +79,12 @@
     </ClCompile>
     <ClCompile Include="Resource\mesh.cpp">
       <Filter>04. Resource\1. Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\texture.cpp">
+      <Filter>04. Resource\2. Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\sampler.cpp">
+      <Filter>04. Resource\3. Sampler</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

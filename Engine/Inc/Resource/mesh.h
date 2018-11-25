@@ -34,7 +34,7 @@ namespace K
 		std::vector<IndexBuffer> IB_vector;
 	};
 
-	class K_ENGINE_DLL Mesh final
+	class K_ENGINE_DLL Mesh
 	{
 		friend class ResourceManager;
 	public:
@@ -46,6 +46,11 @@ namespace K
 		Microsoft::WRL::ComPtr<ID3D11Buffer> const& GetInstanceBuffer(int _container_idx) const;
 
 		void SetInstanceCount(int _container_idx, int _count);
+
+		Vector3 min() const;
+		Vector3 max() const;
+		Vector3 center() const;
+		Vector3 extent() const;
 
 	private:
 		Mesh() = default;
@@ -70,5 +75,9 @@ namespace K
 		void _CreateIndexBuffer(void* _data, int _stride, int _count, D3D11_USAGE _usage, DXGI_FORMAT _format);
 
 		std::vector<std::unique_ptr<MeshContainer, std::function<void(MeshContainer*)>>> mesh_container_vector_{};
+		Vector3 min_{};
+		Vector3 max_{};
+		Vector3 center_{};
+		Vector3 extent_{};
 	};
 }

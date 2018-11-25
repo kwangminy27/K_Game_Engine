@@ -22,11 +22,17 @@
     <ClCompile Include="KClient.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DirectXTK\DirectXTK_Desktop_2017_Win10.vcxproj">
+      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\KCommon\Inc\KCommon.vcxproj">
       <Project>{7b196413-a110-46bf-8d00-0c7086f46f15}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\KEngine\Inc\KEngine.vcxproj">
       <Project>{118a1b7f-3bd4-4d48-8c7e-b5fb11d62f99}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KPhysics\Inc\KPhysics.vcxproj">
+      <Project>{1173c0c8-dfa5-41d5-92f8-4abd2eecba9c}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -86,8 +92,8 @@
     <OutDir>../Bin/</OutDir>
     <IntDir>../Obj/</IntDir>
     <TargetName>$(ProjectName)_Debug</TargetName>
-    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Engine/Inc/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Engine/Bin/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(SolutionDir)Engine/Inc/;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(SolutionDir)Engine/Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -99,8 +105,8 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>../Bin/</OutDir>
     <IntDir>../Obj/</IntDir>
-    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Engine/Inc/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Engine/Bin/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(SolutionDir)Engine/Inc/;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(SolutionDir)Engine/Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -110,6 +116,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTK/Inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -157,6 +164,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTK/Inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

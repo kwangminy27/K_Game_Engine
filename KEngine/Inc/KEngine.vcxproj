@@ -75,8 +75,8 @@
     <OutDir>../Bin/</OutDir>
     <IntDir>../Obj/</IntDir>
     <TargetName>$(ProjectName)_Debug</TargetName>
-    <IncludePath>$(SolutionDir)Common/Inc/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common/Bin/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -88,8 +88,8 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>../Bin/</OutDir>
     <IntDir>../Obj/</IntDir>
-    <IncludePath>$(SolutionDir)Common/Inc/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common/Bin/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -98,7 +98,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>K_ENGINE_EXPORT;_DEBUG;KENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXTK/Inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>KEngine.h</PrecompiledHeaderFile>
@@ -150,7 +150,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>K_ENGINE_EXPORT;NDEBUG;KENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXTK/Inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>KEngine.h</PrecompiledHeaderFile>
@@ -174,6 +174,8 @@
     <ClInclude Include="path_manager.h" />
     <ClInclude Include="Resource\mesh.h" />
     <ClInclude Include="Resource\resource_manager.h" />
+    <ClInclude Include="Resource\sampler.h" />
+    <ClInclude Include="Resource\texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core.cpp" />
@@ -185,10 +187,18 @@
     <ClCompile Include="path_manager.cpp" />
     <ClCompile Include="Resource\mesh.cpp" />
     <ClCompile Include="Resource\resource_manager.cpp" />
+    <ClCompile Include="Resource\sampler.cpp" />
+    <ClCompile Include="Resource\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DirectXTK\DirectXTK_Desktop_2017_Win10.vcxproj">
+      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\KCommon\Inc\KCommon.vcxproj">
       <Project>{7b196413-a110-46bf-8d00-0c7086f46f15}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KPhysics\Inc\KPhysics.vcxproj">
+      <Project>{1173c0c8-dfa5-41d5-92f8-4abd2eecba9c}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
