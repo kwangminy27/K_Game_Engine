@@ -40,6 +40,9 @@
     <Filter Include="05. Rendering\2. State">
       <UniqueIdentifier>{012e1711-2f90-4fbf-9b9f-27ef60f861f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Audio">
+      <UniqueIdentifier>{3cd2edfe-ba40-4f8e-b1b3-1f17f03d2e6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -87,6 +90,9 @@
     <ClInclude Include="Rendering\blend_state.h">
       <Filter>05. Rendering\2. State</Filter>
     </ClInclude>
+    <ClInclude Include="Audio\audio_manager.h">
+      <Filter>06. Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -127,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="Rendering\blend_state.cpp">
       <Filter>05. Rendering\2. State</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\audio_manager.cpp">
+      <Filter>06. Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

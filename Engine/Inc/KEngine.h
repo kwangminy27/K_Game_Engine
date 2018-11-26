@@ -33,6 +33,7 @@
 // DirectXTK
 #include <DDSTextureLoader.h>
 #include <WICTextureLoader.h>
+#include <Audio.h>
 
 // Base
 #include "Base/macro.h"

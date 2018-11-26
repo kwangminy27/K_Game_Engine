@@ -5,6 +5,7 @@
 #include "path_manager.h"
 #include "Resource/resource_manager.h"
 #include "Rendering/rendering_manager.h"
+#include "Audio/audio_manager.h"
 
 bool K::Core::shutdown_{};
 
@@ -16,6 +17,8 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 {
 	try
 	{
+		ThrowIfFailed(CoInitializeEx(nullptr, COINIT_MULTITHREADED));
+
 		instance_ = _instance;
 
 		_RegisterClass(_class_name);
@@ -25,6 +28,7 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 		PathManager::singleton()->Initialize();
 		ResourceManager::singleton()->Initialize();
 		RenderingManager::singleton()->Initialize();
+		AudioManager::singleton()->Initialize();
 	}
 	catch (std::exception const& _e)
 	{
@@ -53,10 +57,13 @@ void K::Core::Run()
 
 void K::Core::_Finalize()
 {
+	AudioManager::singleton().reset();
 	RenderingManager::singleton().reset();
 	ResourceManager::singleton().reset();
 	PathManager::singleton().reset();
 	DeviceManager::singleton().reset();
+
+	CoUninitialize();
 }
 
 LRESULT K::Core::_WindowProc(HWND _window, UINT _message, WPARAM _w_param, LPARAM _l_param)
