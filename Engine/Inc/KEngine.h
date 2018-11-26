@@ -8,6 +8,8 @@
 // C++ Standard Library
 #include <array>
 #include <filesystem>
+#include <fstream>
+#include <functional>
 #include <iostream>
 #include <string>
 #include <unordered_map>

@@ -119,7 +119,7 @@ void K::ResourceManager::_CreateTexture2D(std::string const& _tag, std::wstring 
 		delete _p;
 	} };
 
-	texture->_CreateTexture2D(_tag, _file_name, _path_tag);
+	texture->_CreateTexture2D(_file_name, _path_tag);
 
 	texture_map_.insert(std::make_pair(_tag, std::move(texture)));
 }
@@ -138,7 +138,7 @@ void K::ResourceManager::_CreateSampler(
 		delete _p;
 	} };
 
-	sampler->_CreateSampler(_tag, _filter, _address_u, _address_v, _address_w);
+	sampler->_CreateSampler(_filter, _address_u, _address_v, _address_w);
 
 	sampler_map_.insert(std::make_pair(_tag, std::move(sampler)));
 }

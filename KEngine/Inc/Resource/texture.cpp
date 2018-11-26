@@ -4,9 +4,9 @@
 #include "device_manager.h"
 #include "path_manager.h"
 
-void K::Texture::SetToShader(int _register)
+void K::Texture::SetToShader(int _slot)
 {
-	DeviceManager::singleton()->context()->PSSetShaderResources(_register, 1, SRV_.GetAddressOf());
+	DeviceManager::singleton()->context()->PSSetShaderResources(_slot, 1, SRV_.GetAddressOf());
 }
 
 K::Texture::Texture(Texture const& _other)
@@ -21,7 +21,7 @@ K::Texture::Texture(Texture&& _other) noexcept
 	SRV_ = std::move(_other.SRV_);
 }
 
-void K::Texture::_CreateTexture2D(std::string const& _tag, std::wstring const& _file_name, std::string const& _path_tag)
+void K::Texture::_CreateTexture2D(std::wstring const& _file_name, std::string const& _path_tag)
 {
 	auto const& device = DeviceManager::singleton()->device();
 

@@ -3,9 +3,9 @@
 
 #include "device_manager.h"
 
-void K::Sampler::SetToShader(int _register)
+void K::Sampler::SetToShader(int _slot)
 {
-	DeviceManager::singleton()->context()->PSSetSamplers(_register, 1, sampler_.GetAddressOf());
+	DeviceManager::singleton()->context()->PSSetSamplers(_slot, 1, sampler_.GetAddressOf());
 }
 
 K::Sampler::Sampler(Sampler const& _other)
@@ -19,7 +19,6 @@ K::Sampler::Sampler(Sampler&& _other) noexcept
 }
 
 void K::Sampler::_CreateSampler(
-	std::string const& _tag,
 	D3D11_FILTER _filter,
 	D3D11_TEXTURE_ADDRESS_MODE _address_u,
 	D3D11_TEXTURE_ADDRESS_MODE _address_v,

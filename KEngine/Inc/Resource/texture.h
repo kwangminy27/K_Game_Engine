@@ -6,7 +6,7 @@ namespace K
 	{
 		friend class ResourceManager;
 	public:
-		void SetToShader(int _register);
+		void SetToShader(int _slot);
 
 	private:
 		Texture() = default;
@@ -15,7 +15,7 @@ namespace K
 		Texture& operator=(Texture const&) = default;
 		Texture& operator=(Texture&&) noexcept = default;
 
-		void _CreateTexture2D(std::string const& _tag, std::wstring const& _file_name, std::string const& _path_tag);
+		void _CreateTexture2D(std::wstring const& _file_name, std::string const& _path_tag);
 
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> texture_{};
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> SRV_{};

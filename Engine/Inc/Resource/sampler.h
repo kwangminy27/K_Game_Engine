@@ -6,7 +6,7 @@ namespace K
 	{
 		friend class ResourceManager;
 	public:
-		void SetToShader(int _register);
+		void SetToShader(int _slot);
 
 	private:
 		Sampler() = default;
@@ -16,7 +16,6 @@ namespace K
 		Sampler& operator=(Sampler&&) noexcept = default;
 
 		void _CreateSampler(
-			std::string const& _tag,
 			D3D11_FILTER _filter,
 			D3D11_TEXTURE_ADDRESS_MODE _address_u,
 			D3D11_TEXTURE_ADDRESS_MODE _address_v,

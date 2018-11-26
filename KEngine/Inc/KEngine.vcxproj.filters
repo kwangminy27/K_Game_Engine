@@ -28,6 +28,18 @@
     <Filter Include="04. Resource\3. Sampler">
       <UniqueIdentifier>{db1b4322-8ca7-4cfc-ad4c-667b4c3592f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05. Rendering">
+      <UniqueIdentifier>{016cf702-6e3f-4f72-9bdf-3a8139c10d32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Rendering\1. Shader">
+      <UniqueIdentifier>{1778eaf8-de8b-4d06-a773-cf6913846a34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Rendering\1. Shader\1. HLSL">
+      <UniqueIdentifier>{de79ca66-cc8e-45d6-9444-07e4874ed7dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Rendering\2. State">
+      <UniqueIdentifier>{012e1711-2f90-4fbf-9b9f-27ef60f861f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -60,6 +72,21 @@
     <ClInclude Include="Resource\sampler.h">
       <Filter>04. Resource\3. Sampler</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\rendering_manager.h">
+      <Filter>05. Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\shader.h">
+      <Filter>05. Rendering\1. Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\state.h">
+      <Filter>05. Rendering\2. State</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\depth_stencil_state.h">
+      <Filter>05. Rendering\2. State</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\blend_state.h">
+      <Filter>05. Rendering\2. State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -85,6 +112,21 @@
     </ClCompile>
     <ClCompile Include="Resource\sampler.cpp">
       <Filter>04. Resource\3. Sampler</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\rendering_manager.cpp">
+      <Filter>05. Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\shader.cpp">
+      <Filter>05. Rendering\1. Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\state.cpp">
+      <Filter>05. Rendering\2. State</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\depth_stencil_state.cpp">
+      <Filter>05. Rendering\2. State</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\blend_state.cpp">
+      <Filter>05. Rendering\2. State</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
