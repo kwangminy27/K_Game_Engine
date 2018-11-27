@@ -31,8 +31,8 @@ namespace K
 		void _CreateSolidColorBrush(Vector4 const& _color);
 		unsigned int _CreateColorKey(Vector4 const& _color) const;
 
-		static Microsoft::WRL::ComPtr<IDWriteTextFormat> text_format_nullptr_;
-		static Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> solid_color_brush_nullptr_;
+		static Microsoft::WRL::ComPtr<IDWriteTextFormat> text_format_dummy_;
+		static Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> solid_color_brush_dummy_;
 		Microsoft::WRL::ComPtr<IDWriteFactory> dwrite_factory_{};
 		std::unordered_map<std::string, Microsoft::WRL::ComPtr<IDWriteTextFormat>> text_format_map_{};
 		std::unordered_map<unsigned int, Microsoft::WRL::ComPtr<ID2D1SolidColorBrush>> solid_color_brush_map_{};

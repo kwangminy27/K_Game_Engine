@@ -58,9 +58,9 @@ namespace K
 			std::vector<D3D11_RENDER_TARGET_BLEND_DESC> const& _render_target_blend_desc_vector);
 		void _CreateConstantBuffer(std::string const& _tag, int _size, int _shader_flag, int _slot);
 
-		static std::shared_ptr<Shader> shader_nullptr_;
-		static std::shared_ptr<State> state_nullptr_;
-		static std::shared_ptr<ConstantBuffer> CB_nullptr_;
+		static std::shared_ptr<Shader> shader_dummy_;
+		static std::shared_ptr<State> state_dummy_;
+		static std::shared_ptr<ConstantBuffer> CB_dummy_;
 		std::unordered_map<std::string, std::shared_ptr<Shader>> shader_map_{};
 		std::unordered_map<std::string, std::shared_ptr<State>> state_map_{};
 		std::unordered_map<std::string, std::shared_ptr<ConstantBuffer>> CB_map_{};

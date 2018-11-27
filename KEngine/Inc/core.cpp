@@ -9,6 +9,7 @@
 #include "Audio/audio_manager.h"
 #include "Video/video_manager.h"
 #include "time_manager.h"
+#include "input_manager.h"
 
 bool K::Core::shutdown_{};
 
@@ -35,6 +36,7 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 		ResourceManager::singleton()->Initialize();
 		RenderingManager::singleton()->Initialize();
 		TimeManager::singleton()->Initialize();
+		InputManager::singleton()->Initialize();
 	}
 	catch (std::exception const& _e)
 	{
@@ -63,6 +65,7 @@ void K::Core::Run()
 
 void K::Core::_Finalize()
 {
+	InputManager::singleton().reset();
 	TimeManager::singleton().reset();
 	RenderingManager::singleton().reset();
 	ResourceManager::singleton().reset();
@@ -79,15 +82,6 @@ LRESULT K::Core::_WindowProc(HWND _window, UINT _message, WPARAM _w_param, LPARA
 {
 	switch (_message)
 	{
-	case WM_KEYDOWN:
-		switch (_w_param)
-		{
-		case VK_ESCAPE:
-			DestroyWindow(_window);
-			return 0;
-		}
-		return 0;
-
 	case WM_DESTROY:
 		Core::shutdown_ = true;
 		PostQuitMessage(0);
@@ -152,6 +146,12 @@ void K::Core::_Logic()
 
 void K::Core::_Input(float _time)
 {
+	auto const& input_manager = InputManager::singleton();
+
+	input_manager->Update();
+
+	if (input_manager->KeyDown("ESC"))
+		DestroyWindow(window_);
 }
 
 void K::Core::_Update(float _time)

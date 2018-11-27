@@ -22,7 +22,7 @@ namespace K
 		void _CreateRootPath();
 		void _CreatePath(std::string const& _tag, std::filesystem::path const& _path, std::string const& _base_path_tag = ROOT_PATH);
 
-		static std::filesystem::path path_nullptr_;
+		static std::filesystem::path path_dummy_;
 		std::unordered_map<std::string, std::filesystem::path> path_map_{};
 	};
 }

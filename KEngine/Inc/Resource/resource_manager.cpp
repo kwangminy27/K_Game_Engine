@@ -5,9 +5,9 @@
 #include "texture.h"
 #include "sampler.h"
 
-std::shared_ptr<K::Mesh> K::ResourceManager::mesh_nullptr_{};
-std::shared_ptr<K::Texture> K::ResourceManager::texture_nullptr_{};
-std::shared_ptr<K::Sampler> K::ResourceManager::sampler_nullptr_{};
+std::shared_ptr<K::Mesh> K::ResourceManager::mesh_dummy_{};
+std::shared_ptr<K::Texture> K::ResourceManager::texture_dummy_{};
+std::shared_ptr<K::Sampler> K::ResourceManager::sampler_dummy_{};
 
 void K::ResourceManager::Initialize()
 {
@@ -29,7 +29,7 @@ std::shared_ptr<K::Mesh> const& K::ResourceManager::FindMesh(std::string const& 
 	auto iter = mesh_map_.find(_tag);
 
 	if (iter == mesh_map_.end())
-		return mesh_nullptr_;
+		return mesh_dummy_;
 
 	return iter->second;
 }
@@ -39,7 +39,7 @@ std::shared_ptr<K::Texture> const& K::ResourceManager::FindTexture(std::string c
 	auto iter = texture_map_.find(_tag);
 
 	if (iter == texture_map_.end())
-		return texture_nullptr_;
+		return texture_dummy_;
 
 	return iter->second;
 }
@@ -49,7 +49,7 @@ std::shared_ptr<K::Sampler> const& K::ResourceManager::FindSampler(std::string c
 	auto iter = sampler_map_.find(_tag);
 
 	if (iter == sampler_map_.end())
-		return sampler_nullptr_;
+		return sampler_dummy_;
 
 	return iter->second;
 }

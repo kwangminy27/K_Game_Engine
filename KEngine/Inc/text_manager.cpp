@@ -3,8 +3,8 @@
 
 #include "device_manager.h"
 
-Microsoft::WRL::ComPtr<IDWriteTextFormat> K::TextManager::text_format_nullptr_{};
-Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> K::TextManager::solid_color_brush_nullptr_{};
+Microsoft::WRL::ComPtr<IDWriteTextFormat> K::TextManager::text_format_dummy_{};
+Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> K::TextManager::solid_color_brush_dummy_{};
 
 void K::TextManager::Initialize()
 {
@@ -43,7 +43,7 @@ Microsoft::WRL::ComPtr<IDWriteTextFormat> const& K::TextManager::FindTextFormat(
 	auto iter = text_format_map_.find(_tag);
 
 	if (iter == text_format_map_.end())
-		return text_format_nullptr_;
+		return text_format_dummy_;
 
 	return iter->second;
 }
@@ -53,7 +53,7 @@ Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> const& K::TextManager::FindSolidCol
 	auto iter = solid_color_brush_map_.find(_CreateColorKey(_color));
 
 	if (iter == solid_color_brush_map_.end())
-		return solid_color_brush_nullptr_;
+		return solid_color_brush_dummy_;
 
 	return iter->second;
 }

@@ -171,6 +171,7 @@
     <ClInclude Include="Base\macro.h" />
     <ClInclude Include="core.h" />
     <ClInclude Include="device_manager.h" />
+    <ClInclude Include="input_manager.h" />
     <ClInclude Include="KEngine.h" />
     <ClInclude Include="path_manager.h" />
     <ClInclude Include="Rendering\blend_state.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="Audio\audio_manager.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="device_manager.cpp" />
+    <ClCompile Include="input_manager.cpp" />
     <ClCompile Include="KEngine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -218,6 +220,9 @@
     <ProjectReference Include="..\..\KPhysics\Inc\KPhysics.vcxproj">
       <Project>{1173c0c8-dfa5-41d5-92f8-4abd2eecba9c}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="input_manager.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

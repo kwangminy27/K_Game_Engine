@@ -7,9 +7,9 @@
 #include "depth_stencil_state.h"
 #include "blend_state.h"
 
-std::shared_ptr<K::Shader> K::RenderingManager::shader_nullptr_{};
-std::shared_ptr<K::State> K::RenderingManager::state_nullptr_{};
-std::shared_ptr<K::ConstantBuffer> K::RenderingManager::CB_nullptr_{};
+std::shared_ptr<K::Shader> K::RenderingManager::shader_dummy_{};
+std::shared_ptr<K::State> K::RenderingManager::state_dummy_{};
+std::shared_ptr<K::ConstantBuffer> K::RenderingManager::CB_dummy_{};
 
 void K::RenderingManager::Initialize()
 {
@@ -31,7 +31,7 @@ std::shared_ptr<K::Shader> const& K::RenderingManager::FindShader(std::string co
 	auto iter = shader_map_.find(_tag);
 
 	if (iter == shader_map_.end())
-		return shader_nullptr_;
+		return shader_dummy_;
 
 	return iter->second;
 }
@@ -41,7 +41,7 @@ std::shared_ptr<K::State> const& K::RenderingManager::FindState(std::string cons
 	auto iter = state_map_.find(_tag);
 
 	if (iter == state_map_.end())
-		return state_nullptr_;
+		return state_dummy_;
 
 	return iter->second;
 }
@@ -51,7 +51,7 @@ std::shared_ptr<K::ConstantBuffer> const& K::RenderingManager::FindConstantBuffe
 	auto iter = CB_map_.find(_tag);
 
 	if (iter == CB_map_.end())
-		return CB_nullptr_;
+		return CB_dummy_;
 
 	return iter->second;
 }

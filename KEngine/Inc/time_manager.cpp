@@ -3,7 +3,18 @@
 
 void K::TimeManager::Initialize()
 {
-	last_time_point_ = std::chrono::high_resolution_clock::now();
+	try
+	{
+		last_time_point_ = std::chrono::high_resolution_clock::now();
+	}
+	catch (std::exception const& _e)
+	{
+		std::cout << _e.what() << std::endl;
+	}
+	catch (...)
+	{
+		std::cout << "TimeManager::Initialize" << std::endl;
+	}
 }
 
 void K::TimeManager::Update()

@@ -29,8 +29,8 @@ namespace K
 
 		void _CreateSoundEffect(std::string const& _tag, std::wstring const& _file_name, std::string const& _path_tag);
 
-		static std::shared_ptr<DirectX::SoundEffect> sound_effect_nullptr_;
-		static std::shared_ptr<DirectX::SoundEffectInstance> sound_effect_instance_nullptr_;
+		static std::shared_ptr<DirectX::SoundEffect> sound_effect_dummy_;
+		static std::shared_ptr<DirectX::SoundEffectInstance> sound_effect_instance_dummy_;
 		std::unique_ptr<DirectX::AudioEngine> audio_engine_{};
 		std::unordered_map<std::string, std::shared_ptr<DirectX::SoundEffect>> sound_effect_map_{};
 		std::unordered_map<std::string, std::shared_ptr<DirectX::SoundEffectInstance>> sound_effect_instance_map_{};

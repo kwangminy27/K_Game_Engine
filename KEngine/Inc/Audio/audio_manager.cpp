@@ -3,8 +3,8 @@
 
 #include "path_manager.h"
 
-std::shared_ptr<DirectX::SoundEffect> K::AudioManager::sound_effect_nullptr_{};
-std::shared_ptr<DirectX::SoundEffectInstance> K::AudioManager::sound_effect_instance_nullptr_{};
+std::shared_ptr<DirectX::SoundEffect> K::AudioManager::sound_effect_dummy_{};
+std::shared_ptr<DirectX::SoundEffectInstance> K::AudioManager::sound_effect_instance_dummy_{};
 
 void K::AudioManager::Initialize()
 {
@@ -46,7 +46,7 @@ std::shared_ptr<DirectX::SoundEffect> const& K::AudioManager::FindSoundEffect(st
 	auto iter = sound_effect_map_.find(_tag);
 
 	if (iter == sound_effect_map_.end())
-		return sound_effect_nullptr_;
+		return sound_effect_dummy_;
 
 	return iter->second;
 }
@@ -56,7 +56,7 @@ std::shared_ptr<DirectX::SoundEffectInstance> const& K::AudioManager::FindSoundE
 	auto iter = sound_effect_instance_map_.find(_tag);
 
 	if (iter == sound_effect_instance_map_.end())
-		return sound_effect_instance_nullptr_;
+		return sound_effect_instance_dummy_;
 
 	return iter->second;
 }

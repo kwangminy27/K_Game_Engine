@@ -52,6 +52,9 @@
     <Filter Include="09. Time">
       <UniqueIdentifier>{431925c9-cd2e-4e50-a23f-7873db2c7135}</UniqueIdentifier>
     </Filter>
+    <Filter Include="10. Input">
+      <UniqueIdentifier>{b444248f-3713-454c-97c1-806b5813e7b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -111,6 +114,9 @@
     <ClInclude Include="time_manager.h">
       <Filter>09. Time</Filter>
     </ClInclude>
+    <ClInclude Include="input_manager.h">
+      <Filter>10. Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -164,5 +170,13 @@
     <ClCompile Include="time_manager.cpp">
       <Filter>09. Time</Filter>
     </ClCompile>
+    <ClCompile Include="input_manager.cpp">
+      <Filter>10. Input</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="input_manager.inl">
+      <Filter>10. Input</Filter>
+    </None>
   </ItemGroup>
 </Project>

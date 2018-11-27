@@ -1,7 +1,7 @@
 #include "KEngine.h"
 #include "path_manager.h"
 
-std::filesystem::path K::PathManager::path_nullptr_{};
+std::filesystem::path K::PathManager::path_dummy_{};
 
 void K::PathManager::Initialize()
 {
@@ -27,7 +27,7 @@ std::filesystem::path const& K::PathManager::FindPath(std::string const& _tag) c
 	auto iter = path_map_.find(_tag);
 
 	if (iter == path_map_.end())
-		return path_nullptr_;
+		return path_dummy_;
 
 	return iter->second;
 }
