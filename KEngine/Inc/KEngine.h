@@ -35,6 +35,11 @@
 #include <WICTextureLoader.h>
 #include <Audio.h>
 
+// DirectShow
+#include <dshow.h>
+
+#pragma comment(lib, "strmiids")
+
 // Base
 #include "Base/macro.h"
 #include "Base/enum.h"

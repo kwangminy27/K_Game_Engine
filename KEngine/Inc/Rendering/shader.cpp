@@ -54,9 +54,9 @@ void K::Shader::_CreateVertexShader(
 	if (path_buffer.empty())
 		throw std::exception{ "Shader::_CreateVertexShader" };
 
-	std::wstring full_path = path_buffer.wstring() + _file_name;
+	path_buffer /= _file_name;
 
-	std::ifstream cso{ full_path, std::ios::ate | std::ios::binary };
+	std::ifstream cso{ path_buffer, std::ios::ate | std::ios::binary };
 
 	auto size = cso.tellg();
 
@@ -93,9 +93,9 @@ void K::Shader::_CreatePixelShader(std::wstring const& _file_name, std::string c
 	if (path_buffer.empty())
 		throw std::exception{ "Shader::_CreatePixelShader" };
 
-	std::wstring full_path = path_buffer.wstring() + _file_name;
+	path_buffer /= _file_name;
 
-	std::ifstream cso{ full_path, std::ios::ate | std::ios::binary };
+	std::ifstream cso{ path_buffer, std::ios::ate | std::ios::binary };
 
 	auto size = cso.tellg();
 

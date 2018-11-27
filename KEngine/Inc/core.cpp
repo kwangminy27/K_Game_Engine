@@ -6,6 +6,7 @@
 #include "Resource/resource_manager.h"
 #include "Rendering/rendering_manager.h"
 #include "Audio/audio_manager.h"
+#include "Video/video_manager.h"
 
 bool K::Core::shutdown_{};
 
@@ -29,6 +30,7 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 		ResourceManager::singleton()->Initialize();
 		RenderingManager::singleton()->Initialize();
 		AudioManager::singleton()->Initialize();
+		VideoManager::singleton()->Initialize();
 	}
 	catch (std::exception const& _e)
 	{
@@ -57,6 +59,7 @@ void K::Core::Run()
 
 void K::Core::_Finalize()
 {
+	VideoManager::singleton().reset();
 	AudioManager::singleton().reset();
 	RenderingManager::singleton().reset();
 	ResourceManager::singleton().reset();
@@ -139,6 +142,8 @@ void K::Core::_Logic()
 
 void K::Core::_Input(float _time)
 {
+	if (GetAsyncKeyState('Q') & 0x8000)
+		VideoManager::singleton()->Stop();
 }
 
 void K::Core::_Update(float _time)

@@ -63,8 +63,6 @@ void K::DeviceManager::_Finalize()
 
 void K::DeviceManager::_InitializeDirect3D(HWND _window)
 {
-	using Microsoft::WRL::ComPtr;
-
 	UINT flags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
 #ifdef _DEBUG
 	flags |= D3D11_CREATE_DEVICE_DEBUG;
@@ -88,13 +86,13 @@ void K::DeviceManager::_InitializeDirect3D(HWND _window)
 		&context_
 	));
 
-	ComPtr<IDXGIDevice> dxgi_device{};
+	Microsoft::WRL::ComPtr<IDXGIDevice> dxgi_device{};
 	ThrowIfFailed(device_.As(&dxgi_device));
 
-	ComPtr<IDXGIAdapter> dxgi_adapter{};
+	Microsoft::WRL::ComPtr<IDXGIAdapter> dxgi_adapter{};
 	ThrowIfFailed(dxgi_device->GetAdapter(&dxgi_adapter));
 
-	ComPtr<IDXGIFactory> dxgi_factory{};
+	Microsoft::WRL::ComPtr<IDXGIFactory> dxgi_factory{};
 	ThrowIfFailed(dxgi_adapter->GetParent(__uuidof(IDXGIFactory), &dxgi_factory));
 
 	DXGI_SWAP_CHAIN_DESC dscd{};
@@ -108,7 +106,7 @@ void K::DeviceManager::_InitializeDirect3D(HWND _window)
 
 	ThrowIfFailed(dxgi_factory->CreateSwapChain(device_.Get(), &dscd, &swap_chain_));
 
-	ComPtr<ID3D11Texture2D> buffer{};
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> buffer{};
 	ThrowIfFailed(swap_chain_->GetBuffer(0, __uuidof(ID3D11Texture2D), &buffer));
 	ThrowIfFailed(device_->CreateRenderTargetView(buffer.Get(), nullptr, &RTV_));
 
@@ -140,8 +138,6 @@ void K::DeviceManager::_InitializeDirect3D(HWND _window)
 
 void K::DeviceManager::_InitializeDirect2D()
 {
-	using Microsoft::WRL::ComPtr;
-
 #ifdef _DEBUG
 	D2D1_FACTORY_OPTIONS dfo{ D2D1_DEBUG_LEVEL_INFORMATION };
 	ThrowIfFailed(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, __uuidof(ID2D1Factory), &dfo, &d2d_factory_));
@@ -149,7 +145,7 @@ void K::DeviceManager::_InitializeDirect2D()
 	ThrowIfFailed(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, __uuidof(ID2D1Factory), &d2d_factory_));
 #endif
 
-	ComPtr<IDXGISurface> surface{};
+	Microsoft::WRL::ComPtr<IDXGISurface> surface{};
 	ThrowIfFailed(swap_chain_->GetBuffer(0, __uuidof(IDXGISurface), &surface));
 
 	D2D1_RENDER_TARGET_PROPERTIES drtp{};

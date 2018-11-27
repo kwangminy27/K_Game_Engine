@@ -32,11 +32,9 @@ void K::Texture::_CreateTexture2D(std::wstring const& _file_name, std::string co
 
 	path_buffer /= _file_name;
 
-	std::filesystem::path extension = path_buffer.extension();
-
 	Microsoft::WRL::ComPtr<ID3D11Resource> resource{};
 
-	if (extension.string() == ".dds")
+	if (path_buffer.extension() == ".dds")
 		ThrowIfFailed(DirectX::CreateDDSTextureFromFile(device.Get(), path_buffer.c_str(), &resource, &SRV_));
 	else
 		ThrowIfFailed(DirectX::CreateWICTextureFromFile(device.Get(), path_buffer.c_str(), &resource, &SRV_));

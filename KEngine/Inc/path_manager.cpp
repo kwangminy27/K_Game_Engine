@@ -8,7 +8,9 @@ void K::PathManager::Initialize()
 	try
 	{
 		_CreateRootPath();
-		_CreatePath(TEXTURE_PATH, "Texure/");
+		_CreatePath(TEXTURE_PATH, "Texure\\");
+		_CreatePath(AUDIO_PATH, "Audio\\");
+		_CreatePath(VIDEO_PATH, "Video\\");
 	}
 	catch (std::exception const& _e)
 	{
@@ -37,7 +39,8 @@ void K::PathManager::_Finalize()
 void K::PathManager::_CreateRootPath()
 {
 	std::filesystem::path path_buffer = std::filesystem::current_path();
-	path_buffer.replace_filename("Bin/");
+
+	path_buffer.replace_filename("Bin\\");
 
 	_CreatePath(ROOT_PATH, path_buffer, "");
 }
