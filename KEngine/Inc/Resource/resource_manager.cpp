@@ -13,7 +13,6 @@ void K::ResourceManager::Initialize()
 {
 	try
 	{
-
 	}
 	catch (std::exception const& _e)
 	{

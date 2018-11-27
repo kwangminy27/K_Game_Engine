@@ -5,7 +5,17 @@
 
 void K::VideoManager::Initialize()
 {
-	Play(L"BlizNorth640x480.avi");
+	try
+	{
+	}
+	catch (std::exception const& _e)
+	{
+		std::cout << _e.what() << std::endl;
+	}
+	catch (...)
+	{
+		std::cout << "VideoManager::Initialize" << std::endl;
+	}
 }
 
 void K::VideoManager::Play(std::wstring const& _file_name)

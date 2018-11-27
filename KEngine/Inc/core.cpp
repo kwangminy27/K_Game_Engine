@@ -2,6 +2,7 @@
 #include "core.h"
 
 #include "device_manager.h"
+#include "text_manager.h"
 #include "path_manager.h"
 #include "Resource/resource_manager.h"
 #include "Rendering/rendering_manager.h"
@@ -26,6 +27,7 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 		_CreateWindow(_class_name, _window_name);
 
 		DeviceManager::singleton()->Initialize(window_);
+		TextManager::singleton()->Initialize();
 		PathManager::singleton()->Initialize();
 		ResourceManager::singleton()->Initialize();
 		RenderingManager::singleton()->Initialize();
@@ -64,6 +66,7 @@ void K::Core::_Finalize()
 	RenderingManager::singleton().reset();
 	ResourceManager::singleton().reset();
 	PathManager::singleton().reset();
+	TextManager::singleton().reset();
 	DeviceManager::singleton().reset();
 
 	CoUninitialize();
@@ -142,8 +145,6 @@ void K::Core::_Logic()
 
 void K::Core::_Input(float _time)
 {
-	if (GetAsyncKeyState('Q') & 0x8000)
-		VideoManager::singleton()->Stop();
 }
 
 void K::Core::_Update(float _time)
