@@ -8,6 +8,7 @@
 #include "Rendering/rendering_manager.h"
 #include "Audio/audio_manager.h"
 #include "Video/video_manager.h"
+#include "time_manager.h"
 
 bool K::Core::shutdown_{};
 
@@ -29,10 +30,11 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 		DeviceManager::singleton()->Initialize(window_);
 		TextManager::singleton()->Initialize();
 		PathManager::singleton()->Initialize();
+		VideoManager::singleton()->Initialize();
+		AudioManager::singleton()->Initialize();
 		ResourceManager::singleton()->Initialize();
 		RenderingManager::singleton()->Initialize();
-		AudioManager::singleton()->Initialize();
-		VideoManager::singleton()->Initialize();
+		TimeManager::singleton()->Initialize();
 	}
 	catch (std::exception const& _e)
 	{
@@ -61,10 +63,11 @@ void K::Core::Run()
 
 void K::Core::_Finalize()
 {
-	VideoManager::singleton().reset();
-	AudioManager::singleton().reset();
+	TimeManager::singleton().reset();
 	RenderingManager::singleton().reset();
 	ResourceManager::singleton().reset();
+	AudioManager::singleton().reset();
+	VideoManager::singleton().reset();
 	PathManager::singleton().reset();
 	TextManager::singleton().reset();
 	DeviceManager::singleton().reset();
@@ -135,12 +138,16 @@ void K::Core::_CreateWindow(std::wstring const& _class_name, std::wstring const&
 
 void K::Core::_Logic()
 {
-	float delta_time{};
+	auto const& time_manager = TimeManager::singleton();
+	
+	time_manager->Update();
 
-	_Input(delta_time);
-	_Update(delta_time);
-	_Collision(delta_time);
-	_Render(delta_time);
+	float time_delta = time_manager->time_delta();
+
+	_Input(time_delta);
+	_Update(time_delta);
+	_Collision(time_delta);
+	_Render(time_delta);
 }
 
 void K::Core::_Input(float _time)

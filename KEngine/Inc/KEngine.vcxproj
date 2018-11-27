@@ -183,6 +183,7 @@
     <ClInclude Include="Resource\sampler.h" />
     <ClInclude Include="Resource\texture.h" />
     <ClInclude Include="text_manager.h" />
+    <ClInclude Include="time_manager.h" />
     <ClInclude Include="Video\video_manager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +205,7 @@
     <ClCompile Include="Resource\sampler.cpp" />
     <ClCompile Include="Resource\texture.cpp" />
     <ClCompile Include="text_manager.cpp" />
+    <ClCompile Include="time_manager.cpp" />
     <ClCompile Include="Video\video_manager.cpp" />
   </ItemGroup>
   <ItemGroup>

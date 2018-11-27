@@ -19,35 +19,38 @@
     <Filter Include="04. Path">
       <UniqueIdentifier>{23b6dccc-2aba-4184-afee-e975f24170ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05. Resource">
-      <UniqueIdentifier>{624acd5b-67b2-4aa1-9459-8395f72310a9}</UniqueIdentifier>
+    <Filter Include="05. Video">
+      <UniqueIdentifier>{3c2cdf20-164f-45cd-b6e0-c2489cfb2cb2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05. Resource\1. Mesh">
-      <UniqueIdentifier>{f6e89f13-bb83-4432-907a-079d53304c05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Resource\2. Texture">
-      <UniqueIdentifier>{b1fd6ce6-2932-4bdc-8cb4-fc6035e0bcca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Resource\3. Sampler">
-      <UniqueIdentifier>{db1b4322-8ca7-4cfc-ad4c-667b4c3592f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. Rendering">
-      <UniqueIdentifier>{016cf702-6e3f-4f72-9bdf-3a8139c10d32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. Rendering\1. Shader">
-      <UniqueIdentifier>{1778eaf8-de8b-4d06-a773-cf6913846a34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. Rendering\1. Shader\1. HLSL">
-      <UniqueIdentifier>{de79ca66-cc8e-45d6-9444-07e4874ed7dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. Rendering\2. State">
-      <UniqueIdentifier>{012e1711-2f90-4fbf-9b9f-27ef60f861f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. Audio">
+    <Filter Include="06. Audio">
       <UniqueIdentifier>{3cd2edfe-ba40-4f8e-b1b3-1f17f03d2e6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08. Video">
-      <UniqueIdentifier>{3c2cdf20-164f-45cd-b6e0-c2489cfb2cb2}</UniqueIdentifier>
+    <Filter Include="08. Rendering">
+      <UniqueIdentifier>{016cf702-6e3f-4f72-9bdf-3a8139c10d32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Rendering\1. Shader">
+      <UniqueIdentifier>{1778eaf8-de8b-4d06-a773-cf6913846a34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Rendering\1. Shader\1. HLSL">
+      <UniqueIdentifier>{de79ca66-cc8e-45d6-9444-07e4874ed7dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Rendering\2. State">
+      <UniqueIdentifier>{012e1711-2f90-4fbf-9b9f-27ef60f861f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Resource">
+      <UniqueIdentifier>{624acd5b-67b2-4aa1-9459-8395f72310a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Resource\1. Mesh">
+      <UniqueIdentifier>{f6e89f13-bb83-4432-907a-079d53304c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Resource\2. Texture">
+      <UniqueIdentifier>{b1fd6ce6-2932-4bdc-8cb4-fc6035e0bcca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Resource\3. Sampler">
+      <UniqueIdentifier>{db1b4322-8ca7-4cfc-ad4c-667b4c3592f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. Time">
+      <UniqueIdentifier>{431925c9-cd2e-4e50-a23f-7873db2c7135}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,40 +73,43 @@
       <Filter>04. Path</Filter>
     </ClInclude>
     <ClInclude Include="Resource\resource_manager.h">
-      <Filter>05. Resource</Filter>
+      <Filter>07. Resource</Filter>
     </ClInclude>
     <ClInclude Include="Resource\mesh.h">
-      <Filter>05. Resource\1. Mesh</Filter>
+      <Filter>07. Resource\1. Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Resource\texture.h">
-      <Filter>05. Resource\2. Texture</Filter>
+      <Filter>07. Resource\2. Texture</Filter>
     </ClInclude>
     <ClInclude Include="Resource\sampler.h">
-      <Filter>05. Resource\3. Sampler</Filter>
+      <Filter>07. Resource\3. Sampler</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\rendering_manager.h">
-      <Filter>06. Rendering</Filter>
+      <Filter>08. Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\shader.h">
-      <Filter>06. Rendering\1. Shader</Filter>
+      <Filter>08. Rendering\1. Shader</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\state.h">
-      <Filter>06. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. State</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\depth_stencil_state.h">
-      <Filter>06. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. State</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\blend_state.h">
-      <Filter>06. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. State</Filter>
     </ClInclude>
     <ClInclude Include="Audio\audio_manager.h">
-      <Filter>07. Audio</Filter>
+      <Filter>06. Audio</Filter>
     </ClInclude>
     <ClInclude Include="Video\video_manager.h">
-      <Filter>08. Video</Filter>
+      <Filter>05. Video</Filter>
     </ClInclude>
     <ClInclude Include="text_manager.h">
       <Filter>03. Text</Filter>
+    </ClInclude>
+    <ClInclude Include="time_manager.h">
+      <Filter>09. Time</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -120,40 +126,43 @@
       <Filter>04. Path</Filter>
     </ClCompile>
     <ClCompile Include="Resource\resource_manager.cpp">
-      <Filter>05. Resource</Filter>
+      <Filter>07. Resource</Filter>
     </ClCompile>
     <ClCompile Include="Resource\mesh.cpp">
-      <Filter>05. Resource\1. Mesh</Filter>
+      <Filter>07. Resource\1. Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Resource\texture.cpp">
-      <Filter>05. Resource\2. Texture</Filter>
+      <Filter>07. Resource\2. Texture</Filter>
     </ClCompile>
     <ClCompile Include="Resource\sampler.cpp">
-      <Filter>05. Resource\3. Sampler</Filter>
+      <Filter>07. Resource\3. Sampler</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\rendering_manager.cpp">
-      <Filter>06. Rendering</Filter>
+      <Filter>08. Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\shader.cpp">
-      <Filter>06. Rendering\1. Shader</Filter>
+      <Filter>08. Rendering\1. Shader</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\state.cpp">
-      <Filter>06. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. State</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\depth_stencil_state.cpp">
-      <Filter>06. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. State</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\blend_state.cpp">
-      <Filter>06. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. State</Filter>
     </ClCompile>
     <ClCompile Include="Audio\audio_manager.cpp">
-      <Filter>07. Audio</Filter>
+      <Filter>06. Audio</Filter>
     </ClCompile>
     <ClCompile Include="Video\video_manager.cpp">
-      <Filter>08. Video</Filter>
+      <Filter>05. Video</Filter>
     </ClCompile>
     <ClCompile Include="text_manager.cpp">
       <Filter>03. Text</Filter>
+    </ClCompile>
+    <ClCompile Include="time_manager.cpp">
+      <Filter>09. Time</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@
 
 // C++ Standard Library
 #include <array>
+#include <chrono>
 #include <filesystem>
 #include <fstream>
 #include <functional>
