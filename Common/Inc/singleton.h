@@ -19,6 +19,7 @@ namespace K
 
 		virtual void _Finalize() = 0;
 
+	private:
 		static std::unique_ptr<T, std::function<void(T*)>> singleton_;
 		static std::once_flag once_flag_;
 	};

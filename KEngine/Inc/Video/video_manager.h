@@ -11,7 +11,7 @@ namespace K
 		void Play(std::wstring const& _file_name);
 		void Stop();
 
-	protected:
+	private:
 		VideoManager() = default;
 		VideoManager(VideoManager const&) = delete;
 		VideoManager(VideoManager&&) noexcept = delete;

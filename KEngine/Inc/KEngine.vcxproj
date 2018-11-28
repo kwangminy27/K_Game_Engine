@@ -186,6 +186,9 @@
     <ClInclude Include="text_manager.h" />
     <ClInclude Include="time_manager.h" />
     <ClInclude Include="Video\video_manager.h" />
+    <ClInclude Include="World\layer.h" />
+    <ClInclude Include="World\level.h" />
+    <ClInclude Include="World\world_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Audio\audio_manager.cpp" />
@@ -209,6 +212,9 @@
     <ClCompile Include="text_manager.cpp" />
     <ClCompile Include="time_manager.cpp" />
     <ClCompile Include="Video\video_manager.cpp" />
+    <ClCompile Include="World\layer.cpp" />
+    <ClCompile Include="World\level.cpp" />
+    <ClCompile Include="World\world_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DirectXTK\DirectXTK_Desktop_2017_Win10.vcxproj">
@@ -223,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="input_manager.inl" />
+    <None Include="World\world_manager.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

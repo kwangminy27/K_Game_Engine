@@ -55,6 +55,15 @@
     <Filter Include="10. Input">
       <UniqueIdentifier>{b444248f-3713-454c-97c1-806b5813e7b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="11. World">
+      <UniqueIdentifier>{f4e4fb51-2bc1-44e4-a62d-d046a20be6b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="11. World\1. Level">
+      <UniqueIdentifier>{5b162e82-84b1-4307-aefe-e1dd63fe3fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="11. World\1. Level\1. Layer">
+      <UniqueIdentifier>{cc8be12f-eae0-41e3-ae78-51dec5bd6ae2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -117,6 +126,15 @@
     <ClInclude Include="input_manager.h">
       <Filter>10. Input</Filter>
     </ClInclude>
+    <ClInclude Include="World\world_manager.h">
+      <Filter>11. World</Filter>
+    </ClInclude>
+    <ClInclude Include="World\level.h">
+      <Filter>11. World\1. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="World\layer.h">
+      <Filter>11. World\1. Level\1. Layer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -173,10 +191,22 @@
     <ClCompile Include="input_manager.cpp">
       <Filter>10. Input</Filter>
     </ClCompile>
+    <ClCompile Include="World\world_manager.cpp">
+      <Filter>11. World</Filter>
+    </ClCompile>
+    <ClCompile Include="World\level.cpp">
+      <Filter>11. World\1. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="World\layer.cpp">
+      <Filter>11. World\1. Level\1. Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="input_manager.inl">
       <Filter>10. Input</Filter>
+    </None>
+    <None Include="World\world_manager.inl">
+      <Filter>11. World</Filter>
     </None>
   </ItemGroup>
 </Project>

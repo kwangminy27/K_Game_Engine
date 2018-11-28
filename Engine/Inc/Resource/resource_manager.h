@@ -16,6 +16,10 @@ namespace K
 		std::shared_ptr<Texture> const& FindTexture(std::string const& _tag) const;
 		std::shared_ptr<Sampler> const& FindSampler(std::string const& _tag) const;
 
+		static std::shared_ptr<Mesh> mesh_dummy_;
+		static std::shared_ptr<Texture> texture_dummy_;
+		static std::shared_ptr<Sampler> sampler_dummy_;
+
 	private:
 		ResourceManager() = default;
 		ResourceManager(ResourceManager const&) = delete;
@@ -45,9 +49,6 @@ namespace K
 			D3D11_TEXTURE_ADDRESS_MODE _address_v,
 			D3D11_TEXTURE_ADDRESS_MODE _address_w);
 
-		static std::shared_ptr<Mesh> mesh_dummy_;
-		static std::shared_ptr<Texture> texture_dummy_;
-		static std::shared_ptr<Sampler> sampler_dummy_;
 		std::unordered_map<std::string, std::shared_ptr<Mesh>> mesh_map_{};
 		std::unordered_map<std::string, std::shared_ptr<Texture>> texture_map_{};
 		std::unordered_map<std::string, std::shared_ptr<Sampler>> sampler_map_{};

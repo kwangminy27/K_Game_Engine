@@ -10,6 +10,7 @@
 #include "Video/video_manager.h"
 #include "time_manager.h"
 #include "input_manager.h"
+#include "World/world_manager.h"
 
 bool K::Core::shutdown_{};
 
@@ -37,6 +38,7 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 		RenderingManager::singleton()->Initialize();
 		TimeManager::singleton()->Initialize();
 		InputManager::singleton()->Initialize();
+		WorldManager::singleton()->Initialize();
 	}
 	catch (std::exception const& _e)
 	{
@@ -65,6 +67,7 @@ void K::Core::Run()
 
 void K::Core::_Finalize()
 {
+	WorldManager::singleton().reset();
 	InputManager::singleton().reset();
 	TimeManager::singleton().reset();
 	RenderingManager::singleton().reset();
@@ -152,14 +155,18 @@ void K::Core::_Input(float _time)
 
 	if (input_manager->KeyDown("ESC"))
 		DestroyWindow(window_);
+
+	WorldManager::singleton()->Input(_time);
 }
 
 void K::Core::_Update(float _time)
 {
+	WorldManager::singleton()->Update(_time);
 }
 
 void K::Core::_Collision(float _time)
 {
+	WorldManager::singleton()->Collision(_time);
 }
 
 void K::Core::_Render(float _time)
@@ -167,5 +174,8 @@ void K::Core::_Render(float _time)
 	auto const& device_manager = DeviceManager::singleton();
 
 	device_manager->Clear();
+
+	WorldManager::singleton()->Render(_time);
+
 	device_manager->Present();
 }

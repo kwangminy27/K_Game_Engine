@@ -3,8 +3,8 @@
 
 #include "path_manager.h"
 
-std::shared_ptr<DirectX::SoundEffect> K::AudioManager::sound_effect_dummy_{};
-std::shared_ptr<DirectX::SoundEffectInstance> K::AudioManager::sound_effect_instance_dummy_{};
+std::unique_ptr<DirectX::SoundEffect> K::AudioManager::sound_effect_dummy_{};
+std::unique_ptr<DirectX::SoundEffectInstance> K::AudioManager::sound_effect_instance_dummy_{};
 
 void K::AudioManager::Initialize()
 {
@@ -41,7 +41,7 @@ void K::AudioManager::Resume()
 	audio_engine_->Resume();
 }
 
-std::shared_ptr<DirectX::SoundEffect> const& K::AudioManager::FindSoundEffect(std::string const& _tag) const
+std::unique_ptr<DirectX::SoundEffect> const& K::AudioManager::FindSoundEffect(std::string const& _tag) const
 {
 	auto iter = sound_effect_map_.find(_tag);
 
@@ -51,7 +51,7 @@ std::shared_ptr<DirectX::SoundEffect> const& K::AudioManager::FindSoundEffect(st
 	return iter->second;
 }
 
-std::shared_ptr<DirectX::SoundEffectInstance> const& K::AudioManager::FindSoundEffectInstance(std::string const& _tag) const
+std::unique_ptr<DirectX::SoundEffectInstance> const& K::AudioManager::FindSoundEffectInstance(std::string const& _tag) const
 {
 	auto iter = sound_effect_instance_map_.find(_tag);
 
@@ -94,5 +94,5 @@ void K::AudioManager::_CreateSoundEffect(std::string const& _tag, std::wstring c
 
 	auto sound_effect = std::make_unique<DirectX::SoundEffect>(audio_engine_.get(), path_buffer.c_str());
 
-	sound_effect_map_.insert(make_pair(_tag, move(sound_effect)));
+	sound_effect_map_.insert(make_pair(_tag, std::move(sound_effect)));
 }

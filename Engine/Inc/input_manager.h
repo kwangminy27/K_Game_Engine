@@ -22,6 +22,8 @@ namespace K
 		bool KeyPressed(std::string const& _tag) const;
 		bool KeyUp(std::string const& _tag) const;
 
+		static std::pair<std::string, KEY_DESC> key_desc_dummy_;
+
 	private:
 		InputManager() = default;
 		InputManager(InputManager const&) = delete;
@@ -37,7 +39,6 @@ namespace K
 		template <typename... Types> void _CreateKeyDesc(std::string const& _tag, Types... _Args);
 		void _CreateKeyDesc();
 
-		static std::pair<std::string, KEY_DESC> key_desc_dummy_;
 		std::unordered_map<std::string, KEY_DESC> key_desc_map_{};
 	};
 }

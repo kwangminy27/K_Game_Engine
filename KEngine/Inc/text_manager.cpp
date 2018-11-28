@@ -102,16 +102,16 @@ void K::TextManager::_CreateSolidColorBrush(Vector4 const& _color)
 	solid_color_brush_map_.insert(std::make_pair(_CreateColorKey(_color), std::move(solid_color_brush)));
 }
 
-unsigned int K::TextManager::_CreateColorKey(Vector4 const& _color) const
+uint32_t K::TextManager::_CreateColorKey(Vector4 const& _color) const
 {
 	auto color = _color;
 	color *= 255.f;
 
-	unsigned int key{};
-	key |= static_cast<unsigned char>(color.x);
-	key |= static_cast<unsigned char>(color.y) << 8;
-	key |= static_cast<unsigned char>(color.z) << 16;
-	key |= static_cast<unsigned char>(color.w) << 24;
+	uint32_t key{};
+	key |= static_cast<uint8_t>(color.x);
+	key |= static_cast<uint8_t>(color.y) << 8;
+	key |= static_cast<uint8_t>(color.z) << 16;
+	key |= static_cast<uint8_t>(color.w) << 24;
 
 	return key;
 }

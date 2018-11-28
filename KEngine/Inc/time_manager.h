@@ -11,7 +11,7 @@ namespace K
 		void Update();
 
 		float time_delta() const;
-		unsigned int FPS() const;
+		uint32_t FPS() const;
 
 	private:
 		TimeManager() = default;
@@ -24,6 +24,6 @@ namespace K
 
 		std::chrono::time_point<std::chrono::high_resolution_clock> last_time_point_{};
 		float time_delta_{};
-		unsigned int FPS_{};
+		uint32_t FPS_{};
 	};
 }

@@ -19,7 +19,7 @@ void K::TimeManager::Initialize()
 
 void K::TimeManager::Update()
 {
-	static int FPS{};
+	static uint32_t FPS{};
 	static float accumulated_time{};
 
 	auto duration = std::chrono::high_resolution_clock::now() - last_time_point_;
@@ -44,7 +44,7 @@ float K::TimeManager::time_delta() const
 	return time_delta_;
 }
 
-unsigned int K::TimeManager::FPS() const
+uint32_t K::TimeManager::FPS() const
 {
 	return FPS_;
 }

@@ -2,12 +2,25 @@
 
 namespace K
 {
+	enum class TAG_STATE
+	{
+		NORMAL,
+		DISABLED,
+		DEAD
+	};
+
+	using TAG = std::pair<std::string, uint32_t>;
+
 	class K_COMMON_DLL Tag
 	{
 	public:
-		std::string const& tag() const;
+		virtual void Initialize() = 0;
 
-		void set_tag(std::string const& _tag);
+		TAG_STATE tag_state() const;
+		TAG const& tag() const;
+
+		void set_tag_state(TAG_STATE _state);
+		void set_tag(TAG const& _tag);
 
 	protected:
 		Tag() = default;
@@ -18,6 +31,8 @@ namespace K
 
 		virtual void _Finalize() = 0;
 
-		std::string tag_{};
+	private:
+		TAG_STATE tag_state_{};
+		TAG tag_{};
 	};
 }

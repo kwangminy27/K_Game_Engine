@@ -12,11 +12,14 @@ namespace K
 		void Suspend();
 		void Resume();
 
-		std::shared_ptr<DirectX::SoundEffect> const& FindSoundEffect(std::string const& _tag) const;
-		std::shared_ptr<DirectX::SoundEffectInstance> const& FindSoundEffectInstance(std::string const& _tag) const;
+		std::unique_ptr<DirectX::SoundEffect> const& FindSoundEffect(std::string const& _tag) const;
+		std::unique_ptr<DirectX::SoundEffectInstance> const& FindSoundEffectInstance(std::string const& _tag) const;
 
 		void AddSoundEffectInstance(std::string const& _tag, std::unique_ptr<DirectX::SoundEffectInstance> _sound_effect_instance);
 		void RemoveSoundEffectInstance(std::string const& _tag);
+
+		static std::unique_ptr<DirectX::SoundEffect> sound_effect_dummy_;
+		static std::unique_ptr<DirectX::SoundEffectInstance> sound_effect_instance_dummy_;
 
 	private:
 		AudioManager() = default;
@@ -29,10 +32,8 @@ namespace K
 
 		void _CreateSoundEffect(std::string const& _tag, std::wstring const& _file_name, std::string const& _path_tag);
 
-		static std::shared_ptr<DirectX::SoundEffect> sound_effect_dummy_;
-		static std::shared_ptr<DirectX::SoundEffectInstance> sound_effect_instance_dummy_;
 		std::unique_ptr<DirectX::AudioEngine> audio_engine_{};
-		std::unordered_map<std::string, std::shared_ptr<DirectX::SoundEffect>> sound_effect_map_{};
-		std::unordered_map<std::string, std::shared_ptr<DirectX::SoundEffectInstance>> sound_effect_instance_map_{};
+		std::unordered_map<std::string, std::unique_ptr<DirectX::SoundEffect>> sound_effect_map_{};
+		std::unordered_map<std::string, std::unique_ptr<DirectX::SoundEffectInstance>> sound_effect_instance_map_{};
 	};
 }

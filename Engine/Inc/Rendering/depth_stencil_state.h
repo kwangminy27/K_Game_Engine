@@ -10,7 +10,7 @@ namespace K
 	public:
 		virtual void SetToShader() override;
 
-	protected:
+	private:
 		DepthStencilState() = default;
 		DepthStencilState(DepthStencilState const& _other);
 		DepthStencilState(DepthStencilState&& _other) noexcept;

@@ -10,7 +10,7 @@ namespace K
 	public:
 		virtual void SetToShader() override;
 
-	protected:
+	private:
 		BlendState() = default;
 		BlendState(BlendState const& _other);
 		BlendState(BlendState&& _other) noexcept;

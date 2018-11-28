@@ -1,12 +1,23 @@
 #include "KCommon.h"
 #include "tag.h"
 
-std::string const& K::Tag::tag() const
+K::TAG_STATE K::Tag::tag_state() const
+{
+	return tag_state_;
+}
+
+K::TAG const& K::Tag::tag() const
 {
 	return tag_;
 }
 
-void K::Tag::set_tag(std::string const& _tag)
+void K::Tag::set_tag_state(TAG_STATE _state)
+{
+	tag_state_ = _state;
+}
+
+
+void K::Tag::set_tag(TAG const& _tag)
 {
 	tag_ = _tag;
 }

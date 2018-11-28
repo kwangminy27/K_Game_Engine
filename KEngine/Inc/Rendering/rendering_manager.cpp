@@ -152,7 +152,7 @@ void K::RenderingManager::_CreateBlendState(
 	state_map_.insert(std::make_pair(_tag, std::move(state)));
 }
 
-void K::RenderingManager::_CreateConstantBuffer(std::string const& _tag, int _size, int _shader_flag, int _slot)
+void K::RenderingManager::_CreateConstantBuffer(std::string const& _tag, uint32_t _size, uint32_t _shader_flag, uint32_t _slot)
 {
 	auto const& device = DeviceManager::singleton()->device();
 

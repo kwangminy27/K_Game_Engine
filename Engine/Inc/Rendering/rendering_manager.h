@@ -10,9 +10,9 @@ namespace K
 	struct ConstantBuffer
 	{
 		Microsoft::WRL::ComPtr<ID3D11Buffer> buffer;
-		int size;
-		int shader_flag;
-		int slot;
+		uint32_t size;
+		uint32_t shader_flag;
+		uint32_t slot;
 	};
 
 	class K_ENGINE_DLL RenderingManager : public Singleton<RenderingManager>
@@ -26,6 +26,10 @@ namespace K
 		std::shared_ptr<ConstantBuffer> const& FindConstantBuffer(std::string const& _tag) const;
 
 		void UpdateConstantBuffer(std::string const& _tag, void* _data);
+
+		static std::shared_ptr<Shader> shader_dummy_;
+		static std::shared_ptr<State> state_dummy_;
+		static std::shared_ptr<ConstantBuffer> CB_dummy_;
 
 	private:
 		RenderingManager() = default;
@@ -56,11 +60,8 @@ namespace K
 			bool _alpha_to_coverage_enable,
 			bool _independent_blend_enable,
 			std::vector<D3D11_RENDER_TARGET_BLEND_DESC> const& _render_target_blend_desc_vector);
-		void _CreateConstantBuffer(std::string const& _tag, int _size, int _shader_flag, int _slot);
+		void _CreateConstantBuffer(std::string const& _tag, uint32_t _size, uint32_t _shader_flag, uint32_t _slot);
 
-		static std::shared_ptr<Shader> shader_dummy_;
-		static std::shared_ptr<State> state_dummy_;
-		static std::shared_ptr<ConstantBuffer> CB_dummy_;
 		std::unordered_map<std::string, std::shared_ptr<Shader>> shader_map_{};
 		std::unordered_map<std::string, std::shared_ptr<State>> state_map_{};
 		std::unordered_map<std::string, std::shared_ptr<ConstantBuffer>> CB_map_{};
