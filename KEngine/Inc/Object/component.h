@@ -25,6 +25,7 @@ namespace K
 		Component(Component&& _other) noexcept;
 		Component& operator=(Component const&) = delete;
 		Component& operator=(Component&&) noexcept = default;
+		virtual ~Component() = default;
 
 		virtual void _Finalize() override;
 

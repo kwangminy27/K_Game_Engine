@@ -9,7 +9,6 @@ void K::Level::Initialize()
 {
 	try
 	{
-		_CreateLayer("Default", 0);
 	}
 	catch (std::exception const& _e)
 	{
@@ -42,6 +41,27 @@ K::APTR const& K::Level::FindActor(TAG const& _tag) const
 	}
 
 	return Layer::actor_dummy_;
+}
+
+std::shared_ptr<K::Layer> K::Level::CreateLayer(TAG const& _tag)
+{
+	auto layer = std::shared_ptr<Layer>{ new Layer, [](Layer* _p) {
+		_p->_Finalize();
+		delete _p;
+	} };
+
+	layer->set_tag(_tag);
+	layer->set_level(shared_from_this());
+
+	layer->Initialize();
+
+	layer_list_.push_back(layer);
+
+	layer_list_.sort([](std::shared_ptr<Layer> const& _p1, std::shared_ptr<Layer> const& _p2) {
+		return _p1->tag().second < _p2->tag().second;
+	});
+
+	return layer;
 }
 
 K::Level::Level(Level&& _other) noexcept : Tag(std::move(_other))
@@ -139,28 +159,4 @@ void K::Level::_Render(float _time)
 			break;
 		}
 	}
-}
-
-void K::Level::_CreateLayer(std::string const& _tag, uint32_t _order)
-{
-	auto layer = std::shared_ptr<Layer>{ new Layer, [](Layer* _p) {
-		_p->_Finalize();
-		delete _p;
-	} };
-
-	auto id = std::count_if(layer_list_.begin(), layer_list_.end(), [&_tag](std::shared_ptr<Layer> const& _p) {
-		return _p->tag().first == _tag;
-	});
-
-	layer->set_tag(std::make_pair(_tag, static_cast<uint32_t>(id)));
-	layer->set_order(_order);
-	layer->set_level(shared_from_this());
-
-	layer->Initialize();
-
-	layer_list_.push_back(std::move(layer));
-
-	layer_list_.sort([](std::shared_ptr<Layer> const& _p1, std::shared_ptr<Layer> const& _p2) {
-		return _p1->order() < _p2->order();
-	});
 }

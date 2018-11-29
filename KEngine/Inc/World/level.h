@@ -13,6 +13,8 @@ namespace K
 		std::shared_ptr<Layer> const& FindLayer(TAG const& _tag) const;
 		APTR const& FindActor(TAG const& _tag) const;
 
+		std::shared_ptr<Layer> CreateLayer(TAG const& _tag);
+
 		static std::shared_ptr<Layer> layer_dummy_;
 
 	protected:
@@ -29,8 +31,6 @@ namespace K
 		void _Update(float _time);
 		void _Collision(float _time);
 		void _Render(float _time);
-
-		void _CreateLayer(std::string const& _tag, uint32_t _order);
 
 	private:
 		std::list<std::shared_ptr<Layer>> layer_list_{};

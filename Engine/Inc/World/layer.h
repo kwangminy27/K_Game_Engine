@@ -15,10 +15,7 @@ namespace K
 		void RemoveActor(TAG const& _tag);
 
 		std::shared_ptr<Level> level() const;
-		uint32_t order() const;
-
 		void set_level(std::shared_ptr<Level> const& _level);
-		void set_order(uint32_t _order);
 
 		static APTR actor_dummy_;
 
@@ -37,7 +34,6 @@ namespace K
 		void _Render(float _time);
 
 		std::weak_ptr<Level> level_{};
-		uint32_t order_{};
 		std::list<APTR> actor_list_{};
 	};
 }

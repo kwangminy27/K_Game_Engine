@@ -21,15 +21,19 @@ namespace K
 		CPTR const& FindComponent(TAG const& _tag) const;
 		APTR const& FindChild(TAG const& _tag) const;
 
-		void AddComponent(CPTR _component);
-		void AddChild(APTR const& _child);
+		void AddComponent(CPTR& _component);
+		void AddChild(APTR& _child);
 
 		void RemoveComponent(TAG const& _tag);
 		void RemoveChild(TAG const& _tag);
 
 		std::shared_ptr<Level> level() const;
 		std::shared_ptr<Layer> layer() const;
+		APTR parent() const;
+		std::list<CPTR> const& component_list() const;
+		std::list<APTR> const& child_list() const;
 
+		void set_parent(APTR const& _actor);
 		void set_level(std::shared_ptr<Level> const& _level);
 		void set_layer(std::shared_ptr<Layer> const& _layer);
 
@@ -42,11 +46,13 @@ namespace K
 		Actor(Actor&& _other) noexcept;
 		Actor& operator=(Actor const&) = delete;
 		Actor& operator=(Actor&&) noexcept = default;
+		virtual ~Actor() = default;
 
 		virtual void _Finalize() override;
 
 		std::weak_ptr<Level> level_{};
 		std::weak_ptr<Layer> layer_{};
+		std::weak_ptr<Actor> parent_{};
 		std::list<CPTR> component_list_{};
 		std::list<APTR> child_list_{};
 	};

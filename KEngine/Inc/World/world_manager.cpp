@@ -10,7 +10,6 @@ void K::WorldManager::Initialize()
 {
 	try
 	{
-		_CreateLevel<Level>({ "Default", 0 });
 	}
 	catch (std::exception const& _e)
 	{

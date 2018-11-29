@@ -11,6 +11,7 @@
 #include "time_manager.h"
 #include "input_manager.h"
 #include "World/world_manager.h"
+#include "Object/object_manager.h"
 
 bool K::Core::shutdown_{};
 
@@ -39,6 +40,38 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 		TimeManager::singleton()->Initialize();
 		InputManager::singleton()->Initialize();
 		WorldManager::singleton()->Initialize();
+		ObjectManager::singleton()->Initialize();
+	}
+	catch (std::exception const& _e)
+	{
+		std::cout << _e.what() << std::endl;
+	}
+	catch (...)
+	{
+		std::cout << "Core::Initialize" << std::endl;
+	}
+}
+
+void K::Core::Initialize(HINSTANCE _instance, HWND _window)
+{
+	try
+	{
+		ThrowIfFailed(CoInitializeEx(nullptr, COINIT_MULTITHREADED));
+
+		instance_ = _instance;
+		window_ = _window;
+
+		DeviceManager::singleton()->Initialize(window_);
+		TextManager::singleton()->Initialize();
+		PathManager::singleton()->Initialize();
+		VideoManager::singleton()->Initialize();
+		AudioManager::singleton()->Initialize();
+		ResourceManager::singleton()->Initialize();
+		RenderingManager::singleton()->Initialize();
+		TimeManager::singleton()->Initialize();
+		InputManager::singleton()->Initialize();
+		WorldManager::singleton()->Initialize();
+		ObjectManager::singleton()->Initialize();
 	}
 	catch (std::exception const& _e)
 	{
@@ -61,12 +94,27 @@ void K::Core::Run()
 			DispatchMessage(&message);
 		}
 		else
-			_Logic();
+			Logic();
 	}
+}
+
+void K::Core::Logic()
+{
+	auto const& time_manager = TimeManager::singleton();
+
+	time_manager->Update();
+
+	float time_delta = time_manager->time_delta();
+
+	_Input(time_delta);
+	_Update(time_delta);
+	_Collision(time_delta);
+	_Render(time_delta);
 }
 
 void K::Core::_Finalize()
 {
+	ObjectManager::singleton().reset();
 	WorldManager::singleton().reset();
 	InputManager::singleton().reset();
 	TimeManager::singleton().reset();
@@ -133,28 +181,11 @@ void K::Core::_CreateWindow(std::wstring const& _class_name, std::wstring const&
 	ShowWindow(window_, SW_SHOW);
 }
 
-void K::Core::_Logic()
-{
-	auto const& time_manager = TimeManager::singleton();
-	
-	time_manager->Update();
-
-	float time_delta = time_manager->time_delta();
-
-	_Input(time_delta);
-	_Update(time_delta);
-	_Collision(time_delta);
-	_Render(time_delta);
-}
-
 void K::Core::_Input(float _time)
 {
 	auto const& input_manager = InputManager::singleton();
 
 	input_manager->Update();
-
-	if (input_manager->KeyDown("ESC"))
-		DestroyWindow(window_);
 
 	WorldManager::singleton()->Input(_time);
 }

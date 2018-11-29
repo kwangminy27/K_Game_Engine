@@ -1,6 +1,7 @@
 #include "KEngine.h"
 #include "layer.h"
 
+#include "world_manager.h"
 #include "level.h"
 #include "Object/actor.h"
 
@@ -35,13 +36,26 @@ K::APTR const& K::Layer::FindActor(TAG const& _tag) const
 
 void K::Layer::AddActor(APTR const& _actor)
 {
-	actor_list_.push_back(std::move(_actor));
+	_actor->set_level(level());
+	_actor->set_layer(shared_from_this());
+
+	actor_list_.push_back(_actor);
+
+	for (auto const& child : _actor->child_list())
+		AddActor(child);
 }
 
 void K::Layer::RemoveActor(TAG const& _tag)
 {
-	if (auto const& actor = FindActor(_tag))
-		actor_list_.remove(actor);
+	auto const& actor = FindActor(_tag);
+
+	actor->set_level(WorldManager::level_dummy_);
+	actor->set_layer(Level::layer_dummy_);
+
+	for (auto const& child : actor->child_list())
+		RemoveActor(child->tag());
+
+	actor_list_.remove(actor);
 }
 
 std::shared_ptr<K::Level> K::Layer::level() const
@@ -49,25 +63,14 @@ std::shared_ptr<K::Level> K::Layer::level() const
 	return level_.lock();
 }
 
-uint32_t K::Layer::order() const
-{
-	return order_;
-}
-
 void K::Layer::set_level(std::shared_ptr<Level> const& _level)
 {
 	level_ = _level;
 }
 
-void K::Layer::set_order(uint32_t _order)
-{
-	order_ = _order;
-}
-
 K::Layer::Layer(Layer&& _other) noexcept : Tag(std::move(_other))
 {
 	level_ = std::move(_other.level_);
-	order_ = std::move(_other.order_);
 	actor_list_ = std::move(_other.actor_list_);
 }
 
@@ -91,6 +94,12 @@ void K::Layer::_Input(float _time)
 			break;
 
 		case TAG_STATE::DEAD:
+			if (auto parent = (*iter)->parent())
+				parent->RemoveChild((*iter)->tag());
+
+			for (auto const& child : (*iter)->child_list())
+				child->set_parent(actor_dummy_);
+
 			iter = actor_list_.erase(iter);
 			break;
 		}
@@ -113,6 +122,12 @@ void K::Layer::_Update(float _time)
 			break;
 
 		case TAG_STATE::DEAD:
+			if (auto parent = (*iter)->parent())
+				parent->RemoveChild((*iter)->tag());
+
+			for (auto const& child : (*iter)->child_list())
+				child->set_parent(actor_dummy_);
+
 			iter = actor_list_.erase(iter);
 			break;
 		}
@@ -135,6 +150,12 @@ void K::Layer::_Collision(float _time)
 			break;
 
 		case TAG_STATE::DEAD:
+			if (auto parent = (*iter)->parent())
+				parent->RemoveChild((*iter)->tag());
+
+			for (auto const& child : (*iter)->child_list())
+				child->set_parent(actor_dummy_);
+
 			iter = actor_list_.erase(iter);
 			break;
 		}
@@ -157,6 +178,12 @@ void K::Layer::_Render(float _time)
 			break;
 
 		case TAG_STATE::DEAD:
+			if (auto parent = (*iter)->parent())
+				parent->RemoveChild((*iter)->tag());
+
+			for (auto const& child : (*iter)->child_list())
+				child->set_parent(actor_dummy_);
+
 			iter = actor_list_.erase(iter);
 			break;
 		}

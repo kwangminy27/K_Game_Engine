@@ -9,8 +9,10 @@ namespace K
 		virtual void Initialize() override;
 
 		void Initialize(std::wstring const& _class_name, std::wstring const& _window_name, HINSTANCE _instance);
+		void Initialize(HINSTANCE _instance, HWND _window);
 
 		void Run();
+		void Logic();
 
 	private:
 		Core() = default;
@@ -25,7 +27,6 @@ namespace K
 		void _RegisterClass(std::wstring const& _class_name);
 		void _CreateWindow(std::wstring const& _class_name, std::wstring const& _window_name);
 
-		void _Logic();
 		void _Input(float _time);
 		void _Update(float _time);
 		void _Collision(float _time);

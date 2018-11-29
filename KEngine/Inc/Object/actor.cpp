@@ -1,6 +1,7 @@
 #include "KEngine.h"
 #include "actor.h"
 
+#include "World/layer.h"
 #include "component.h"
 
 K::CPTR K::Actor::component_dummy_{};
@@ -122,13 +123,17 @@ K::APTR const& K::Actor::FindChild(TAG const& _tag) const
 	return *iter;
 }
 
-void K::Actor::AddComponent(CPTR _component)
+void K::Actor::AddComponent(CPTR& _component)
 {
+	_component->set_owner(shared_from_this());
+
 	component_list_.push_back(std::move(_component));
 }
 
-void K::Actor::AddChild(APTR const& _child)
+void K::Actor::AddChild(APTR& _child)
 {
+	_child->set_parent(shared_from_this());
+
 	child_list_.push_back(std::move(_child));
 }
 
@@ -140,8 +145,11 @@ void K::Actor::RemoveComponent(TAG const& _tag)
 
 void K::Actor::RemoveChild(TAG const& _tag)
 {
-	if (auto const& child = FindChild(_tag))
-		child_list_.remove(child);
+	auto const& child = FindChild(_tag);
+
+	child->set_parent(Layer::actor_dummy_);
+
+	child_list_.remove(child);
 }
 
 std::shared_ptr<K::Level> K::Actor::level() const
@@ -152,6 +160,26 @@ std::shared_ptr<K::Level> K::Actor::level() const
 std::shared_ptr<K::Layer> K::Actor::layer() const
 {
 	return layer_.lock();
+}
+
+K::APTR K::Actor::parent() const
+{
+	return parent_.lock();
+}
+
+std::list<K::CPTR> const& K::Actor::component_list() const
+{
+	return component_list_;
+}
+
+std::list<K::APTR> const& K::Actor::child_list() const
+{
+	return child_list_;
+}
+
+void K::Actor::set_parent(APTR const& _actor)
+{
+	parent_ = _actor;
 }
 
 void K::Actor::set_level(std::shared_ptr<Level> const& _level)
@@ -168,6 +196,7 @@ K::Actor::Actor(Actor const& _other) : Tag(_other)
 {
 	level_ = _other.level_;
 	layer_ = _other.layer_;
+	parent_ = _other.parent_;
 
 	component_list_.clear();
 	for (auto const& component : _other.component_list_)
@@ -182,6 +211,7 @@ K::Actor::Actor(Actor&& _other) noexcept : Tag(std::move(_other))
 {
 	level_ = std::move(_other.level_);
 	layer_ = std::move(_other.layer_);
+	parent_ = std::move(_other.parent_);
 	component_list_ = std::move(_other.component_list_);
 	child_list_ = std::move(_other.child_list_);
 }

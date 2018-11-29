@@ -1,7 +1,7 @@
 #pragma once
 
 template <typename T>
-void K::WorldManager::_CreateLevel(TAG const& _tag)
+void K::WorldManager::CreateLevel(TAG const& _tag)
 {
 	auto level = std::shared_ptr<Level>{ new T, [](T* _p) {
 		_p->_Finalize();

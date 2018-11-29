@@ -20,6 +20,8 @@ namespace K
 		std::shared_ptr<Layer> const& FindLayer(TAG const& _tag) const;
 		APTR const& FindActor(TAG const& _tag) const;
 
+		template <typename T> void CreateLevel(TAG const& _tag);
+
 		static std::shared_ptr<Level> level_dummy_;
 
 	private:
@@ -30,8 +32,6 @@ namespace K
 		WorldManager& operator=(WorldManager&&) noexcept = delete;
 
 		virtual void _Finalize() override;
-
-		template <typename T> void _CreateLevel(TAG const& _tag);
 
 		std::list<std::shared_ptr<Level>> level_list_{};
 	};
