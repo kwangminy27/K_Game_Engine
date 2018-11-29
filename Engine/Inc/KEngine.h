@@ -44,6 +44,7 @@
 // Base
 #include "Base/macro.h"
 #include "Base/enum.h"
+#include "Base/term.h"
 
 // KCommon
 #include <KCommon.h>

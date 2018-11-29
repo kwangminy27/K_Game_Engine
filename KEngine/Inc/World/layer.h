@@ -10,17 +10,23 @@ namespace K
 	public:
 		virtual void Initialize() override;
 
-		uint32_t order() const;
-		std::shared_ptr<Level> level() const;
+		APTR const& FindActor(TAG const& _tag) const;
+		void AddActor(APTR const& _actor);
+		void RemoveActor(TAG const& _tag);
 
-		void set_order(uint32_t _order);
+		std::shared_ptr<Level> level() const;
+		uint32_t order() const;
+
 		void set_level(std::shared_ptr<Level> const& _level);
+		void set_order(uint32_t _order);
+
+		static APTR actor_dummy_;
 
 	private:
 		Layer() = default;
-		Layer(Layer const& _other);
+		Layer(Layer const&) = delete;
 		Layer(Layer&& _other) noexcept;
-		Layer& operator=(Layer const&) = default;
+		Layer& operator=(Layer const&) = delete;
 		Layer& operator=(Layer&&) noexcept = default;
 
 		virtual void _Finalize() override;
@@ -30,7 +36,8 @@ namespace K
 		void _Collision(float _time);
 		void _Render(float _time);
 
-		uint32_t order_{};
 		std::weak_ptr<Level> level_{};
+		uint32_t order_{};
+		std::list<APTR> actor_list_{};
 	};
 }

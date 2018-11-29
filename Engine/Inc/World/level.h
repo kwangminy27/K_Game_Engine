@@ -11,15 +11,17 @@ namespace K
 		virtual void Initialize() override;
 
 		std::shared_ptr<Layer> const& FindLayer(TAG const& _tag) const;
+		APTR const& FindActor(TAG const& _tag) const;
 
 		static std::shared_ptr<Layer> layer_dummy_;
 
 	protected:
 		Level() = default;
-		Level(Level const& _other);
+		Level(Level const&) = delete;
 		Level(Level&& _other) noexcept;
-		Level& operator=(Level const&) = default;
+		Level& operator=(Level const&) = delete;
 		Level& operator=(Level&&) noexcept = default;
+		virtual ~Level() = default;
 
 		virtual void _Finalize() override;
 

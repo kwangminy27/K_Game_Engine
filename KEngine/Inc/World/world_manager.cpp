@@ -2,6 +2,7 @@
 #include "world_manager.h"
 
 #include "level.h"
+#include "layer.h"
 
 std::shared_ptr<K::Level> K::WorldManager::level_dummy_{};
 
@@ -9,7 +10,7 @@ void K::WorldManager::Initialize()
 {
 	try
 	{
-		_CreateLevel<Level>("Default");
+		_CreateLevel<Level>({ "Default", 0 });
 	}
 	catch (std::exception const& _e)
 	{
@@ -130,6 +131,17 @@ std::shared_ptr<K::Layer> const& K::WorldManager::FindLayer(TAG const& _tag) con
 	}
 
 	return Level::layer_dummy_;
+}
+
+K::APTR const& K::WorldManager::FindActor(TAG const& _tag) const
+{
+	for (auto const& level : level_list_)
+	{
+		if (auto const& actor = level->FindActor(_tag))
+			return actor;
+	}
+
+	return Layer::actor_dummy_;
 }
 
 void K::WorldManager::_Finalize()

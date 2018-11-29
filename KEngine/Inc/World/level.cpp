@@ -33,9 +33,15 @@ std::shared_ptr<K::Layer> const& K::Level::FindLayer(TAG const& _tag) const
 	return *iter;
 }
 
-K::Level::Level(Level const& _other) : Tag(_other)
+K::APTR const& K::Level::FindActor(TAG const& _tag) const
 {
-	layer_list_ = _other.layer_list_;
+	for (auto const& layer : layer_list_)
+	{
+		if (auto const& actor = layer->FindActor(_tag))
+			return actor;
+	}
+
+	return Layer::actor_dummy_;
 }
 
 K::Level::Level(Level&& _other) noexcept : Tag(std::move(_other))

@@ -163,6 +163,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Base\macro.h" />
+    <ClInclude Include="Base\term.h" />
     <ClInclude Include="KCommon.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="tag.h" />

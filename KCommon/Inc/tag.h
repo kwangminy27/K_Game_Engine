@@ -9,8 +9,6 @@ namespace K
 		DEAD
 	};
 
-	using TAG = std::pair<std::string, uint32_t>;
-
 	class K_COMMON_DLL Tag
 	{
 	public:

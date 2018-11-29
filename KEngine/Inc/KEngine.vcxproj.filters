@@ -64,6 +64,15 @@
     <Filter Include="11. World\1. Level\1. Layer">
       <UniqueIdentifier>{cc8be12f-eae0-41e3-ae78-51dec5bd6ae2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="12. Object">
+      <UniqueIdentifier>{9500db42-7eec-44d1-add7-4b0843045773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12. Object\1. Actor">
+      <UniqueIdentifier>{84239b9c-e7d6-4ed4-9641-9708c3689ed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12. Object\2. Component">
+      <UniqueIdentifier>{609e9f7b-aab0-451d-b6cf-8e08427f34d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -135,6 +144,18 @@
     <ClInclude Include="World\layer.h">
       <Filter>11. World\1. Level\1. Layer</Filter>
     </ClInclude>
+    <ClInclude Include="Object\object_manager.h">
+      <Filter>12. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\actor.h">
+      <Filter>12. Object\1. Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\component.h">
+      <Filter>12. Object\2. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\term.h">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -200,6 +221,15 @@
     <ClCompile Include="World\layer.cpp">
       <Filter>11. World\1. Level\1. Layer</Filter>
     </ClCompile>
+    <ClCompile Include="Object\object_manager.cpp">
+      <Filter>12. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\actor.cpp">
+      <Filter>12. Object\1. Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\component.cpp">
+      <Filter>12. Object\2. Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="input_manager.inl">
@@ -207,6 +237,9 @@
     </None>
     <None Include="World\world_manager.inl">
       <Filter>11. World</Filter>
+    </None>
+    <None Include="object_manager.inl">
+      <Filter>12. Object</Filter>
     </None>
   </ItemGroup>
 </Project>

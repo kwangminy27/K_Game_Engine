@@ -18,6 +18,7 @@ namespace K
 
 		std::shared_ptr<Level> const& FindLevel(TAG const& _tag) const;
 		std::shared_ptr<Layer> const& FindLayer(TAG const& _tag) const;
+		APTR const& FindActor(TAG const& _tag) const;
 
 		static std::shared_ptr<Level> level_dummy_;
 
@@ -30,7 +31,7 @@ namespace K
 
 		virtual void _Finalize() override;
 
-		template <typename T> void _CreateLevel(std::string const& _tag);
+		template <typename T> void _CreateLevel(TAG const& _tag);
 
 		std::list<std::shared_ptr<Level>> level_list_{};
 	};
