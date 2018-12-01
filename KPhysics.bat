@@ -5,3 +5,4 @@ xcopy KPhysics\Inc\*.inl Physics\Inc\ /d /s /y /exclude:ignore.txt
 xcopy KPhysics\Bin\*.* Physics\Bin\ /d /s /y /exclude:ignore.txt
 xcopy KPhysics\Bin\*.* KEngine\Bin\ /d /s /y /exclude:ignore.txt
 xcopy KPhysics\Bin\*.* KClient\Bin\ /d /s /y /exclude:ignore.txt
+xcopy KPhysics\Bin\*.* KEditor\Bin\ /d /s /y /exclude:ignore.txt
