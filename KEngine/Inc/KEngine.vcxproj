@@ -75,8 +75,8 @@
     <OutDir>../Bin/</OutDir>
     <IntDir>../Obj/</IntDir>
     <TargetName>$(ProjectName)_Debug</TargetName>
-    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(SolutionDir)Network/Inc/;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(SolutionDir)Network/Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -88,8 +88,8 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>../Bin/</OutDir>
     <IntDir>../Obj/</IntDir>
-    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(SolutionDir)Network/Inc/;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(SolutionDir)Network/Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -98,7 +98,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>K_ENGINE_EXPORT;_DEBUG;KENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXTK/Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXTK/Inc/</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>KEngine.h</PrecompiledHeaderFile>
@@ -150,7 +150,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>K_ENGINE_EXPORT;NDEBUG;KENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXTK/Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXTK/Inc/</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>KEngine.h</PrecompiledHeaderFile>
@@ -170,6 +170,7 @@
     <ClInclude Include="Base\enum.h" />
     <ClInclude Include="Base\macro.h" />
     <ClInclude Include="Base\term.h" />
+    <ClInclude Include="connection_manager.h" />
     <ClInclude Include="core.h" />
     <ClInclude Include="device_manager.h" />
     <ClInclude Include="input_manager.h" />
@@ -178,11 +179,13 @@
     <ClInclude Include="Object\component.h" />
     <ClInclude Include="Object\object_manager.h" />
     <ClInclude Include="path_manager.h" />
+    <ClInclude Include="registry_manager.h" />
     <ClInclude Include="Rendering\blend_state.h" />
     <ClInclude Include="Rendering\depth_stencil_state.h" />
     <ClInclude Include="Rendering\rendering_manager.h" />
     <ClInclude Include="Rendering\shader.h" />
     <ClInclude Include="Rendering\state.h" />
+    <ClInclude Include="replication_manager.h" />
     <ClInclude Include="Resource\mesh.h" />
     <ClInclude Include="Resource\resource_manager.h" />
     <ClInclude Include="Resource\sampler.h" />
@@ -196,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Audio\audio_manager.cpp" />
+    <ClCompile Include="connection_manager.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="device_manager.cpp" />
     <ClCompile Include="input_manager.cpp" />
@@ -207,11 +211,13 @@
     <ClCompile Include="Object\component.cpp" />
     <ClCompile Include="Object\object_manager.cpp" />
     <ClCompile Include="path_manager.cpp" />
+    <ClCompile Include="registry_manager.cpp" />
     <ClCompile Include="Rendering\blend_state.cpp" />
     <ClCompile Include="Rendering\depth_stencil_state.cpp" />
     <ClCompile Include="Rendering\rendering_manager.cpp" />
     <ClCompile Include="Rendering\shader.cpp" />
     <ClCompile Include="Rendering\state.cpp" />
+    <ClCompile Include="replication_manager.cpp" />
     <ClCompile Include="Resource\mesh.cpp" />
     <ClCompile Include="Resource\resource_manager.cpp" />
     <ClCompile Include="Resource\sampler.cpp" />
@@ -230,13 +236,16 @@
     <ProjectReference Include="..\..\KCommon\Inc\KCommon.vcxproj">
       <Project>{7b196413-a110-46bf-8d00-0c7086f46f15}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\KNetwork\Inc\KNetwork.vcxproj">
+      <Project>{30474b79-c1d5-44d1-a0c9-290d0f3fda6f}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\KPhysics\Inc\KPhysics.vcxproj">
       <Project>{1173c0c8-dfa5-41d5-92f8-4abd2eecba9c}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="input_manager.inl" />
-    <None Include="object_manager.inl" />
+    <None Include="Object\object_manager.inl" />
     <None Include="World\world_manager.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

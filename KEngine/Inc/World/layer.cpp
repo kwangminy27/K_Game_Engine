@@ -4,6 +4,7 @@
 #include "world_manager.h"
 #include "level.h"
 #include "Object/actor.h"
+#include "replication_manager.h"
 
 K::APTR K::Layer::actor_dummy_{};
 
@@ -45,17 +46,15 @@ void K::Layer::AddActor(APTR const& _actor)
 		AddActor(child);
 }
 
-void K::Layer::RemoveActor(TAG const& _tag)
+void K::Layer::RemoveActor(APTR const& _actor)
 {
-	auto const& actor = FindActor(_tag);
+	_actor->set_level(WorldManager::level_dummy_);
+	_actor->set_layer(Level::layer_dummy_);
 
-	actor->set_level(WorldManager::level_dummy_);
-	actor->set_layer(Level::layer_dummy_);
+	for (auto const& child : _actor->child_list())
+		RemoveActor(child);
 
-	for (auto const& child : actor->child_list())
-		RemoveActor(child->tag());
-
-	actor_list_.remove(actor);
+	actor_list_.remove(_actor);
 }
 
 std::shared_ptr<K::Level> K::Layer::level() const
@@ -94,8 +93,10 @@ void K::Layer::_Input(float _time)
 			break;
 
 		case TAG_STATE::DEAD:
+			ReplicationManager::singleton()->RemoveActor(*iter);
+
 			if (auto parent = (*iter)->parent())
-				parent->RemoveChild((*iter)->tag());
+				parent->RemoveChild(*iter);
 
 			for (auto const& child : (*iter)->child_list())
 				child->set_parent(actor_dummy_);
@@ -122,8 +123,10 @@ void K::Layer::_Update(float _time)
 			break;
 
 		case TAG_STATE::DEAD:
+			ReplicationManager::singleton()->RemoveActor(*iter);
+
 			if (auto parent = (*iter)->parent())
-				parent->RemoveChild((*iter)->tag());
+				parent->RemoveChild(*iter);
 
 			for (auto const& child : (*iter)->child_list())
 				child->set_parent(actor_dummy_);
@@ -150,8 +153,10 @@ void K::Layer::_Collision(float _time)
 			break;
 
 		case TAG_STATE::DEAD:
+			ReplicationManager::singleton()->RemoveActor(*iter);
+
 			if (auto parent = (*iter)->parent())
-				parent->RemoveChild((*iter)->tag());
+				parent->RemoveChild(*iter);
 
 			for (auto const& child : (*iter)->child_list())
 				child->set_parent(actor_dummy_);
@@ -178,8 +183,10 @@ void K::Layer::_Render(float _time)
 			break;
 
 		case TAG_STATE::DEAD:
+			ReplicationManager::singleton()->RemoveActor(*iter);
+
 			if (auto parent = (*iter)->parent())
-				parent->RemoveChild((*iter)->tag());
+				parent->RemoveChild(*iter);
 
 			for (auto const& child : (*iter)->child_list())
 				child->set_parent(actor_dummy_);

@@ -2,13 +2,16 @@
 
 namespace K
 {
-	class DefaultActor final : public Actor
+	class DefaultActor final : public ActorClient
 	{
 		friend class ObjectManager;
 	public:
 		virtual void Initialize() override;
 
 		virtual APTR Clone() const override;
+
+		virtual void Serialize(InputMemoryStream& _imstream) override;
+		virtual void Serialize(OutputMemoryStream& _omstream) override;
 
 	private:
 		DefaultActor() = default;

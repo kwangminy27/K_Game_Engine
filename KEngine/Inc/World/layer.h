@@ -11,8 +11,9 @@ namespace K
 		virtual void Initialize() override;
 
 		APTR const& FindActor(TAG const& _tag) const;
+
 		void AddActor(APTR const& _actor);
-		void RemoveActor(TAG const& _tag);
+		void RemoveActor(APTR const& _actor);
 
 		std::shared_ptr<Level> level() const;
 		void set_level(std::shared_ptr<Level> const& _level);

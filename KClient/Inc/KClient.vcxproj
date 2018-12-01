@@ -38,6 +38,9 @@
     <ProjectReference Include="..\..\KEngine\Inc\KEngine.vcxproj">
       <Project>{118a1b7f-3bd4-4d48-8c7e-b5fb11d62f99}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\KNetwork\Inc\KNetwork.vcxproj">
+      <Project>{30474b79-c1d5-44d1-a0c9-290d0f3fda6f}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\KPhysics\Inc\KPhysics.vcxproj">
       <Project>{1173c0c8-dfa5-41d5-92f8-4abd2eecba9c}</Project>
     </ProjectReference>
@@ -105,8 +108,8 @@
     <OutDir>../Bin/</OutDir>
     <IntDir>../Obj/</IntDir>
     <TargetName>$(ProjectName)_Debug</TargetName>
-    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(SolutionDir)Engine/Inc/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(SolutionDir)Engine/Bin/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(SolutionDir)Network/Inc/;$(SolutionDir)Engine/Inc/;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(SolutionDir)Network/Bin/;$(SolutionDir)Engine/Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -118,8 +121,8 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>../Bin/</OutDir>
     <IntDir>../Obj/</IntDir>
-    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(SolutionDir)Engine/Inc/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(SolutionDir)Engine/Bin/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Common/Inc/;$(SolutionDir)Physics/Inc/;$(SolutionDir)Network/Inc/;$(SolutionDir)Engine/Inc/;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Common/Bin/;$(SolutionDir)Physics/Bin/;$(SolutionDir)Network/Bin/;$(SolutionDir)Engine/Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

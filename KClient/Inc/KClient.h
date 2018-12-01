@@ -9,3 +9,4 @@
 #include <Object/object_manager.h>
 #include <Object/actor.h>
 #include <Object/component.h>
+#include <registry_manager.h>

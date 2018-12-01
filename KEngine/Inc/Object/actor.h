@@ -18,14 +18,17 @@ namespace K
 
 		virtual APTR Clone() const = 0;
 
+		virtual void Serialize(InputMemoryStream& _imstream) = 0;
+		virtual void Serialize(OutputMemoryStream& _omstream) = 0;
+
 		CPTR const& FindComponent(TAG const& _tag) const;
 		APTR const& FindChild(TAG const& _tag) const;
 
 		void AddComponent(CPTR& _component);
 		void AddChild(APTR& _child);
 
-		void RemoveComponent(TAG const& _tag);
-		void RemoveChild(TAG const& _tag);
+		void RemoveComponent(CPTR const& _component);
+		void RemoveChild(APTR const& _child);
 
 		std::shared_ptr<Level> level() const;
 		std::shared_ptr<Layer> layer() const;
@@ -55,5 +58,37 @@ namespace K
 		std::weak_ptr<Actor> parent_{};
 		std::list<CPTR> component_list_{};
 		std::list<APTR> child_list_{};
+	};
+
+	class K_ENGINE_DLL ActorClient : public Actor
+	{
+	public:
+		virtual APTR Clone() const = 0;
+
+		virtual void Serialize(InputMemoryStream& _imstream) = 0;
+		virtual void Serialize(OutputMemoryStream& _omstream) = 0;
+
+	protected:
+		ActorClient() = default;
+		ActorClient(ActorClient const& _other);
+		ActorClient(ActorClient&& _other) noexcept;
+		ActorClient& operator=(ActorClient const&) = delete;
+		ActorClient& operator=(ActorClient&&) noexcept = default;
+	};
+
+	class K_ENGINE_DLL ActorServer : public Actor
+	{
+	public:
+		virtual APTR Clone() const = 0;
+
+		virtual void Serialize(InputMemoryStream& _imstream) = 0;
+		virtual void Serialize(OutputMemoryStream& _omstream) = 0;
+
+	protected:
+		ActorServer() = default;
+		ActorServer(ActorServer const& _other);
+		ActorServer(ActorServer&& _other) noexcept;
+		ActorServer& operator=(ActorServer const&) = delete;
+		ActorServer& operator=(ActorServer&&) noexcept = default;
 	};
 }

@@ -30,11 +30,19 @@ K::APTR K::DefaultActor::Clone() const
 	} };
 }
 
-K::DefaultActor::DefaultActor(DefaultActor const& _other) : Actor(_other)
+void K::DefaultActor::Serialize(InputMemoryStream& _imstream)
 {
 }
 
-K::DefaultActor::DefaultActor(DefaultActor&& _other) noexcept : Actor(std::move(_other))
+void K::DefaultActor::Serialize(OutputMemoryStream& _omstream)
+{
+}
+
+K::DefaultActor::DefaultActor(DefaultActor const& _other) : ActorClient(_other)
+{
+}
+
+K::DefaultActor::DefaultActor(DefaultActor&& _other) noexcept : ActorClient(std::move(_other))
 {
 }
 

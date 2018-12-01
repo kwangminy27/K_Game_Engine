@@ -12,6 +12,9 @@
 #include "input_manager.h"
 #include "World/world_manager.h"
 #include "Object/object_manager.h"
+#include "registry_manager.h"
+#include "replication_manager.h"
+#include "connection_manager.h"
 
 bool K::Core::shutdown_{};
 
@@ -23,24 +26,10 @@ void K::Core::Initialize(std::wstring const& _class_name, std::wstring const& _w
 {
 	try
 	{
-		ThrowIfFailed(CoInitializeEx(nullptr, COINIT_MULTITHREADED));
-
-		instance_ = _instance;
-
 		_RegisterClass(_class_name);
 		_CreateWindow(_class_name, _window_name);
 
-		DeviceManager::singleton()->Initialize(window_);
-		TextManager::singleton()->Initialize();
-		PathManager::singleton()->Initialize();
-		VideoManager::singleton()->Initialize();
-		AudioManager::singleton()->Initialize();
-		ResourceManager::singleton()->Initialize();
-		RenderingManager::singleton()->Initialize();
-		TimeManager::singleton()->Initialize();
-		InputManager::singleton()->Initialize();
-		WorldManager::singleton()->Initialize();
-		ObjectManager::singleton()->Initialize();
+		Initialize(_instance, window_);
 	}
 	catch (std::exception const& _e)
 	{
@@ -61,6 +50,8 @@ void K::Core::Initialize(HINSTANCE _instance, HWND _window)
 		instance_ = _instance;
 		window_ = _window;
 
+		SocketManager::singleton()->Initialize();
+
 		DeviceManager::singleton()->Initialize(window_);
 		TextManager::singleton()->Initialize();
 		PathManager::singleton()->Initialize();
@@ -72,6 +63,9 @@ void K::Core::Initialize(HINSTANCE _instance, HWND _window)
 		InputManager::singleton()->Initialize();
 		WorldManager::singleton()->Initialize();
 		ObjectManager::singleton()->Initialize();
+		RegistryManager::singleton()->Initialize();
+		ReplicationManager::singleton()->Initialize();
+		ConnectionManager::singleton()->Initialize();
 	}
 	catch (std::exception const& _e)
 	{
@@ -114,6 +108,9 @@ void K::Core::Logic()
 
 void K::Core::_Finalize()
 {
+	ConnectionManager::singleton().reset();
+	ReplicationManager::singleton().reset();
+	RegistryManager::singleton().reset();
 	ObjectManager::singleton().reset();
 	WorldManager::singleton().reset();
 	InputManager::singleton().reset();
@@ -125,6 +122,8 @@ void K::Core::_Finalize()
 	PathManager::singleton().reset();
 	TextManager::singleton().reset();
 	DeviceManager::singleton().reset();
+
+	SocketManager::singleton().reset();
 
 	CoUninitialize();
 }

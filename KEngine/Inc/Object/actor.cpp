@@ -137,19 +137,16 @@ void K::Actor::AddChild(APTR& _child)
 	child_list_.push_back(std::move(_child));
 }
 
-void K::Actor::RemoveComponent(TAG const& _tag)
+void K::Actor::RemoveComponent(CPTR const& _component)
 {
-	if(auto const& component = FindComponent(_tag))
-		component_list_.remove(component);
+	component_list_.remove(_component);
 }
 
-void K::Actor::RemoveChild(TAG const& _tag)
+void K::Actor::RemoveChild(APTR const& _child)
 {
-	auto const& child = FindChild(_tag);
+	_child->set_parent(Layer::actor_dummy_);
 
-	child->set_parent(Layer::actor_dummy_);
-
-	child_list_.remove(child);
+	child_list_.remove(_child);
 }
 
 std::shared_ptr<K::Level> K::Actor::level() const
@@ -217,5 +214,21 @@ K::Actor::Actor(Actor&& _other) noexcept : Tag(std::move(_other))
 }
 
 void K::Actor::_Finalize()
+{
+}
+
+K::ActorClient::ActorClient(ActorClient const& _other) : Actor(_other)
+{
+}
+
+K::ActorClient::ActorClient(ActorClient&& _other) noexcept : Actor(std::move(_other))
+{
+}
+
+K::ActorServer::ActorServer(ActorServer const& _other) : Actor(_other)
+{
+}
+
+K::ActorServer::ActorServer(ActorServer&& _other) noexcept : Actor(std::move(_other))
 {
 }

@@ -2,18 +2,19 @@
 #include "default_level.h"
 
 #include "Actor/default_actor.h"
-#include "Component/default_component.h"
 
 void K::DefaultLevel::Initialize()
 {
 	try
 	{
-		auto const& object_manager = ObjectManager::singleton();
-
 		auto layer = CreateLayer({ "DefaultLayer", 0 });
 
-		auto actor = object_manager->CreateActor<DefaultActor>({ "DefaultActor", 0 });
-		layer->AddActor(actor);
+		auto const& object_manager = ObjectManager::singleton();
+		auto const& registry_manager = RegistryManager::singleton();
+
+		registry_manager->AddActorGenerator({ "DefaultActor" }, [&object_manager](TAG const& _tag) -> APTR {
+			return object_manager->CreateActor<DefaultActor>(_tag);
+		});
 	}
 	catch (std::exception const& _e)
 	{

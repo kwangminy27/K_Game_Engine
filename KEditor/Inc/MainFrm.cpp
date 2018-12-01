@@ -38,7 +38,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 
 	cs.style = WS_CAPTION | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU;
 
-	RECT rc{ 0, 0, static_cast<int>(RESOLUTION::WIDTH) , static_cast<int>(RESOLUTION::HEIGHT) };
+	RECT rc{ 0, 0, static_cast<int>(K::RESOLUTION::WIDTH) , static_cast<int>(K::RESOLUTION::HEIGHT) };
 	AdjustWindowRectEx(&rc, cs.style, true, cs.dwExStyle);
 
 	cs.cx = rc.right - rc.left;

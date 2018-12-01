@@ -1,8 +1,5 @@
 #pragma once
 
-#include <KCommon.h>
-#include <singleton.h>
-
 namespace K
 {
 	class K_ENGINE_DLL DeviceManager final : public Singleton<DeviceManager>

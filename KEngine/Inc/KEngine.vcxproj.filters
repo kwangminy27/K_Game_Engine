@@ -73,6 +73,15 @@
     <Filter Include="12. Object\2. Component">
       <UniqueIdentifier>{609e9f7b-aab0-451d-b6cf-8e08427f34d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="13. Registry">
+      <UniqueIdentifier>{8251f841-2aba-4619-8f68-1fbfc3868291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="14. Replication">
+      <UniqueIdentifier>{9285f524-9832-426a-b773-37fc95696ffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="15. Connection">
+      <UniqueIdentifier>{d87a8301-dfcf-4262-9a53-c1d9259e852a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -156,6 +165,15 @@
     <ClInclude Include="Base\term.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="replication_manager.h">
+      <Filter>14. Replication</Filter>
+    </ClInclude>
+    <ClInclude Include="registry_manager.h">
+      <Filter>13. Registry</Filter>
+    </ClInclude>
+    <ClInclude Include="connection_manager.h">
+      <Filter>15. Connection</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -230,6 +248,15 @@
     <ClCompile Include="Object\component.cpp">
       <Filter>12. Object\2. Component</Filter>
     </ClCompile>
+    <ClCompile Include="replication_manager.cpp">
+      <Filter>14. Replication</Filter>
+    </ClCompile>
+    <ClCompile Include="registry_manager.cpp">
+      <Filter>13. Registry</Filter>
+    </ClCompile>
+    <ClCompile Include="connection_manager.cpp">
+      <Filter>15. Connection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="input_manager.inl">
@@ -238,7 +265,7 @@
     <None Include="World\world_manager.inl">
       <Filter>11. World</Filter>
     </None>
-    <None Include="object_manager.inl">
+    <None Include="Object\object_manager.inl">
       <Filter>12. Object</Filter>
     </None>
   </ItemGroup>

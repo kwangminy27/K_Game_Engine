@@ -24,6 +24,14 @@ K::CPTR K::DefaultComponent::Clone() const
 	} };
 }
 
+void K::DefaultComponent::Serialize(InputMemoryStream& _imstream)
+{
+}
+
+void K::DefaultComponent::Serialize(OutputMemoryStream& _omstream)
+{
+}
+
 K::DefaultComponent::DefaultComponent(DefaultComponent const& _other) : Component(_other)
 {
 }

@@ -16,6 +16,9 @@ namespace K
 
 		virtual CPTR Clone() const = 0;
 
+		virtual void Serialize(InputMemoryStream& _imstream) = 0;
+		virtual void Serialize(OutputMemoryStream& _omstream) = 0;
+
 		APTR owner() const;
 		void set_owner(APTR const& _actor);
 
