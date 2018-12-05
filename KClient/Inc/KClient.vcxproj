@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\default_actor.h" />
+    <ClInclude Include="Base\enum.h" />
     <ClInclude Include="Component\default_component.h" />
     <ClInclude Include="KClient.h" />
     <ClInclude Include="Level\default_level.h" />

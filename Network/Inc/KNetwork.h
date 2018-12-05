@@ -10,10 +10,10 @@
 #include <iostream>
 #include <unordered_map>
 
-// Base
-#include "Base/macro.h"
-#include "Base/term.h"
-
 // KCommon
 #include <KCommon.h>
 #include <singleton.h>
+
+// Base
+#include "Base/macro.h"
+#include "Base/term.h"

@@ -3,7 +3,7 @@
 
 #include "World/world_manager.h"
 #include "World/layer.h"
-#include "Object/actor.h"
+#include "Object/Actor/actor.h"
 #include "registry_manager.h"
 
 void K::ReplicationManager::Initialize()

@@ -1437,7 +1437,7 @@ inline K::Matrix K::Matrix::Inverse() const
 	return R;
 }
 
-inline K::Matrix K::Matrix::CreateScale(Vector3 const& _v)
+inline K::Matrix K::Matrix::CreateScaling(Vector3 const& _v)
 {
 	using namespace DirectX;
 

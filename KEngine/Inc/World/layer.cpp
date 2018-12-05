@@ -3,7 +3,7 @@
 
 #include "world_manager.h"
 #include "level.h"
-#include "Object/actor.h"
+#include "Object/Actor/actor.h"
 #include "replication_manager.h"
 
 K::APTR K::Layer::actor_dummy_{};

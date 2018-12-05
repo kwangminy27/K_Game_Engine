@@ -34,9 +34,6 @@
     <Filter Include="08. Rendering\1. Shader\1. HLSL">
       <UniqueIdentifier>{de79ca66-cc8e-45d6-9444-07e4874ed7dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08. Rendering\2. State">
-      <UniqueIdentifier>{012e1711-2f90-4fbf-9b9f-27ef60f861f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="07. Resource">
       <UniqueIdentifier>{624acd5b-67b2-4aa1-9459-8395f72310a9}</UniqueIdentifier>
     </Filter>
@@ -82,6 +79,12 @@
     <Filter Include="15. Connection">
       <UniqueIdentifier>{d87a8301-dfcf-4262-9a53-c1d9259e852a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="08. Rendering\2. RenderState">
+      <UniqueIdentifier>{012e1711-2f90-4fbf-9b9f-27ef60f861f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12. Object\2. Component\1. Transform">
+      <UniqueIdentifier>{b43321db-e0e9-4829-945e-91cb429ef170}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -120,14 +123,11 @@
     <ClInclude Include="Rendering\shader.h">
       <Filter>08. Rendering\1. Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\state.h">
-      <Filter>08. Rendering\2. State</Filter>
-    </ClInclude>
     <ClInclude Include="Rendering\depth_stencil_state.h">
-      <Filter>08. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. RenderState</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\blend_state.h">
-      <Filter>08. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. RenderState</Filter>
     </ClInclude>
     <ClInclude Include="Audio\audio_manager.h">
       <Filter>06. Audio</Filter>
@@ -156,12 +156,6 @@
     <ClInclude Include="Object\object_manager.h">
       <Filter>12. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Object\actor.h">
-      <Filter>12. Object\1. Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\component.h">
-      <Filter>12. Object\2. Component</Filter>
-    </ClInclude>
     <ClInclude Include="Base\term.h">
       <Filter>Base</Filter>
     </ClInclude>
@@ -173,6 +167,18 @@
     </ClInclude>
     <ClInclude Include="connection_manager.h">
       <Filter>15. Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Actor\actor.h">
+      <Filter>12. Object\1. Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Component\component.h">
+      <Filter>12. Object\2. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\render_state.h">
+      <Filter>08. Rendering\2. RenderState</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Component\transform.h">
+      <Filter>12. Object\2. Component\1. Transform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,14 +212,11 @@
     <ClCompile Include="Rendering\shader.cpp">
       <Filter>08. Rendering\1. Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\state.cpp">
-      <Filter>08. Rendering\2. State</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\depth_stencil_state.cpp">
-      <Filter>08. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. RenderState</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\blend_state.cpp">
-      <Filter>08. Rendering\2. State</Filter>
+      <Filter>08. Rendering\2. RenderState</Filter>
     </ClCompile>
     <ClCompile Include="Audio\audio_manager.cpp">
       <Filter>06. Audio</Filter>
@@ -242,12 +245,6 @@
     <ClCompile Include="Object\object_manager.cpp">
       <Filter>12. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Object\actor.cpp">
-      <Filter>12. Object\1. Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\component.cpp">
-      <Filter>12. Object\2. Component</Filter>
-    </ClCompile>
     <ClCompile Include="replication_manager.cpp">
       <Filter>14. Replication</Filter>
     </ClCompile>
@@ -256,6 +253,18 @@
     </ClCompile>
     <ClCompile Include="connection_manager.cpp">
       <Filter>15. Connection</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Actor\actor.cpp">
+      <Filter>12. Object\1. Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Component\component.cpp">
+      <Filter>12. Object\2. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\render_state.cpp">
+      <Filter>08. Rendering\2. RenderState</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Component\transform.cpp">
+      <Filter>12. Object\2. Component\1. Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

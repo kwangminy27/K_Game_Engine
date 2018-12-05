@@ -5,7 +5,7 @@ namespace K
 	struct CSO_DESC;
 
 	class Shader;
-	class State;
+	class RenderState;
 
 	struct ConstantBuffer
 	{
@@ -22,13 +22,13 @@ namespace K
 		virtual void Initialize() override;
 
 		std::shared_ptr<Shader> const& FindShader(std::string const& _tag) const;
-		std::shared_ptr<State> const& FindState(std::string const& _tag) const;
+		std::shared_ptr<RenderState> const& FindRenderState(std::string const& _tag) const;
 		std::shared_ptr<ConstantBuffer> const& FindConstantBuffer(std::string const& _tag) const;
 
 		void UpdateConstantBuffer(std::string const& _tag, void* _data);
 
 		static std::shared_ptr<Shader> shader_dummy_;
-		static std::shared_ptr<State> state_dummy_;
+		static std::shared_ptr<RenderState> render_state_dummy_;
 		static std::shared_ptr<ConstantBuffer> CB_dummy_;
 
 	private:
@@ -63,7 +63,7 @@ namespace K
 		void _CreateConstantBuffer(std::string const& _tag, uint32_t _size, uint32_t _shader_flag, uint32_t _slot);
 
 		std::unordered_map<std::string, std::shared_ptr<Shader>> shader_map_{};
-		std::unordered_map<std::string, std::shared_ptr<State>> state_map_{};
+		std::unordered_map<std::string, std::shared_ptr<RenderState>> render_state_map_{};
 		std::unordered_map<std::string, std::shared_ptr<ConstantBuffer>> CB_map_{};
 	};
 }

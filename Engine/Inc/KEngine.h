@@ -41,11 +41,6 @@
 
 #pragma comment(lib, "strmiids")
 
-// Base
-#include "Base/enum.h"
-#include "Base/macro.h"
-#include "Base/term.h"
-
 // KCommon
 #include <KCommon.h>
 #include <singleton.h>
@@ -59,6 +54,11 @@
 #include <KNetwork.h>
 #include <Socket/socket_manager.h>
 #include <Stream/memory_stream.h>
+
+// Base
+#include "Base/enum.h"
+#include "Base/macro.h"
+#include "Base/term.h"
 
 namespace K
 {

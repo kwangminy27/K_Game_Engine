@@ -197,6 +197,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Actor\default_actor.h" />
+    <ClInclude Include="Base\enum.h" />
     <ClInclude Include="Component\default_component.h" />
     <ClInclude Include="KEditor.h" />
     <ClInclude Include="KEditorDoc.h" />

@@ -6,14 +6,14 @@
 void K::DepthStencilState::SetToShader()
 {
 	UINT stencil_ref{};
-	DeviceManager::singleton()->context()->OMSetDepthStencilState(static_cast<ID3D11DepthStencilState*>(state_.Get()), stencil_ref);
+	DeviceManager::singleton()->context()->OMSetDepthStencilState(static_cast<ID3D11DepthStencilState*>(render_state_.Get()), stencil_ref);
 }
 
-K::DepthStencilState::DepthStencilState(DepthStencilState const& _other) : State(_other)
+K::DepthStencilState::DepthStencilState(DepthStencilState const& _other) : RenderState(_other)
 {
 }
 
-K::DepthStencilState::DepthStencilState(DepthStencilState&& _other) noexcept : State(std::move(_other))
+K::DepthStencilState::DepthStencilState(DepthStencilState&& _other) noexcept : RenderState(std::move(_other))
 {
 }
 
@@ -42,5 +42,5 @@ void K::DepthStencilState::_CreateState(
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depth_stencil_state{};
 	ThrowIfFailed(device->CreateDepthStencilState(&dsd, &depth_stencil_state));
 
-	ThrowIfFailed(depth_stencil_state.As(&state_));
+	ThrowIfFailed(depth_stencil_state.As(&render_state_));
 }

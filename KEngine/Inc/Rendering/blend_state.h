@@ -1,10 +1,10 @@
 #pragma once
 
-#include "state.h"
+#include "render_state.h"
 
 namespace K
 {
-	class K_ENGINE_DLL BlendState final : public State
+	class K_ENGINE_DLL BlendState final : public RenderState
 	{
 		friend class RenderingManager;
 	public:

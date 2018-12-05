@@ -73,6 +73,13 @@ namespace K
 	template <typename T, uint32_t Size> class ByteSwapper;
 
 	template <typename T>
+	class ByteSwapper<T, 1>
+	{
+	public:
+		T Swap(T _data) const;
+	};
+
+	template <typename T>
 	class ByteSwapper<T, 2>
 	{
 	public:

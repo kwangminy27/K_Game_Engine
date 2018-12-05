@@ -13,6 +13,9 @@
     <Filter Include="3. Component">
       <UniqueIdentifier>{21320a94-4a35-43a0-9b64-b85eb764cf3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{5e0356c0-87eb-4f03-85d7-66699078f11a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KClient.h">
@@ -26,6 +29,9 @@
     </ClInclude>
     <ClInclude Include="Component\default_component.h">
       <Filter>3. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\enum.h">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

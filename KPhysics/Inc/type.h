@@ -290,7 +290,7 @@ namespace K
 		Matrix Transpose() const;
 		Matrix Inverse() const;
 
-		static Matrix CreateScale(Vector3 const& _v);
+		static Matrix CreateScaling(Vector3 const& _v);
 		static Matrix CreateRotationX(float _angle);
 		static Matrix CreateRotationY(float _angle);
 		static Matrix CreateRotationZ(float _angle);

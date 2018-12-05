@@ -22,6 +22,9 @@
     <Filter Include="3. Component">
       <UniqueIdentifier>{339ab516-68e7-46b6-9d3f-de46ee47d01b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{5f6b2455-937b-4137-b48b-7c8d6b1c39f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEditor.h">
@@ -56,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="Component\default_component.h">
       <Filter>3. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\enum.h">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,14 +6,14 @@
 void K::BlendState::SetToShader()
 {
 	UINT sample_mask{ 0xffffffff };
-	DeviceManager::singleton()->context()->OMSetBlendState(static_cast<ID3D11BlendState*>(state_.Get()), nullptr, sample_mask);
+	DeviceManager::singleton()->context()->OMSetBlendState(static_cast<ID3D11BlendState*>(render_state_.Get()), nullptr, sample_mask);
 }
 
-K::BlendState::BlendState(BlendState const& _other) : State(_other)
+K::BlendState::BlendState(BlendState const& _other) : RenderState(_other)
 {
 }
 
-K::BlendState::BlendState(BlendState&& _other) noexcept : State(std::move(_other))
+K::BlendState::BlendState(BlendState&& _other) noexcept : RenderState(std::move(_other))
 {
 }
 
@@ -35,5 +35,5 @@ void K::BlendState::_CreateState(
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blend_state{};
 	ThrowIfFailed(device->CreateBlendState(&dbd, &blend_state));
 
-	ThrowIfFailed(blend_state.As(&state_));
+	ThrowIfFailed(blend_state.As(&render_state_));
 }

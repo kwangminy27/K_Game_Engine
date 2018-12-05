@@ -85,6 +85,12 @@ T K::MemoryStream::_ByteSwap(T _data)
 }
 
 template<typename T>
+T K::ByteSwapper<T, 1>::Swap(T _data) const
+{
+	return _data;
+}
+
+template<typename T>
 T K::ByteSwapper<T, 2>::Swap(T _data) const
 {
 	return static_cast<T>((static_cast<uint16_t>(_data) >> 8) | (static_cast<uint16_t>(_data) << 8));
