@@ -12,112 +12,6 @@ void K::Actor::Initialize()
 {
 }
 
-void K::Actor::Input(float _time)
-{
-	for (auto iter = component_list_.begin(); iter != component_list_.end();)
-	{
-		switch ((*iter)->tag_state())
-		{
-		case TAG_STATE::NORMAL:
-			(*iter)->Input(_time);
-			++iter;
-			break;
-
-		case TAG_STATE::DISABLED:
-			++iter;
-			break;
-
-		case TAG_STATE::DEAD:
-			iter = component_list_.erase(iter);
-			break;
-		}
-	}
-}
-
-void K::Actor::Update(float _time)
-{
-	for (auto iter = component_list_.begin(); iter != component_list_.end();)
-	{
-		switch ((*iter)->tag_state())
-		{
-		case TAG_STATE::NORMAL:
-			(*iter)->Update(_time);
-			++iter;
-			break;
-
-		case TAG_STATE::DISABLED:
-			++iter;
-			break;
-
-		case TAG_STATE::DEAD:
-			iter = component_list_.erase(iter);
-			break;
-		}
-	}
-
-	auto const& transform = static_cast<Transform*>(FindComponent({ "Transform", 0 }).get());
-
-	if (transform->dirty_flag())
-	{
-		for (auto const& child : child_list_)
-		{
-			auto const& child_transform = static_cast<Transform*>(child->FindComponent({ "Transform", 0 }).get());
-
-			child_transform->set_parent_scaling(transform->world_scaling());
-			child_transform->set_parent_rotation(transform->world_rotation());
-			child_transform->set_parent_translation(transform->world_translation());
-
-			child_transform->set_dirty_flag(true);
-		}
-
-		transform->set_dirty_flag(false);
-	}
-}
-
-void K::Actor::Collision(float _time)
-{
-	for (auto iter = component_list_.begin(); iter != component_list_.end();)
-	{
-		switch ((*iter)->tag_state())
-		{
-		case TAG_STATE::NORMAL:
-			(*iter)->Collision(_time);
-			++iter;
-			break;
-
-		case TAG_STATE::DISABLED:
-			++iter;
-			break;
-
-		case TAG_STATE::DEAD:
-			iter = component_list_.erase(iter);
-			break;
-		}
-	}
-}
-
-void K::Actor::Render(float _time)
-{
-	for (auto iter = component_list_.begin(); iter != component_list_.end();)
-	{
-		switch ((*iter)->tag_state())
-		{
-		case TAG_STATE::NORMAL:
-			(*iter)->Render(_time);
-			++iter;
-			break;
-
-		case TAG_STATE::DISABLED:
-			++iter;
-			break;
-
-		case TAG_STATE::DEAD:
-			iter = component_list_.erase(iter);
-			break;
-		}
-	}
-}
-
 K::CPTR const& K::Actor::FindComponent(TAG const& _tag) const
 {
 	auto iter = std::find_if(component_list_.begin(), component_list_.end(), [&_tag](CPTR const& _p) {
@@ -234,6 +128,112 @@ K::Actor::Actor(Actor&& _other) noexcept : Tag(std::move(_other))
 
 void K::Actor::_Finalize()
 {
+}
+
+void K::Actor::_Input(float _time)
+{
+	for (auto iter = component_list_.begin(); iter != component_list_.end();)
+	{
+		switch ((*iter)->tag_state())
+		{
+		case TAG_STATE::NORMAL:
+			(*iter)->Input(_time);
+			++iter;
+			break;
+
+		case TAG_STATE::DISABLED:
+			++iter;
+			break;
+
+		case TAG_STATE::DEAD:
+			iter = component_list_.erase(iter);
+			break;
+		}
+	}
+}
+
+void K::Actor::_Update(float _time)
+{
+	for (auto iter = component_list_.begin(); iter != component_list_.end();)
+	{
+		switch ((*iter)->tag_state())
+		{
+		case TAG_STATE::NORMAL:
+			(*iter)->Update(_time);
+			++iter;
+			break;
+
+		case TAG_STATE::DISABLED:
+			++iter;
+			break;
+
+		case TAG_STATE::DEAD:
+			iter = component_list_.erase(iter);
+			break;
+		}
+	}
+
+	auto const& transform = static_cast<Transform*>(FindComponent({ "Transform", 0 }).get());
+
+	if (transform->dirty_flag())
+	{
+		for (auto const& child : child_list_)
+		{
+			auto const& child_transform = static_cast<Transform*>(child->FindComponent({ "Transform", 0 }).get());
+
+			child_transform->set_parent_scaling(transform->world_scaling());
+			child_transform->set_parent_rotation(transform->world_rotation());
+			child_transform->set_parent_translation(transform->world_translation());
+
+			child_transform->set_dirty_flag(true);
+		}
+
+		transform->set_dirty_flag(false);
+	}
+}
+
+void K::Actor::_Collision(float _time)
+{
+	for (auto iter = component_list_.begin(); iter != component_list_.end();)
+	{
+		switch ((*iter)->tag_state())
+		{
+		case TAG_STATE::NORMAL:
+			(*iter)->Collision(_time);
+			++iter;
+			break;
+
+		case TAG_STATE::DISABLED:
+			++iter;
+			break;
+
+		case TAG_STATE::DEAD:
+			iter = component_list_.erase(iter);
+			break;
+		}
+	}
+}
+
+void K::Actor::_Render(float _time)
+{
+	for (auto iter = component_list_.begin(); iter != component_list_.end();)
+	{
+		switch ((*iter)->tag_state())
+		{
+		case TAG_STATE::NORMAL:
+			(*iter)->Render(_time);
+			++iter;
+			break;
+
+		case TAG_STATE::DISABLED:
+			++iter;
+			break;
+
+		case TAG_STATE::DEAD:
+			iter = component_list_.erase(iter);
+			break;
+		}
+	}
 }
 
 K::ActorClient::ActorClient(ActorClient const& _other) : Actor(_other)

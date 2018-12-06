@@ -54,9 +54,12 @@ void K::MemoryStream::Serialize(std::string& _data)
 	_Serialize(_data.data(), size);
 }
 
-template<typename T>
-void K::MemoryStream::Serialize(std::vector<T>& _data_vector)
+template <>
+void K::MemoryStream::Serialize(std::wstring& _data)
 {
+	uint16_t platform_endianess = 0x1234;
+	uint16_t stream_endianess = htons(platform_endianess);
+
 	uint32_t size{};
 
 	switch (_GetType())
@@ -64,11 +67,50 @@ void K::MemoryStream::Serialize(std::vector<T>& _data_vector)
 	case MEMORY_STREAM_TYPE::INPUT:
 		_Serialize(&size, sizeof(uint32_t));
 
+		if (platform_endianess != stream_endianess)
+			size = _ByteSwap(size);
+
+		_data.resize(size);
+		break;
+
+	case MEMORY_STREAM_TYPE::OUTPUT:
+		size = static_cast<uint32_t>(_data.size());
+
+		if (platform_endianess != stream_endianess)
+			size = _ByteSwap(size);
+
+		_Serialize(&size, sizeof(uint32_t));
+		break;
+	}
+
+	for (auto& e : _data)
+		Serialize(e);
+}
+
+template<typename T>
+void K::MemoryStream::Serialize(std::vector<T>& _data_vector)
+{
+	uint16_t platform_endianess = 0x1234;
+	uint16_t stream_endianess = htons(platform_endianess);
+
+	uint32_t size{};
+
+	switch (_GetType())
+	{
+	case MEMORY_STREAM_TYPE::INPUT:
+		_Serialize(&size, sizeof(uint32_t));
+
+		if(platform_endianess != stream_endianess)
+			size = _ByteSwap(size);
+
 		_data_vector.resize(size);
 		break;
 
 	case MEMORY_STREAM_TYPE::OUTPUT:
 		size = static_cast<uint32_t>(_data_vector.size());
+
+		if (platform_endianess != stream_endianess)
+			size = _ByteSwap(size);
 
 		_Serialize(&size, sizeof(uint32_t));
 		break;

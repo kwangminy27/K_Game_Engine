@@ -8,13 +8,10 @@ namespace K
 
 	class K_ENGINE_DLL Actor : public Tag, public std::enable_shared_from_this<Actor>
 	{
+		friend class Layer;
+		friend class ObjectManager;
 	public:
 		virtual void Initialize() override;
-
-		virtual void Input(float _time);
-		virtual void Update(float _time);
-		virtual void Collision(float _time);
-		virtual void Render(float _time);
 
 		virtual APTR Clone() const = 0;
 
@@ -53,6 +50,11 @@ namespace K
 
 		virtual void _Finalize() override;
 
+		void _Input(float _time);
+		void _Update(float _time);
+		void _Collision(float _time);
+		void _Render(float _time);
+
 		std::weak_ptr<Level> level_{};
 		std::weak_ptr<Layer> layer_{};
 		std::weak_ptr<Actor> parent_{};
@@ -62,6 +64,7 @@ namespace K
 
 	class K_ENGINE_DLL ActorClient : public Actor
 	{
+		friend class ObjectManager;
 	public:
 		virtual APTR Clone() const = 0;
 
@@ -78,6 +81,7 @@ namespace K
 
 	class K_ENGINE_DLL ActorServer : public Actor
 	{
+		friend class ObjectManager;
 	public:
 		virtual APTR Clone() const = 0;
 

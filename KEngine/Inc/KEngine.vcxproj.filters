@@ -85,6 +85,9 @@
     <Filter Include="12. Object\2. Component\1. Transform">
       <UniqueIdentifier>{b43321db-e0e9-4829-945e-91cb429ef170}</UniqueIdentifier>
     </Filter>
+    <Filter Include="12. Object\2. Component\2. Text">
+      <UniqueIdentifier>{cd6490b3-f2a4-4f68-a30a-13af0f8cfc66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -180,6 +183,9 @@
     <ClInclude Include="Object\Component\transform.h">
       <Filter>12. Object\2. Component\1. Transform</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Component\text.h">
+      <Filter>12. Object\2. Component\2. Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -265,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="Object\Component\transform.cpp">
       <Filter>12. Object\2. Component\1. Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Component\text.cpp">
+      <Filter>12. Object\2. Component\2. Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

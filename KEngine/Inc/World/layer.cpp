@@ -84,7 +84,7 @@ void K::Layer::_Input(float _time)
 		switch ((*iter)->tag_state())
 		{
 		case TAG_STATE::NORMAL:
-			(*iter)->Input(_time);
+			(*iter)->_Input(_time);
 			++iter;
 			break;
 
@@ -114,7 +114,7 @@ void K::Layer::_Update(float _time)
 		switch ((*iter)->tag_state())
 		{
 		case TAG_STATE::NORMAL:
-			(*iter)->Update(_time);
+			(*iter)->_Update(_time);
 			++iter;
 			break;
 
@@ -144,7 +144,7 @@ void K::Layer::_Collision(float _time)
 		switch ((*iter)->tag_state())
 		{
 		case TAG_STATE::NORMAL:
-			(*iter)->Collision(_time);
+			(*iter)->_Collision(_time);
 			++iter;
 			break;
 
@@ -174,7 +174,7 @@ void K::Layer::_Render(float _time)
 		switch ((*iter)->tag_state())
 		{
 		case TAG_STATE::NORMAL:
-			(*iter)->Render(_time);
+			(*iter)->_Render(_time);
 			++iter;
 			break;
 

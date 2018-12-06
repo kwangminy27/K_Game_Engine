@@ -13,6 +13,7 @@ namespace K
 
 	class K_ENGINE_DLL Transform final : public Component
 	{
+		friend class ObjectManager;
 	public:
 		virtual void Initialize() override;
 

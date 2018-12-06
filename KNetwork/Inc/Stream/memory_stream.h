@@ -19,6 +19,7 @@ namespace K
 
 		template <typename T> void Serialize(T& _data);
 		template <> void Serialize(std::string& _data);
+		template <> void Serialize(std::wstring& _data);
 		template <typename T> void Serialize(std::vector<T>& _data_vector);
 
 		void Clear();
