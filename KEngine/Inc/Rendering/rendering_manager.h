@@ -60,7 +60,7 @@ namespace K
 			bool _alpha_to_coverage_enable,
 			bool _independent_blend_enable,
 			std::vector<D3D11_RENDER_TARGET_BLEND_DESC> const& _render_target_blend_desc_vector);
-		void _CreateConstantBuffer(std::string const& _tag, uint32_t _size, uint32_t _shader_flag, uint32_t _slot);
+		void _CreateConstantBuffer(std::string const& _tag, uint32_t _size, uint8_t _shader_flag, uint32_t _slot);
 
 		std::unordered_map<std::string, std::shared_ptr<Shader>> shader_map_{};
 		std::unordered_map<std::string, std::shared_ptr<RenderState>> render_state_map_{};

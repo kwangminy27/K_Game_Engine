@@ -54,7 +54,7 @@ namespace K
 
 	private:
 		Mesh() = default;
-		Mesh(Mesh const& _other) = delete;
+		Mesh(Mesh const&) = delete;
 		Mesh(Mesh&& _other) noexcept;
 		Mesh& operator=(Mesh const&) = delete;
 		Mesh& operator=(Mesh&&) noexcept = default;
@@ -74,10 +74,10 @@ namespace K
 		void _CreateVertexBuffer(void* _data, int _stride, int _count, D3D11_USAGE _usage, VERTEX_BUFFER_TYPE _type);
 		void _CreateIndexBuffer(void* _data, int _stride, int _count, D3D11_USAGE _usage, DXGI_FORMAT _format);
 
-		std::vector<std::unique_ptr<MeshContainer, std::function<void(MeshContainer*)>>> mesh_container_vector_{};
 		Vector3 min_{};
 		Vector3 max_{};
 		Vector3 center_{};
 		Vector3 extent_{};
+		std::vector<std::unique_ptr<MeshContainer, std::function<void(MeshContainer*)>>> mesh_container_vector_{};
 	};
 }

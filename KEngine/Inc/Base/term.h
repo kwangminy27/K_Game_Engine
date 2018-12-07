@@ -15,4 +15,17 @@ namespace K
 	constexpr auto TEXTURE_PATH = "TexturePath";
 	constexpr auto AUDIO_PATH = "AudioPath";
 	constexpr auto VIDEO_PATH = "VideoPath";
+
+	struct TransformConstantBuffer
+	{
+		Matrix world;
+		Matrix view;
+		Matrix projection;
+		Matrix WVP;
+	};
+
+	struct MaterialConstantBuffer
+	{
+		Vector4 diffuse;
+	};
 }

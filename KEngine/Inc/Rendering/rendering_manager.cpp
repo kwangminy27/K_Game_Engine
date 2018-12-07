@@ -15,6 +15,8 @@ void K::RenderingManager::Initialize()
 {
 	try
 	{
+		_CreateConstantBuffer("Transform", sizeof(TransformConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 0);
+		_CreateConstantBuffer("Material", sizeof(MaterialConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 1);
 	}
 	catch (std::exception const& _e)
 	{
@@ -152,7 +154,7 @@ void K::RenderingManager::_CreateBlendState(
 	render_state_map_.insert(std::make_pair(_tag, std::move(render_state)));
 }
 
-void K::RenderingManager::_CreateConstantBuffer(std::string const& _tag, uint32_t _size, uint32_t _shader_flag, uint32_t _slot)
+void K::RenderingManager::_CreateConstantBuffer(std::string const& _tag, uint32_t _size, uint8_t _shader_flag, uint32_t _slot)
 {
 	auto const& device = DeviceManager::singleton()->device();
 

@@ -177,6 +177,7 @@
     <ClInclude Include="KEngine.h" />
     <ClInclude Include="Object\Actor\actor.h" />
     <ClInclude Include="Object\Component\component.h" />
+    <ClInclude Include="Object\Component\material.h" />
     <ClInclude Include="Object\Component\text.h" />
     <ClInclude Include="Object\Component\transform.h" />
     <ClInclude Include="Object\object_manager.h" />
@@ -211,6 +212,7 @@
     </ClCompile>
     <ClCompile Include="Object\Actor\actor.cpp" />
     <ClCompile Include="Object\Component\component.cpp" />
+    <ClCompile Include="Object\Component\material.cpp" />
     <ClCompile Include="Object\Component\text.cpp" />
     <ClCompile Include="Object\Component\transform.cpp" />
     <ClCompile Include="Object\object_manager.cpp" />

@@ -212,7 +212,7 @@ void K::Mesh::_CreateVertexBuffer(void* _data, int _stride, int _count, D3D11_US
 
 	mesh_container->VB_vector.push_back(std::move(VB));
 
-	if (_type == VERTEX_BUFFER_TYPE::VERTEX)
+	if (VERTEX_BUFFER_TYPE::VERTEX == _type)
 	{
 		char* vertices = static_cast<char*>(_data);
 
