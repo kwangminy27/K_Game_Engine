@@ -91,6 +91,9 @@
     <Filter Include="12. Object\2. Component\3. Material">
       <UniqueIdentifier>{dfd19163-ca57-49cd-8db6-6f50420c2341}</UniqueIdentifier>
     </Filter>
+    <Filter Include="12. Object\2. Component\4. Renderer">
+      <UniqueIdentifier>{01b5859e-9d1c-4a93-88d6-8c5c705fa174}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -192,6 +195,9 @@
     <ClInclude Include="Object\Component\material.h">
       <Filter>12. Object\2. Component\3. Material</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Component\renderer.h">
+      <Filter>12. Object\2. Component\4. Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -283,6 +289,9 @@
     </ClCompile>
     <ClCompile Include="Object\Component\material.cpp">
       <Filter>12. Object\2. Component\3. Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Component\renderer.cpp">
+      <Filter>12. Object\2. Component\4. Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
