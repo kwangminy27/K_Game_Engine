@@ -3,13 +3,23 @@
 
 #include "level.h"
 #include "layer.h"
+#include "Object/object_manager.h"
+#include "Object/Actor/camera_actor.h"
 
 std::shared_ptr<K::Level> K::WorldManager::level_dummy_{};
+std::shared_ptr<K::CameraActor> K::WorldManager::camera_dummy_{};
 
 void K::WorldManager::Initialize()
 {
 	try
 	{
+		auto const& object_manager = ObjectManager::singleton();
+
+		auto ui_camera = std::static_pointer_cast<CameraActor>(object_manager->CreateActor<CameraActor>({ "UICamera", 0 }));
+		camera_list_.push_back(ui_camera);
+
+		auto main_camera = std::static_pointer_cast<CameraActor>(object_manager->CreateActor<CameraActor>({ "MainCamera", 0 }));
+		camera_list_.push_back(main_camera);
 	}
 	catch (std::exception const& _e)
 	{
@@ -143,6 +153,23 @@ K::APTR const& K::WorldManager::FindActor(TAG const& _tag) const
 	return Layer::actor_dummy_;
 }
 
+std::shared_ptr<K::CameraActor> const& K::WorldManager::FindCamera(TAG const& _tag) const
+{
+	auto iter = std::find_if(camera_list_.begin(), camera_list_.end(), [&_tag](std::shared_ptr<CameraActor> const& _p) {
+		return _p->tag() == _tag;
+	});
+
+	if (iter == camera_list_.end())
+		return camera_dummy_;
+	
+	return *iter;
+}
+
 void K::WorldManager::_Finalize()
 {
+}
+
+void K::WorldManager::_AddCamera(std::shared_ptr<CameraActor> const& _camera)
+{
+	camera_list_.push_back(_camera);
 }

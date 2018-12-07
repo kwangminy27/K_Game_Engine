@@ -176,6 +176,8 @@
     <ClInclude Include="input_manager.h" />
     <ClInclude Include="KEngine.h" />
     <ClInclude Include="Object\Actor\actor.h" />
+    <ClInclude Include="Object\Actor\camera_actor.h" />
+    <ClInclude Include="Object\Component\camera.h" />
     <ClInclude Include="Object\Component\component.h" />
     <ClInclude Include="Object\Component\material.h" />
     <ClInclude Include="Object\Component\renderer.h" />
@@ -212,6 +214,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Object\Actor\actor.cpp" />
+    <ClCompile Include="Object\Actor\camera_actor.cpp" />
+    <ClCompile Include="Object\Component\camera.cpp" />
     <ClCompile Include="Object\Component\component.cpp" />
     <ClCompile Include="Object\Component\material.cpp" />
     <ClCompile Include="Object\Component\renderer.cpp" />

@@ -11,7 +11,7 @@ namespace K
 		friend class Layer;
 		friend class ObjectManager;
 	public:
-		virtual void Initialize() override;
+		virtual void Initialize() = 0;
 
 		virtual APTR Clone() const = 0;
 
@@ -48,12 +48,17 @@ namespace K
 		Actor& operator=(Actor&&) noexcept = default;
 		virtual ~Actor() = default;
 
-		virtual void _Finalize() override;
+		virtual void _Finalize() = 0;
 
-		void _Input(float _time);
-		void _Update(float _time);
-		void _Collision(float _time);
-		void _Render(float _time);
+		virtual void _Input(float _time) = 0;
+		virtual void _Update(float _time) = 0;
+		virtual void _Collision(float _time) = 0;
+		virtual void _Render(float _time) = 0;
+
+		void __Input(float _time);
+		void __Update(float _time);
+		void __Collision(float _time);
+		void __Render(float _time);
 
 		std::weak_ptr<Level> level_{};
 		std::weak_ptr<Layer> layer_{};
@@ -66,6 +71,8 @@ namespace K
 	{
 		friend class ObjectManager;
 	public:
+		virtual void Initialize() = 0;
+
 		virtual APTR Clone() const = 0;
 
 		virtual void Serialize(InputMemoryStream& _imstream) = 0;
@@ -77,12 +84,21 @@ namespace K
 		ActorClient(ActorClient&& _other) noexcept;
 		ActorClient& operator=(ActorClient const&) = delete;
 		ActorClient& operator=(ActorClient&&) noexcept = default;
+
+		virtual void _Finalize() = 0;
+
+		virtual void _Input(float _time) = 0;
+		virtual void _Update(float _time) = 0;
+		virtual void _Collision(float _time) = 0;
+		virtual void _Render(float _time) = 0;
 	};
 
 	class K_ENGINE_DLL ActorServer : public Actor
 	{
 		friend class ObjectManager;
 	public:
+		virtual void Initialize() = 0;
+
 		virtual APTR Clone() const = 0;
 
 		virtual void Serialize(InputMemoryStream& _imstream) = 0;
@@ -94,5 +110,12 @@ namespace K
 		ActorServer(ActorServer&& _other) noexcept;
 		ActorServer& operator=(ActorServer const&) = delete;
 		ActorServer& operator=(ActorServer&&) noexcept = default;
+
+		virtual void _Finalize() = 0;
+
+		virtual void _Input(float _time) = 0;
+		virtual void _Update(float _time) = 0;
+		virtual void _Collision(float _time) = 0;
+		virtual void _Render(float _time) = 0;
 	};
 }

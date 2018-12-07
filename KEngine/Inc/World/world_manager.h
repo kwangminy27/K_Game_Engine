@@ -4,6 +4,7 @@ namespace K
 {
 	class Level;
 	class Layer;
+	class CameraActor;
 
 	class K_ENGINE_DLL WorldManager final : public Singleton<WorldManager>
 	{
@@ -19,10 +20,12 @@ namespace K
 		std::shared_ptr<Level> const& FindLevel(TAG const& _tag) const;
 		std::shared_ptr<Layer> const& FindLayer(TAG const& _tag) const;
 		APTR const& FindActor(TAG const& _tag) const;
+		std::shared_ptr<CameraActor> const& FindCamera(TAG const& _tag) const;
 
 		template <typename T> void CreateLevel(TAG const& _tag);
 
 		static std::shared_ptr<Level> level_dummy_;
+		static std::shared_ptr<CameraActor> camera_dummy_;
 
 	private:
 		WorldManager() = default;
@@ -33,7 +36,10 @@ namespace K
 
 		virtual void _Finalize() override;
 
+		void _AddCamera(std::shared_ptr<CameraActor> const& _camera);
+
 		std::list<std::shared_ptr<Level>> level_list_{};
+		std::list<std::shared_ptr<CameraActor>> camera_list_{};
 	};
 }
 

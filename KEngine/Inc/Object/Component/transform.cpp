@@ -1,8 +1,6 @@
 #include "KEngine.h"
 #include "transform.h"
 
-#include "Object/Actor/actor.h"
-
 void K::Transform::Initialize()
 {
 	try

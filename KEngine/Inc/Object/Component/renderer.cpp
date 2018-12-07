@@ -5,8 +5,10 @@
 #include "Rendering/rendering_manager.h"
 #include "Rendering/shader.h"
 #include "Rendering/render_state.h"
-#include "Object/Actor/actor.h"
+#include "World/world_manager.h"
+#include "Object/Actor/camera_actor.h"
 #include "Object/Component/transform.h"
+#include "Object/Component/camera.h"
 #include "Object/Component/material.h"
 
 void K::Renderer::Initialize()
@@ -99,10 +101,12 @@ void K::Renderer::_UpdateConstantBuffers(float _time)
 {
 	auto const& transform = owner()->FindComponent({ "Transform", 0 });
 
+	auto const& main_camera = WorldManager::singleton()->FindCamera({ "MainCamera", 0 });
+
 	TransformConstantBuffer transform_CB{};
 	transform_CB.world = CPTR_CAST<Transform>(transform)->world();
-	transform_CB.view = Matrix::Identity;
-	transform_CB.projection = Matrix::Identity;
+	transform_CB.view = main_camera->view();
+	transform_CB.projection = main_camera->projection();
 	transform_CB.WVP = transform_CB.world * transform_CB.view * transform_CB.projection;
 
 	transform_CB.world = transform_CB.world.Transpose();

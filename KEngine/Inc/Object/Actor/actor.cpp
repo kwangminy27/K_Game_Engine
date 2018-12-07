@@ -130,8 +130,10 @@ void K::Actor::_Finalize()
 {
 }
 
-void K::Actor::_Input(float _time)
+void K::Actor::__Input(float _time)
 {
+	_Input(_time);
+
 	for (auto iter = component_list_.begin(); iter != component_list_.end();)
 	{
 		switch ((*iter)->tag_state())
@@ -152,8 +154,10 @@ void K::Actor::_Input(float _time)
 	}
 }
 
-void K::Actor::_Update(float _time)
+void K::Actor::__Update(float _time)
 {
+	_Update(_time);
+
 	for (auto iter = component_list_.begin(); iter != component_list_.end();)
 	{
 		switch ((*iter)->tag_state())
@@ -192,8 +196,10 @@ void K::Actor::_Update(float _time)
 	}
 }
 
-void K::Actor::_Collision(float _time)
+void K::Actor::__Collision(float _time)
 {
+	_Collision(_time);
+
 	for (auto iter = component_list_.begin(); iter != component_list_.end();)
 	{
 		switch ((*iter)->tag_state())
@@ -214,8 +220,10 @@ void K::Actor::_Collision(float _time)
 	}
 }
 
-void K::Actor::_Render(float _time)
+void K::Actor::__Render(float _time)
 {
+	_Render(_time);
+
 	for (auto iter = component_list_.begin(); iter != component_list_.end();)
 	{
 		switch ((*iter)->tag_state())

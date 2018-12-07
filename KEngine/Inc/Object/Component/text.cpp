@@ -3,7 +3,8 @@
 
 #include "device_manager.h"
 #include "text_manager.h"
-#include "Object/Actor/actor.h"
+#include "World/world_manager.h"
+#include "Object/Actor/camera_actor.h"
 #include "Object/Component/transform.h"
 
 void K::Text::Initialize()
@@ -31,7 +32,17 @@ void K::Text::Render(float _time)
 	auto const& format = text_manager->FindTextFormat(format_tag_);
 	auto const& brush = text_manager->FindSolidColorBrush(color_key_);
 
-	auto position = static_cast<Transform*>(owner()->FindComponent({ "Transform", 0 }).get())->world().Translation();
+	auto const& transform = static_cast<Transform*>(owner()->FindComponent({ "Transform", 0 }).get());
+	auto position = transform->world().Translation();
+
+	if (!ui_flag_)
+	{
+		auto const& main_camera = WorldManager::singleton()->FindCamera({ "MainCamera", 0 });
+		auto const& main_camera_transform = static_cast<Transform*>(main_camera->FindComponent({ "Transform", 0 }).get());
+		auto main_camera_position = main_camera_transform->world().Translation();
+
+		position -= main_camera_position;
+	}
 
 	auto render_area = text_area_;
 
@@ -74,6 +85,11 @@ void K::Text::set_text_alignment(DWRITE_TEXT_ALIGNMENT _alignment)
 void K::Text::set_paragraph_alignment(DWRITE_PARAGRAPH_ALIGNMENT _alignment)
 {
 	paragraph_alignment_ = _alignment;
+}
+
+void K::Text::set_ui_flag(bool _flag)
+{
+	ui_flag_ = _flag;
 }
 
 void K::Text::set_text(std::wstring const& _text)

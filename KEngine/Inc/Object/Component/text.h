@@ -20,6 +20,7 @@ namespace K
 		void set_text_alignment(DWRITE_TEXT_ALIGNMENT _alignment);
 		void set_paragraph_alignment(DWRITE_PARAGRAPH_ALIGNMENT _alignment);
 
+		void set_ui_flag(bool _flag);
 		void set_text(std::wstring const& _text);
 		void set_format_tag(std::string const& _tag);
 		void set_text_area(D2D1_RECT_F const& _area);
@@ -37,6 +38,7 @@ namespace K
 		DWRITE_TEXT_ALIGNMENT text_alignment_{};
 		DWRITE_PARAGRAPH_ALIGNMENT paragraph_alignment_{};
 
+		bool ui_flag_{};
 		std::wstring text_{};
 		std::string format_tag_{};
 		D2D1_RECT_F text_area_{};

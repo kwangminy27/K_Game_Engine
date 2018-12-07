@@ -85,13 +85,19 @@
     <Filter Include="12. Object\2. Component\1. Transform">
       <UniqueIdentifier>{b43321db-e0e9-4829-945e-91cb429ef170}</UniqueIdentifier>
     </Filter>
-    <Filter Include="12. Object\2. Component\2. Text">
+    <Filter Include="12. Object\1. Actor\1. CameraActor">
+      <UniqueIdentifier>{5a76b4bf-54da-4051-a462-0d064481e42e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12. Object\2. Component\2. Camera">
+      <UniqueIdentifier>{9dad187d-65fd-48f8-83eb-d24d1b44c43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12. Object\2. Component\3. Text">
       <UniqueIdentifier>{cd6490b3-f2a4-4f68-a30a-13af0f8cfc66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="12. Object\2. Component\3. Material">
+    <Filter Include="12. Object\2. Component\4. Material">
       <UniqueIdentifier>{dfd19163-ca57-49cd-8db6-6f50420c2341}</UniqueIdentifier>
     </Filter>
-    <Filter Include="12. Object\2. Component\4. Renderer">
+    <Filter Include="12. Object\2. Component\5. Renderer">
       <UniqueIdentifier>{01b5859e-9d1c-4a93-88d6-8c5c705fa174}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -190,13 +196,19 @@
       <Filter>12. Object\2. Component\1. Transform</Filter>
     </ClInclude>
     <ClInclude Include="Object\Component\text.h">
-      <Filter>12. Object\2. Component\2. Text</Filter>
+      <Filter>12. Object\2. Component\3. Text</Filter>
     </ClInclude>
     <ClInclude Include="Object\Component\material.h">
-      <Filter>12. Object\2. Component\3. Material</Filter>
+      <Filter>12. Object\2. Component\4. Material</Filter>
     </ClInclude>
     <ClInclude Include="Object\Component\renderer.h">
-      <Filter>12. Object\2. Component\4. Renderer</Filter>
+      <Filter>12. Object\2. Component\5. Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Component\camera.h">
+      <Filter>12. Object\2. Component\2. Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Actor\camera_actor.h">
+      <Filter>12. Object\1. Actor\1. CameraActor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,13 +297,19 @@
       <Filter>12. Object\2. Component\1. Transform</Filter>
     </ClCompile>
     <ClCompile Include="Object\Component\text.cpp">
-      <Filter>12. Object\2. Component\2. Text</Filter>
+      <Filter>12. Object\2. Component\3. Text</Filter>
     </ClCompile>
     <ClCompile Include="Object\Component\material.cpp">
-      <Filter>12. Object\2. Component\3. Material</Filter>
+      <Filter>12. Object\2. Component\4. Material</Filter>
     </ClCompile>
     <ClCompile Include="Object\Component\renderer.cpp">
-      <Filter>12. Object\2. Component\4. Renderer</Filter>
+      <Filter>12. Object\2. Component\5. Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Component\camera.cpp">
+      <Filter>12. Object\2. Component\2. Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Actor\camera_actor.cpp">
+      <Filter>12. Object\1. Actor\1. CameraActor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
