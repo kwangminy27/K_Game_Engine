@@ -15,6 +15,10 @@ namespace K
 		virtual void Serialize(InputMemoryStream& _imstream) override;
 		virtual void Serialize(OutputMemoryStream& _omstream) override;
 
+		void CreateView(Vector3 const& _eye, Vector3 const& _focus, Vector3 const& _up);
+		void CreateProjection(float _width, float _height, float _near, float _far);
+		void CreateProjection(float _fov_angle, float _width, float _height, float _near, float _far);
+
 		Matrix const& view() const;
 		Matrix const& projection() const;
 
@@ -26,10 +30,5 @@ namespace K
 		CameraActor& operator=(CameraActor&&) noexcept = default;
 
 		virtual void _Finalize() override;
-
-		virtual void _Input(float _time);
-		virtual void _Update(float _time);
-		virtual void _Collision(float _time);
-		virtual void _Render(float _time);
 	};
 }

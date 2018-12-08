@@ -15,10 +15,12 @@ namespace K
 		std::shared_ptr<Mesh> const& FindMesh(std::string const& _tag) const;
 		std::shared_ptr<Texture> const& FindTexture(std::string const& _tag) const;
 		std::shared_ptr<Sampler> const& FindSampler(std::string const& _tag) const;
+		std::shared_ptr<ANIMATION_2D_CLIP_DESC> const& FindAnimation2DClip(std::string const& _tag) const;
 
 		static std::shared_ptr<Mesh> mesh_dummy_;
 		static std::shared_ptr<Texture> texture_dummy_;
 		static std::shared_ptr<Sampler> sampler_dummy_;
+		static std::shared_ptr<ANIMATION_2D_CLIP_DESC> animation_2d_clip_dummy_;
 
 	private:
 		ResourceManager() = default;
@@ -48,9 +50,11 @@ namespace K
 			D3D11_TEXTURE_ADDRESS_MODE _address_u,
 			D3D11_TEXTURE_ADDRESS_MODE _address_v,
 			D3D11_TEXTURE_ADDRESS_MODE _address_w);
+		void _CreateAnimation2DClip(std::string const& _tag, std::wstring const& _file_name, std::string const& _path_tag);
 
 		std::unordered_map<std::string, std::shared_ptr<Mesh>> mesh_map_{};
 		std::unordered_map<std::string, std::shared_ptr<Texture>> texture_map_{};
 		std::unordered_map<std::string, std::shared_ptr<Sampler>> sampler_map_{};
+		std::unordered_map<std::string, std::shared_ptr<ANIMATION_2D_CLIP_DESC>> animation_2d_clip_map_{};
 	};
 }

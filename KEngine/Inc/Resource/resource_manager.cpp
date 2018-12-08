@@ -1,6 +1,7 @@
 #include "KEngine.h"
 #include "resource_manager.h"
 
+#include "path_manager.h"
 #include "mesh.h"
 #include "texture.h"
 #include "sampler.h"
@@ -8,11 +9,58 @@
 std::shared_ptr<K::Mesh> K::ResourceManager::mesh_dummy_{};
 std::shared_ptr<K::Texture> K::ResourceManager::texture_dummy_{};
 std::shared_ptr<K::Sampler> K::ResourceManager::sampler_dummy_{};
+std::shared_ptr<K::ANIMATION_2D_CLIP_DESC> K::ResourceManager::animation_2d_clip_dummy_{};
 
 void K::ResourceManager::Initialize()
 {
 	try
 	{
+#pragma region Mesh
+		VertexColor color_tri_vertices[3]{
+			{ { 0.f, 0.f, 0.f }, DirectX::Colors::Red.v },
+			{ { 0.5f, 1.f, 0.f }, DirectX::Colors::Green.v },
+			{ { 1.f, 0.f, 0.f }, DirectX::Colors::Blue.v }
+		};
+
+		uint16_t color_tri_indices[3]{ 0, 1, 2 };
+
+		_CreateMesh(
+			COLOR_TRI, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+			color_tri_vertices, sizeof(VertexColor), 3, D3D11_USAGE_DEFAULT,
+			color_tri_indices, sizeof(uint16_t), 3, D3D11_USAGE_DEFAULT, DXGI_FORMAT_R16_UINT
+		);
+
+		VertexTex tex_rect_vertices[4]{
+			{ { 0.f, 0.f, 0.f }, { 0.f, 1.f } },
+			{ { 0.f, 1.f, 0.f }, { 0.f, 0.f } },
+			{ { 1.f, 0.f, 0.f }, { 1.f, 1.f } },
+			{ { 1.f, 1.f, 0.f }, { 1.f, 0.f } }
+		};
+
+		uint16_t tex_rect_indices[6]{ 0, 1, 2, 1, 3, 2 };
+
+		_CreateMesh(
+			TEX_RECT, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+			tex_rect_vertices, sizeof(VertexTex), 4, D3D11_USAGE_DEFAULT,
+			tex_rect_indices, sizeof(uint16_t), 6, D3D11_USAGE_DEFAULT, DXGI_FORMAT_R16_UINT
+		);
+#pragma endregion
+
+#pragma region Texture
+#pragma endregion
+
+#pragma region Sampler
+		_CreateSampler(
+			LINEAR_SAMPLER,
+			D3D11_FILTER_MIN_MAG_MIP_LINEAR,
+			D3D11_TEXTURE_ADDRESS_CLAMP,
+			D3D11_TEXTURE_ADDRESS_CLAMP,
+			D3D11_TEXTURE_ADDRESS_CLAMP
+		);
+#pragma endregion
+
+#pragma region Animation2DClip
+#pragma endregion
 	}
 	catch (std::exception const& _e)
 	{
@@ -50,6 +98,16 @@ std::shared_ptr<K::Sampler> const& K::ResourceManager::FindSampler(std::string c
 
 	if (iter == sampler_map_.end())
 		return sampler_dummy_;
+
+	return iter->second;
+}
+
+std::shared_ptr<K::ANIMATION_2D_CLIP_DESC> const& K::ResourceManager::FindAnimation2DClip(std::string const& _tag) const
+{
+	auto iter = animation_2d_clip_map_.find(_tag);
+
+	if (iter == animation_2d_clip_map_.end())
+		return animation_2d_clip_dummy_;
 
 	return iter->second;
 }
@@ -140,4 +198,84 @@ void K::ResourceManager::_CreateSampler(
 	sampler->_CreateSampler(_filter, _address_u, _address_v, _address_w);
 
 	sampler_map_.insert(std::make_pair(_tag, std::move(sampler)));
+}
+
+void K::ResourceManager::_CreateAnimation2DClip(std::string const& _tag, std::wstring const& _file_name, std::string const& _path_tag)
+{
+	std::filesystem::path path_buffer = PathManager::singleton()->FindPath(_path_tag);
+
+	if (path_buffer.empty())
+		throw std::exception{ "ResourceManager::_CreateAnimation2DClip" };
+
+	path_buffer /= _file_name;
+
+	std::ifstream file{ path_buffer };
+
+	if(file.fail())
+		throw std::exception{ "ResourceManager::_CreateAnimation2DClip" };
+
+	std::string line{};
+	std::stringstream line_stream{};
+
+	std::getline(file, line);
+	std::getline(file, line);
+	line_stream.str(line);
+	std::getline(file, line);
+
+	std::string clip_tag{};
+	std::string texture_tag{};
+	std::string type{};
+	std::string option{};
+	std::string width{};
+	std::string height{};
+	std::string completion_time{};
+
+	std::getline(line_stream, clip_tag, ',');
+	std::getline(line_stream, texture_tag, ',');
+	std::getline(line_stream, type, ',');
+	std::getline(line_stream, option, ',');
+	std::getline(line_stream, width, ',');
+	std::getline(line_stream, height, ',');
+	std::getline(line_stream, completion_time, ',');
+
+	if(nullptr == FindTexture(clip_tag))
+		throw std::exception{ "ResourceManager::_CreateAnimation2DClip" };
+
+	auto animation_2d_clip = std::make_shared<ANIMATION_2D_CLIP_DESC>();
+	animation_2d_clip->clip_tag = clip_tag;
+	animation_2d_clip->texture_tag = texture_tag;
+	animation_2d_clip->type = static_cast<ANIMATION_2D_TYPE>(std::stoi(type));
+	animation_2d_clip->option = static_cast<ANIMATION_OPTION>(std::stoi(option));
+	animation_2d_clip->width = std::stof(width);
+	animation_2d_clip->height = std::stof(height);
+	animation_2d_clip->completion_time = std::stof(completion_time);
+
+	while (true)
+	{
+		line.clear();
+		line_stream.clear();
+
+		std::string left{};
+		std::string top{};
+		std::string right{};
+		std::string bottom{};
+
+		getline(file, line);
+		getline(file, line);
+		line_stream.str(line);
+
+		if (line.empty())
+			break;
+
+		getline(line_stream, left, ',');
+		getline(line_stream, top, ',');
+		getline(line_stream, right, ',');
+		getline(line_stream, bottom, ',');
+
+		ANIMATION_2D_FRAME_DESC frame{};
+		frame.LT = Vector2{ std::stof(left), std::stof(top) };
+		frame.RB = Vector2{ std::stof(right), std::stof(bottom) };
+
+		animation_2d_clip->frame_vector.push_back(std::move(frame));
+	}
 }

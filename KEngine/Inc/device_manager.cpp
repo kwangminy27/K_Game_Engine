@@ -31,6 +31,9 @@ void K::DeviceManager::Clear()
 void K::DeviceManager::Present()
 {
 	swap_chain_->Present(0, NULL);
+
+	context_->OMSetRenderTargets(0, nullptr, nullptr);
+	context_->OMSetRenderTargets(1, RTV_.GetAddressOf(), DSV_.Get());
 }
 
 void K::DeviceManager::ReportLiveObjects()

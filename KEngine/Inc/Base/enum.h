@@ -21,4 +21,16 @@ namespace K
 		RPC,
 		DISCONNECT
 	};
+
+	enum class ANIMATION_2D_TYPE
+	{
+		FRAME,
+		ATLAS
+	};
+
+	enum class ANIMATION_OPTION
+	{
+		LOOP,
+		DESTROY
+	};
 }

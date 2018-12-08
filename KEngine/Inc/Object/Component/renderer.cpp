@@ -2,14 +2,12 @@
 #include "renderer.h"
 
 #include "Resource/mesh.h"
-#include "Rendering/rendering_manager.h"
 #include "Rendering/shader.h"
 #include "Rendering/render_state.h"
-#include "World/world_manager.h"
-#include "Object/Actor/camera_actor.h"
+#include "Object/Actor/actor.h"
 #include "Object/Component/transform.h"
-#include "Object/Component/camera.h"
 #include "Object/Component/material.h"
+#include "Object/Component/animation_2d.h"
 
 void K::Renderer::Initialize()
 {
@@ -28,9 +26,9 @@ void K::Renderer::Initialize()
 
 void K::Renderer::Render(float _time)
 {
-	auto const& material = owner()->FindComponent({ "Mateiral", 0 });
+	auto const& material = owner()->FindComponent({ MATERIAL, 0 });
 
-	_UpdateConstantBuffers(_time);
+	UpdateConstantBuffer(_time);
 
 	for (auto const& render_state : render_state_vector_)
 		render_state->SetToShader();
@@ -39,7 +37,7 @@ void K::Renderer::Render(float _time)
 
 	for (auto i = 0; i < mesh_->GetContainerSize(); ++i)
 	{
-		for (auto j = 0; i < mesh_->GetSubsetSize(i); ++j)
+		for (auto j = 0; j < mesh_->GetSubsetSize(i); ++j)
 		{
 			CPTR_CAST<Material>(material)->SetToShader(i, j);
 
@@ -64,9 +62,13 @@ void K::Renderer::Serialize(OutputMemoryStream& _omstream)
 {
 }
 
-void K::Renderer::AddRenderState(std::shared_ptr<RenderState> const& _render_state)
+void K::Renderer::UpdateConstantBuffer(float _time)
 {
-	render_state_vector_.push_back(_render_state);
+	if(auto const& transform = owner()->FindComponent({ TRANSFORM, 0 }))
+		CPTR_CAST<Transform>(transform)->UpdateConstantBuffer();
+
+	if (auto const& animation_2d = owner()->FindComponent({ ANIMATION_2D, 0 }))
+		CPTR_CAST<Animation2D>(animation_2d)->UpdateConstantBuffer(_time);
 }
 
 void K::Renderer::set_mesh(std::shared_ptr<Mesh> const& _mesh)
@@ -77,6 +79,11 @@ void K::Renderer::set_mesh(std::shared_ptr<Mesh> const& _mesh)
 void K::Renderer::set_shader(std::shared_ptr<Shader> const& _shader)
 {
 	shader_ = _shader;
+}
+
+void K::Renderer::set_render_state(std::shared_ptr<RenderState> const& _render_state)
+{
+	render_state_vector_.push_back(_render_state);
 }
 
 K::Renderer::Renderer(Renderer const& _other) : Component(_other)
@@ -95,24 +102,4 @@ K::Renderer::Renderer(Renderer&& _other) noexcept : Component(std::move(_other))
 
 void K::Renderer::_Finalize()
 {
-}
-
-void K::Renderer::_UpdateConstantBuffers(float _time)
-{
-	auto const& transform = owner()->FindComponent({ "Transform", 0 });
-
-	auto const& main_camera = WorldManager::singleton()->FindCamera({ "MainCamera", 0 });
-
-	TransformConstantBuffer transform_CB{};
-	transform_CB.world = CPTR_CAST<Transform>(transform)->world();
-	transform_CB.view = main_camera->view();
-	transform_CB.projection = main_camera->projection();
-	transform_CB.WVP = transform_CB.world * transform_CB.view * transform_CB.projection;
-
-	transform_CB.world = transform_CB.world.Transpose();
-	transform_CB.view = transform_CB.view.Transpose();
-	transform_CB.projection = transform_CB.projection.Transpose();
-	transform_CB.WVP = transform_CB.WVP.Transpose();
-
-	RenderingManager::singleton()->UpdateConstantBuffer("Transform", &transform_CB);
 }

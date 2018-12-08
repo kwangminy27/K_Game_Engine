@@ -2,12 +2,6 @@
 
 namespace K
 {
-	struct CSO_DESC
-	{
-		SHADER_TYPE type;
-		std::wstring file_name;
-	};
-
 	class K_ENGINE_DLL Shader
 	{
 		friend class RenderingManager;

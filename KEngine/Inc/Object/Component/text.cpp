@@ -32,13 +32,13 @@ void K::Text::Render(float _time)
 	auto const& format = text_manager->FindTextFormat(format_tag_);
 	auto const& brush = text_manager->FindSolidColorBrush(color_key_);
 
-	auto const& transform = static_cast<Transform*>(owner()->FindComponent({ "Transform", 0 }).get());
+	auto const& transform = static_cast<Transform*>(owner()->FindComponent({ TRANSFORM, 0 }).get());
 	auto position = transform->world().Translation();
 
 	if (!ui_flag_)
 	{
 		auto const& main_camera = WorldManager::singleton()->FindCamera({ "MainCamera", 0 });
-		auto const& main_camera_transform = static_cast<Transform*>(main_camera->FindComponent({ "Transform", 0 }).get());
+		auto const& main_camera_transform = static_cast<Transform*>(main_camera->FindComponent({ TRANSFORM, 0 }).get());
 		auto main_camera_position = main_camera_transform->world().Translation();
 
 		position -= main_camera_position;

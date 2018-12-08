@@ -50,10 +50,10 @@ namespace K
 
 		virtual void _Finalize() = 0;
 
-		virtual void _Input(float _time) = 0;
-		virtual void _Update(float _time) = 0;
-		virtual void _Collision(float _time) = 0;
-		virtual void _Render(float _time) = 0;
+		virtual void _Input(float _time);
+		virtual void _Update(float _time);
+		virtual void _Collision(float _time);
+		virtual void _Render(float _time);
 
 		void __Input(float _time);
 		void __Update(float _time);
@@ -86,11 +86,6 @@ namespace K
 		ActorClient& operator=(ActorClient&&) noexcept = default;
 
 		virtual void _Finalize() = 0;
-
-		virtual void _Input(float _time) = 0;
-		virtual void _Update(float _time) = 0;
-		virtual void _Collision(float _time) = 0;
-		virtual void _Render(float _time) = 0;
 	};
 
 	class K_ENGINE_DLL ActorServer : public Actor
@@ -112,10 +107,5 @@ namespace K
 		ActorServer& operator=(ActorServer&&) noexcept = default;
 
 		virtual void _Finalize() = 0;
-
-		virtual void _Input(float _time) = 0;
-		virtual void _Update(float _time) = 0;
-		virtual void _Collision(float _time) = 0;
-		virtual void _Render(float _time) = 0;
 	};
 }

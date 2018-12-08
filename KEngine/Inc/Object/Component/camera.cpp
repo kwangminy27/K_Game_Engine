@@ -20,16 +20,6 @@ void K::Camera::Initialize()
 	}
 }
 
-void K::Camera::Update(float _time)
-{
-	auto const& transform = owner()->FindComponent({ "Transform", 0 });
-
-	auto eye = CPTR_CAST<Transform>(transform)->world().Translation() - Vector3{ 0.f, 0.f, -100.f };
-	auto focus = CPTR_CAST<Transform>(transform)->world().Translation();
-
-	CreateView(eye, focus, Vector3::UnitY);
-}
-
 K::CPTR K::Camera::Clone() const
 {
 	return CPTR{ new Camera{ *this }, [](Component* _p) {

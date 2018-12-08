@@ -15,6 +15,67 @@ namespace K
 	constexpr auto TEXTURE_PATH = "TexturePath";
 	constexpr auto AUDIO_PATH = "AudioPath";
 	constexpr auto VIDEO_PATH = "VideoPath";
+	constexpr auto SHADER_PATH = "ShaderPath";
+
+	//////////////////// Mesh Key ////////////////////
+	constexpr auto COLOR_TRI = "ColorTri";
+	constexpr auto TEX_RECT = "TexRect";
+
+	//////////////////// Sampler Key ////////////////////
+	constexpr auto LINEAR_SAMPLER = "LinearSampler";
+
+	//////////////////// Shader Key ////////////////////
+	constexpr auto BASIC_SHADER = "BasicShader";
+	constexpr auto BASIC_TEX_SHADER = "BasicTexShader";
+	constexpr auto BASIC_ANIMATION_2D_SHADER = "BasicAnimation2DShader";
+
+	//////////////////// RenderState Key ////////////////////
+	constexpr auto ALPHA_BLEND = "AlphaBlend";
+	constexpr auto DEPTH_DISABLE = "DepthDisable";
+
+	//////////////////// Component Key ////////////////////
+	constexpr auto TRANSFORM = "Transform";
+	constexpr auto CAMERA = "Camera";
+	constexpr auto TEXT = "Text";
+	constexpr auto MATERIAL = "Material";
+	constexpr auto RENDERER = "Renderer";
+	constexpr auto ANIMATION_2D = "Animation2D";
+
+	struct VertexColor
+	{
+		Vector3 position;
+		Vector4 color;
+	};
+
+	struct VertexTex
+	{
+		Vector3 position;
+		Vector2 uv;
+	};
+
+	struct CSO_DESC
+	{
+		SHADER_TYPE type;
+		std::wstring file_name;
+	};
+
+	struct ANIMATION_2D_FRAME_DESC
+	{
+		Vector2 LT;
+		Vector2 RB;
+	};
+
+	struct ANIMATION_2D_CLIP_DESC
+	{
+		std::string clip_tag;
+		std::string texture_tag;
+		ANIMATION_2D_TYPE type;
+		ANIMATION_OPTION option;
+		float width;
+		float height;
+		float completion_time;
+		std::vector<ANIMATION_2D_FRAME_DESC> frame_vector;
+	};
 
 	struct TransformConstantBuffer
 	{
@@ -27,5 +88,11 @@ namespace K
 	struct MaterialConstantBuffer
 	{
 		Vector4 diffuse;
+	};
+
+	struct Animation2DConstantBuffer
+	{
+		Vector2 LT;
+		Vector2 RB;
 	};
 }

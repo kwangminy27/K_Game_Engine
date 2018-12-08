@@ -100,6 +100,12 @@
     <Filter Include="12. Object\2. Component\5. Renderer">
       <UniqueIdentifier>{01b5859e-9d1c-4a93-88d6-8c5c705fa174}</UniqueIdentifier>
     </Filter>
+    <Filter Include="08. Rendering\1. Shader\1. HLSL\1. Basic">
+      <UniqueIdentifier>{abf47894-259d-4665-ae18-12d0e5641138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="12. Object\2. Component\6. Animation2D">
+      <UniqueIdentifier>{8dcfec1b-22e6-4c56-98a9-b6b72e48fb1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -210,6 +216,9 @@
     <ClInclude Include="Object\Actor\camera_actor.h">
       <Filter>12. Object\1. Actor\1. CameraActor</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Component\animation_2d.h">
+      <Filter>12. Object\2. Component\6. Animation2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -311,6 +320,9 @@
     <ClCompile Include="Object\Actor\camera_actor.cpp">
       <Filter>12. Object\1. Actor\1. CameraActor</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Component\animation_2d.cpp">
+      <Filter>12. Object\2. Component\6. Animation2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="input_manager.inl">
@@ -322,5 +334,25 @@
     <None Include="Object\object_manager.inl">
       <Filter>12. Object</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Rendering\HLSL\BasicPS.hlsl">
+      <Filter>08. Rendering\1. Shader\1. HLSL\1. Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Rendering\HLSL\BasicVS.hlsl">
+      <Filter>08. Rendering\1. Shader\1. HLSL\1. Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Rendering\HLSL\type.hlsl">
+      <Filter>08. Rendering\1. Shader\1. HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Rendering\HLSL\BasicTexVS.hlsl">
+      <Filter>08. Rendering\1. Shader\1. HLSL\1. Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Rendering\HLSL\BasicTexPS.hlsl">
+      <Filter>08. Rendering\1. Shader\1. HLSL\1. Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Rendering\HLSL\BasicAnimation2DVS.hlsl">
+      <Filter>08. Rendering\1. Shader\1. HLSL\1. Basic</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

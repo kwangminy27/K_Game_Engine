@@ -53,7 +53,7 @@ void K::Material::SetToShader(int _container_idx, int _subset_idx)
 			sampler->SetToShader(i);
 	}
 
-	RenderingManager::singleton()->UpdateConstantBuffer("Material", &material_subset.material_CB);
+	RenderingManager::singleton()->UpdateConstantBuffer(MATERIAL, &material_subset.material_CB);
 }
 
 void K::Material::SetTexture(std::string const& _tag, int _slot, int _container_idx, int _subset_idx)

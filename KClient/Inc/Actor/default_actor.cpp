@@ -59,19 +59,3 @@ K::DefaultActor::DefaultActor(DefaultActor&& _other) noexcept : ActorClient(std:
 void K::DefaultActor::_Finalize()
 {
 }
-
-void K::DefaultActor::_Input(float _time)
-{
-}
-
-void K::DefaultActor::_Update(float _time)
-{
-}
-
-void K::DefaultActor::_Collision(float _time)
-{
-}
-
-void K::DefaultActor::_Render(float _time)
-{
-}

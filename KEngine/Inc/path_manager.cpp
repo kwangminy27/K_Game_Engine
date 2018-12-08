@@ -8,9 +8,10 @@ void K::PathManager::Initialize()
 	try
 	{
 		_CreateRootPath();
-		_CreatePath(TEXTURE_PATH, "Texure\\");
+		_CreatePath(TEXTURE_PATH, "Texture\\");
 		_CreatePath(AUDIO_PATH, "Audio\\");
 		_CreatePath(VIDEO_PATH, "Video\\");
+		_CreatePath(SHADER_PATH, "Shader\\");
 	}
 	catch (std::exception const& _e)
 	{

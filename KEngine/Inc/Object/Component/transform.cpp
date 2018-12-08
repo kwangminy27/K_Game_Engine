@@ -1,6 +1,10 @@
 #include "KEngine.h"
 #include "transform.h"
 
+#include "Rendering/rendering_manager.h"
+#include "World/world_manager.h"
+#include "Object/Actor/camera_actor.h"
+
 void K::Transform::Initialize()
 {
 	try
@@ -115,6 +119,24 @@ void K::Transform::Serialize(OutputMemoryStream& _omstream)
 	_omstream.Serialize(parent_translation_.x);
 	_omstream.Serialize(parent_translation_.y);
 	_omstream.Serialize(parent_translation_.z);
+}
+
+void K::Transform::UpdateConstantBuffer()
+{
+	auto const& main_camera = WorldManager::singleton()->FindCamera({ "MainCamera", 0 });
+
+	TransformConstantBuffer transform_CB{};
+	transform_CB.world = world_;
+	transform_CB.view = main_camera->view();
+	transform_CB.projection = main_camera->projection();
+	transform_CB.WVP = transform_CB.world * transform_CB.view * transform_CB.projection;
+
+	transform_CB.world = transform_CB.world.Transpose();
+	transform_CB.view = transform_CB.view.Transpose();
+	transform_CB.projection = transform_CB.projection.Transpose();
+	transform_CB.WVP = transform_CB.WVP.Transpose();
+
+	RenderingManager::singleton()->UpdateConstantBuffer(TRANSFORM, &transform_CB);
 }
 
 bool K::Transform::dirty_flag() const

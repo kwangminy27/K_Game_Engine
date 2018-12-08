@@ -15,8 +15,79 @@ void K::RenderingManager::Initialize()
 {
 	try
 	{
-		_CreateConstantBuffer("Transform", sizeof(TransformConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 0);
-		_CreateConstantBuffer("Material", sizeof(MaterialConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 1);
+#pragma region Shader
+		std::vector<CSO_DESC> cso_desc_vector{};
+		cso_desc_vector.push_back({ SHADER_TYPE::VERTEX, L"BasicVS.cso" });
+		cso_desc_vector.push_back({ SHADER_TYPE::PIXEL, L"BasicPS.cso" });
+
+		std::vector<D3D11_INPUT_ELEMENT_DESC> input_element_desc_vector{};
+		input_element_desc_vector.push_back({ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 });
+		input_element_desc_vector.push_back({ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 });
+
+		_CreateShader(BASIC_SHADER, cso_desc_vector, input_element_desc_vector, SHADER_PATH);
+
+		cso_desc_vector.clear();
+		cso_desc_vector.push_back({ SHADER_TYPE::VERTEX, L"BasicTexVS.cso" });
+		cso_desc_vector.push_back({ SHADER_TYPE::PIXEL, L"BasicTexPS.cso" });
+
+		input_element_desc_vector.clear();
+		input_element_desc_vector.push_back({ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 });
+		input_element_desc_vector.push_back({ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 });
+
+		_CreateShader(BASIC_TEX_SHADER, cso_desc_vector, input_element_desc_vector, SHADER_PATH);
+
+		cso_desc_vector.clear();
+		cso_desc_vector.push_back({ SHADER_TYPE::VERTEX, L"BasicAnimation2DVS.cso" });
+		cso_desc_vector.push_back({ SHADER_TYPE::PIXEL, L"BasicTexPS.cso" });
+
+		input_element_desc_vector.clear();
+		input_element_desc_vector.push_back({ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 });
+		input_element_desc_vector.push_back({ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 });
+
+		_CreateShader(BASIC_ANIMATION_2D_SHADER, cso_desc_vector, input_element_desc_vector, SHADER_PATH);
+#pragma endregion
+
+#pragma region RenderState
+		D3D11_DEPTH_STENCILOP_DESC front_face{};
+		front_face.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+		front_face.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+		front_face.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+		front_face.StencilFunc = D3D11_COMPARISON_NEVER;
+
+		D3D11_DEPTH_STENCILOP_DESC back_face{};
+		back_face.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+		back_face.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+		back_face.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+		back_face.StencilFunc = D3D11_COMPARISON_NEVER;
+
+		_CreateDepthStencilState(
+			DEPTH_DISABLE,
+			false, D3D11_DEPTH_WRITE_MASK_ZERO, D3D11_COMPARISON_NEVER,
+			false, D3D11_DEFAULT_STENCIL_READ_MASK, D3D11_DEFAULT_STENCIL_WRITE_MASK, front_face, back_face
+		);
+
+		std::vector<D3D11_RENDER_TARGET_BLEND_DESC> render_target_blend_desc_vector{};
+
+		D3D11_RENDER_TARGET_BLEND_DESC rtbd{};
+		rtbd.BlendEnable = true;
+		rtbd.SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		rtbd.DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		rtbd.BlendOp = D3D11_BLEND_OP_ADD;
+		rtbd.SrcBlendAlpha = D3D11_BLEND_ONE;
+		rtbd.DestBlendAlpha = D3D11_BLEND_ZERO;
+		rtbd.BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		rtbd.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+		render_target_blend_desc_vector.push_back(std::move(rtbd));
+
+		_CreateBlendState(ALPHA_BLEND, false, false, render_target_blend_desc_vector);
+#pragma endregion
+
+#pragma region ConstantBuffer
+		_CreateConstantBuffer(TRANSFORM, sizeof(TransformConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 0);
+		_CreateConstantBuffer(MATERIAL, sizeof(MaterialConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 1);
+		_CreateConstantBuffer(ANIMATION_2D, sizeof(Animation2DConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 2);
+#pragma endregion
 	}
 	catch (std::exception const& _e)
 	{
@@ -69,7 +140,7 @@ void K::RenderingManager::UpdateConstantBuffer(std::string const& _tag, void* _d
 	D3D11_MAPPED_SUBRESOURCE ms{};
 	ThrowIfFailed(context->Map(CB->buffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, NULL, &ms));
 
-	memcpy_s(&ms, CB->size, _data, CB->size);
+	memcpy_s(ms.pData, CB->size, _data, CB->size);
 
 	context->Unmap(CB->buffer.Get(), 0);
 

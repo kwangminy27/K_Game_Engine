@@ -2,8 +2,6 @@
 
 namespace K
 {
-	struct CSO_DESC;
-
 	class Shader;
 	class RenderState;
 

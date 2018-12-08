@@ -130,6 +130,22 @@ void K::Actor::_Finalize()
 {
 }
 
+void K::Actor::_Input(float _time)
+{
+}
+
+void K::Actor::_Update(float _time)
+{
+}
+
+void K::Actor::_Collision(float _time)
+{
+}
+
+void K::Actor::_Render(float _time)
+{
+}
+
 void K::Actor::__Input(float _time)
 {
 	_Input(_time);
@@ -177,13 +193,13 @@ void K::Actor::__Update(float _time)
 		}
 	}
 
-	auto const& transform = static_cast<Transform*>(FindComponent({ "Transform", 0 }).get());
+	auto const& transform = static_cast<Transform*>(FindComponent({ TRANSFORM, 0 }).get());
 
 	if (transform->dirty_flag())
 	{
 		for (auto const& child : child_list_)
 		{
-			auto const& child_transform = static_cast<Transform*>(child->FindComponent({ "Transform", 0 }).get());
+			auto const& child_transform = static_cast<Transform*>(child->FindComponent({ TRANSFORM, 0 }).get());
 
 			child_transform->set_parent_scaling(transform->world_scaling());
 			child_transform->set_parent_rotation(transform->world_rotation());

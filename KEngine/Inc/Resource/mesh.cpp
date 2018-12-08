@@ -11,14 +11,15 @@ void K::Mesh::Render()
 	{
 		context->IASetPrimitiveTopology(mesh_container->topology);
 
+		std::vector<ID3D11Buffer*> buffer_vector{};
 		std::vector<UINT> stride_vector{};
 		std::vector<UINT> offset_vector{};
-		std::vector<ID3D11Buffer*> buffer_vector{};
 
 		for (auto const& VB : mesh_container->VB_vector)
 		{
-			stride_vector.push_back(VB.stride);
 			buffer_vector.push_back(VB.buffer.Get());
+			stride_vector.push_back(VB.stride);
+			offset_vector.push_back(0);
 		}
 
 		context->IASetVertexBuffers(0, static_cast<UINT>(mesh_container->VB_vector.size()), buffer_vector.data(), stride_vector.data(), offset_vector.data());
@@ -52,14 +53,15 @@ void K::Mesh::Render(int _container_idx, int _subset_idx)
 
 	context->IASetPrimitiveTopology(mesh_container->topology);
 
+	std::vector<ID3D11Buffer*> buffer_vector{};
 	std::vector<UINT> stride_vector{};
 	std::vector<UINT> offset_vector{};
-	std::vector<ID3D11Buffer*> buffer_vector{};
 
 	for (auto const& VB : mesh_container->VB_vector)
 	{
-		stride_vector.push_back(VB.stride);
 		buffer_vector.push_back(VB.buffer.Get());
+		stride_vector.push_back(VB.stride);
+		offset_vector.push_back(0);
 	}
 
 	context->IASetVertexBuffers(0, static_cast<UINT>(mesh_container->VB_vector.size()), buffer_vector.data(), stride_vector.data(), offset_vector.data());

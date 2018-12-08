@@ -21,10 +21,11 @@ namespace K
 		virtual void Serialize(InputMemoryStream& _imstream) override;
 		virtual void Serialize(OutputMemoryStream& _omstream) override;
 
-		void AddRenderState(std::shared_ptr<RenderState> const& _render_state);
+		void UpdateConstantBuffer(float _time);
 
 		void set_mesh(std::shared_ptr<Mesh> const& _mesh);
 		void set_shader(std::shared_ptr<Shader> const& _shader);
+		void set_render_state(std::shared_ptr<RenderState> const& _render_state);
 
 	private:
 		Renderer() = default;
@@ -34,8 +35,6 @@ namespace K
 		Renderer& operator=(Renderer&&) noexcept = default;
 
 		virtual void _Finalize() override;
-
-		void _UpdateConstantBuffers(float _time);
 
 		std::shared_ptr<Mesh> mesh_{};
 		std::shared_ptr<Shader> shader_{};

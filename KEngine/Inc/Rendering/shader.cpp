@@ -58,11 +58,14 @@ void K::Shader::_CreateVertexShader(
 
 	std::ifstream cso{ path_buffer, std::ios::ate | std::ios::binary };
 
+	if(cso.fail())
+		throw std::exception{ "Shader::_CreateVertexShader" };
+
 	auto size = cso.tellg();
 
 	cso.seekg(0, std::ios::beg);
 
-	auto buffer = std::unique_ptr<BYTE[], std::function<void(BYTE*)>>{ new BYTE[size], [](BYTE* _p) {
+	auto buffer = std::unique_ptr<uint8_t[], std::function<void(uint8_t*)>>{ new uint8_t[size], [](uint8_t* _p) {
 		delete[] _p;
 	} };
 
@@ -97,11 +100,14 @@ void K::Shader::_CreatePixelShader(std::wstring const& _file_name, std::string c
 
 	std::ifstream cso{ path_buffer, std::ios::ate | std::ios::binary };
 
+	if (cso.fail())
+		throw std::exception{ "Shader::_CreatePixelShader" };
+
 	auto size = cso.tellg();
 
 	cso.seekg(0, std::ios::beg);
 
-	auto buffer = std::unique_ptr<BYTE[], std::function<void(BYTE*)>>{ new BYTE[size], [](BYTE* _p) {
+	auto buffer = std::unique_ptr<uint8_t[], std::function<void(uint8_t*)>>{ new uint8_t[size], [](uint8_t* _p) {
 		delete[] _p;
 	} };
 
