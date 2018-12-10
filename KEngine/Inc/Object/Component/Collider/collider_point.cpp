@@ -10,6 +10,7 @@
 #include "Object/Actor/camera_actor.h"
 #include "Object/Component/transform.h"
 #include "Object/Component/camera.h"
+#include "collider_circle.h"
 
 void K::ColliderPoint::Initialize()
 {
@@ -120,10 +121,10 @@ bool K::ColliderPoint::_Collision(Collider* _dest, float _time)
 	switch (_dest->type())
 	{
 	case COLLIDER_TYPE::POINT:
-		return Collider::_CollisionPointToPoint(absolute_info_, static_cast<ColliderPoint*>(_dest)->absolute_info_);
+		return Collider::_CollisionPointToPoint(absolute_info(), static_cast<ColliderPoint*>(_dest)->absolute_info());
 
 	case COLLIDER_TYPE::CIRCLE:
-		break;
+		return Collider::_CollisionCircleToPoint(static_cast<ColliderCircle*>(_dest)->absolute_info(), absolute_info());
 
 	case COLLIDER_TYPE::AABB:
 		break;

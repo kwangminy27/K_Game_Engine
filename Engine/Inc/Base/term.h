@@ -20,7 +20,8 @@ namespace K
 	//////////////////// Mesh Key ////////////////////
 	constexpr auto COLOR_TRI = "ColorTri";
 	constexpr auto TEX_RECT = "TexRect";
-	constexpr auto COLLIDER_RECT = "CollideRect";
+	constexpr auto COLLIDER_RECT = "ColliderRect";
+	constexpr auto COLLIDER_CIRCLE = "ColliderCircle";
 
 	//////////////////// Sampler Key ////////////////////
 	constexpr auto LINEAR_SAMPLER = "LinearSampler";

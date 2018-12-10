@@ -83,12 +83,12 @@ bool K::Collider::_CollisionPointToPoint(Vector3 const& _src, Vector3 const& _de
 
 bool K::Collider::_CollisionCircleToPoint(Circle const& _src, Vector3 const& _dest)
 {
-	return false;
+	return (_dest - _src.center).Length() <= _src.radius;
 }
 
 bool K::Collider::_CollisionCircleToCircle(Circle const& _src, Circle const& _dest)
 {
-	return false;
+	return (_dest.center - _src.center).Length() <= _src.radius + _dest.radius;
 }
 
 bool K::Collider::_CollisionAABBToPoint(AABB const& _src, Vector3 const& _dest)

@@ -237,6 +237,9 @@
     <ClInclude Include="Object\Component\Collider\collider_point.h">
       <Filter>12. Object\2. Component\7. Collider</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Component\Collider\collider_circle.h">
+      <Filter>12. Object\2. Component\7. Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -348,6 +351,9 @@
       <Filter>12. Object\2. Component\7. Collider</Filter>
     </ClCompile>
     <ClCompile Include="Object\Component\Collider\collider_point.cpp">
+      <Filter>12. Object\2. Component\7. Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Component\Collider\collider_circle.cpp">
       <Filter>12. Object\2. Component\7. Collider</Filter>
     </ClCompile>
   </ItemGroup>

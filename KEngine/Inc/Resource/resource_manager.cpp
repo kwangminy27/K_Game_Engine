@@ -45,7 +45,7 @@ void K::ResourceManager::Initialize()
 			tex_rect_indices, sizeof(uint16_t), 6, D3D11_USAGE_DEFAULT, DXGI_FORMAT_R16_UINT
 		);
 
-		Vector3 collider_rect[5]{
+		Vector3 collider_rect_vertices[5]{
 			{ 0.f, 0.f, 0.f },
 			{ 0.f, 1.f, 0.f },
 			{ 1.f, 1.f, 0.f },
@@ -55,7 +55,16 @@ void K::ResourceManager::Initialize()
 
 		_CreateMesh(
 			COLLIDER_RECT, D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP,
-			collider_rect, sizeof(Vector3), 5, D3D11_USAGE_DEFAULT
+			collider_rect_vertices, sizeof(Vector3), 5, D3D11_USAGE_DEFAULT
+		);
+
+		Vector3 collider_circle_vertices[37]{};
+		for (auto i = 0; i < 37; ++i)
+			collider_circle_vertices[i] = { (cos(DirectX::XMConvertToRadians(i * 10.f)) + 1) * 0.5f, (sin(DirectX::XMConvertToRadians(i * 10.f)) + 1) * 0.5f, 0.f };
+
+		_CreateMesh(
+			COLLIDER_CIRCLE, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+			collider_circle_vertices, sizeof(Vector3), 37, D3D11_USAGE_DEFAULT
 		);
 #pragma endregion
 
