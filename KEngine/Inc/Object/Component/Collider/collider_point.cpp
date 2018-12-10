@@ -11,6 +11,7 @@
 #include "Object/Component/transform.h"
 #include "Object/Component/camera.h"
 #include "collider_circle.h"
+#include "collider_aabb.h"
 
 void K::ColliderPoint::Initialize()
 {
@@ -127,7 +128,7 @@ bool K::ColliderPoint::_Collision(Collider* _dest, float _time)
 		return Collider::_CollisionCircleToPoint(static_cast<ColliderCircle*>(_dest)->absolute_info(), absolute_info());
 
 	case COLLIDER_TYPE::AABB:
-		break;
+		return Collider::_CollisionAABBToPoint(static_cast<ColliderAABB*>(_dest)->absolute_info(), absolute_info());
 
 	case COLLIDER_TYPE::OOBB:
 		break;

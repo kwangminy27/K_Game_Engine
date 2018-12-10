@@ -10,6 +10,7 @@
 #include "Object/Actor/camera_actor.h"
 #include "Object/Component/transform.h"
 #include "collider_point.h"
+#include "collider_aabb.h"
 
 void K::ColliderCircle::Initialize()
 {
@@ -18,7 +19,7 @@ void K::ColliderCircle::Initialize()
 		mesh_ = ResourceManager::singleton()->FindMesh(COLLIDER_CIRCLE);
 		shader_ = RenderingManager::singleton()->FindShader(COLLIDER_SHADER);
 
-		type_ = COLLIDER_TYPE::POINT;
+		type_ = COLLIDER_TYPE::CIRCLE;
 		group_tag_ = DEFAULT;
 	}
 	catch (std::exception const& _e)
@@ -45,8 +46,8 @@ void K::ColliderCircle::Update(float _time)
 	absolute_info_.center = position + relative_info_.center;
 	absolute_info_.radius = relative_info_.radius;
 
-	min_ = absolute_info_.center - Vector3{ relative_info_.radius, relative_info_.radius, 0.f };
-	max_ = absolute_info_.center + Vector3{ relative_info_.radius, relative_info_.radius, 0.f };
+	min_ = absolute_info_.center - Vector3{ absolute_info_.radius, absolute_info_.radius, 0.f };
+	max_ = absolute_info_.center + Vector3{ absolute_info_.radius, absolute_info_.radius, 0.f };
 }
 
 void K::ColliderCircle::Render(float _time)
@@ -62,7 +63,7 @@ void K::ColliderCircle::Render(float _time)
 	auto const& transform = owner()->FindComponent(TAG{ TRANSFORM, 0 });
 
 	TransformConstantBuffer transform_CB{};
-	transform_CB.world = CPTR_CAST<Transform>(transform)->world();
+	transform_CB.world = Matrix::CreateScaling(CPTR_CAST<Transform>(transform)->world_scaling()) * Matrix::CreateTranslation(min_);
 	transform_CB.view = camera->view();
 	transform_CB.projection = camera->projection();
 	transform_CB.WVP = transform_CB.world * transform_CB.view * transform_CB.projection;
@@ -127,7 +128,7 @@ bool K::ColliderCircle::_Collision(Collider* _dest, float _time)
 		return Collider::_CollisionCircleToCircle(absolute_info(), static_cast<ColliderCircle*>(_dest)->absolute_info());
 
 	case COLLIDER_TYPE::AABB:
-		break;
+		return Collider::_CollisionAABBToCircle(static_cast<ColliderAABB*>(_dest)->absolute_info(), absolute_info());
 
 	case COLLIDER_TYPE::OOBB:
 		break;

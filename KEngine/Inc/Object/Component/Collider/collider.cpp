@@ -93,17 +93,61 @@ bool K::Collider::_CollisionCircleToCircle(Circle const& _src, Circle const& _de
 
 bool K::Collider::_CollisionAABBToPoint(AABB const& _src, Vector3 const& _dest)
 {
-	return false;
+	auto src_min = _src.center - _src.extent;
+	auto src_max = _src.center + _src.extent;
+
+	if (_dest.x < src_min.x)
+		return false;
+	else if (_dest.y < src_min.y)
+		return false;
+	else if (_dest.z < src_min.z)
+		return false;
+	else if (_dest.x > src_max.x)
+		return false;
+	else if (_dest.y > src_max.y)
+		return false;
+	else if (_dest.z > src_max.z)
+		return false;
+
+	return true;
 }
 
 bool K::Collider::_CollisionAABBToCircle(AABB const& _src, Circle const& _dest)
 {
-	return false;
+	auto src_min = _src.center - _src.extent;
+	auto src_max = _src.center + _src.extent;
+
+	auto proximity_point = _dest.center;
+
+	proximity_point.Clamp(src_min, src_max);
+
+	auto distance = Vector3::Distance(proximity_point, _dest.center);
+
+	return distance <= _dest.radius;
 }
 
 bool K::Collider::_CollisionAABBToAABB(AABB const& _src, AABB const& _dest)
 {
-	return false;
+	auto src_min = _src.center - _src.extent;
+	auto src_max = _src.center + _src.extent;
+
+	auto dest_min = _dest.center - _dest.extent;
+	auto dest_max = _dest.center + _dest.extent;
+
+	if (dest_max.x < src_min.x)
+		return false;
+	else if (dest_max.y < src_min.y)
+		return false;
+	else if (dest_max.z < src_min.z)
+		return false;
+	else if (dest_min.x > src_max.x)
+		return false;
+	else if (dest_min.y > src_max.y)
+		return false;
+	else if (dest_min.z > src_max.z)
+		return false;
+
+	return true;
 }
 
 bool K::Collider::_CollisionOOBBToPoint(OOBB const& _src, Vector3 const& _dest)

@@ -181,6 +181,7 @@
     <ClInclude Include="Object\Component\animation_2d.h" />
     <ClInclude Include="Object\Component\camera.h" />
     <ClInclude Include="Object\Component\Collider\collider.h" />
+    <ClInclude Include="Object\Component\Collider\collider_aabb.h" />
     <ClInclude Include="Object\Component\Collider\collider_circle.h" />
     <ClInclude Include="Object\Component\Collider\collider_point.h" />
     <ClInclude Include="Object\Component\component.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="Object\Component\animation_2d.cpp" />
     <ClCompile Include="Object\Component\camera.cpp" />
     <ClCompile Include="Object\Component\Collider\collider.cpp" />
+    <ClCompile Include="Object\Component\Collider\collider_aabb.cpp" />
     <ClCompile Include="Object\Component\Collider\collider_circle.cpp" />
     <ClCompile Include="Object\Component\Collider\collider_point.cpp" />
     <ClCompile Include="Object\Component\component.cpp" />
