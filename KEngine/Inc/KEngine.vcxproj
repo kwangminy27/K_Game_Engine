@@ -180,6 +180,7 @@
     <ClInclude Include="Object\Actor\camera_actor.h" />
     <ClInclude Include="Object\Component\animation_2d.h" />
     <ClInclude Include="Object\Component\camera.h" />
+    <ClInclude Include="Object\Component\collider.h" />
     <ClInclude Include="Object\Component\component.h" />
     <ClInclude Include="Object\Component\material.h" />
     <ClInclude Include="Object\Component\renderer.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Object\Actor\camera_actor.cpp" />
     <ClCompile Include="Object\Component\animation_2d.cpp" />
     <ClCompile Include="Object\Component\camera.cpp" />
+    <ClCompile Include="Object\Component\collider.cpp" />
     <ClCompile Include="Object\Component\component.cpp" />
     <ClCompile Include="Object\Component\material.cpp" />
     <ClCompile Include="Object\Component\renderer.cpp" />

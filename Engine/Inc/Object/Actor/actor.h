@@ -18,6 +18,7 @@ namespace K
 		virtual void Serialize(OutputMemoryStream& _omstream) = 0;
 
 		CPTR const& FindComponent(TAG const& _tag) const;
+		std::list<Component*> const& FindComponent(std::string const& _tag) const;
 		APTR const& FindChild(TAG const& _tag) const;
 
 		void AddComponent(CPTR& _component);

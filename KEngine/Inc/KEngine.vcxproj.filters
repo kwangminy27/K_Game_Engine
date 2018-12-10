@@ -109,6 +109,9 @@
     <Filter Include="16. Connection">
       <UniqueIdentifier>{d87a8301-dfcf-4262-9a53-c1d9259e852a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="12. Object\2. Component\7. Collider">
+      <UniqueIdentifier>{0377fbb3-c5d3-4092-b952-f4a0dc3e162e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KEngine.h">
@@ -225,6 +228,9 @@
     <ClInclude Include="collision_manager.h">
       <Filter>13. Collision</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Component\collider.h">
+      <Filter>12. Object\2. Component\7. Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KEngine.cpp">
@@ -331,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="collision_manager.cpp">
       <Filter>13. Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Component\collider.cpp">
+      <Filter>12. Object\2. Component\7. Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

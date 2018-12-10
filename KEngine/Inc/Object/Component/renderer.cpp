@@ -26,7 +26,7 @@ void K::Renderer::Initialize()
 
 void K::Renderer::Render(float _time)
 {
-	auto const& material = owner()->FindComponent({ MATERIAL, 0 });
+	auto const& material = owner()->FindComponent(TAG{ MATERIAL, 0 });
 
 	UpdateConstantBuffer(_time);
 
@@ -64,10 +64,10 @@ void K::Renderer::Serialize(OutputMemoryStream& _omstream)
 
 void K::Renderer::UpdateConstantBuffer(float _time)
 {
-	if(auto const& transform = owner()->FindComponent({ TRANSFORM, 0 }))
+	if(auto const& transform = owner()->FindComponent(TAG{ TRANSFORM, 0 }))
 		CPTR_CAST<Transform>(transform)->UpdateConstantBuffer();
 
-	if (auto const& animation_2d = owner()->FindComponent({ ANIMATION_2D, 0 }))
+	if (auto const& animation_2d = owner()->FindComponent(TAG{ ANIMATION_2D, 0 }))
 		CPTR_CAST<Animation2D>(animation_2d)->UpdateConstantBuffer(_time);
 }
 

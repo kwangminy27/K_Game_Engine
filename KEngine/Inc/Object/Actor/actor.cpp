@@ -24,6 +24,21 @@ K::CPTR const& K::Actor::FindComponent(TAG const& _tag) const
 	return *iter;
 }
 
+std::list<K::Component*> const& K::Actor::FindComponent(std::string const& _tag) const
+{
+	static std::list<Component*> component_list{};
+
+	component_list.clear();
+
+	for (auto const& component : component_list_)
+	{
+		if (component->tag().first == _tag)
+			component_list.push_back(component.get());
+	}
+
+	return component_list;
+}
+
 K::APTR const& K::Actor::FindChild(TAG const& _tag) const
 {
 	auto iter = std::find_if(child_list_.begin(), child_list_.end(), [&_tag](APTR const& _p) {
@@ -193,13 +208,13 @@ void K::Actor::__Update(float _time)
 		}
 	}
 
-	auto const& transform = static_cast<Transform*>(FindComponent({ TRANSFORM, 0 }).get());
+	auto const& transform = static_cast<Transform*>(FindComponent(TAG{ TRANSFORM, 0 }).get());
 
 	if (transform->dirty_flag())
 	{
 		for (auto const& child : child_list_)
 		{
-			auto const& child_transform = static_cast<Transform*>(child->FindComponent({ TRANSFORM, 0 }).get());
+			auto const& child_transform = static_cast<Transform*>(child->FindComponent(TAG{ TRANSFORM, 0 }).get());
 
 			child_transform->set_parent_scaling(transform->world_scaling());
 			child_transform->set_parent_rotation(transform->world_rotation());
