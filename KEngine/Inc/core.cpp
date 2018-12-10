@@ -12,6 +12,7 @@
 #include "input_manager.h"
 #include "World/world_manager.h"
 #include "Object/object_manager.h"
+#include "collision_manager.h"
 #include "registry_manager.h"
 #include "replication_manager.h"
 #include "connection_manager.h"
@@ -63,6 +64,7 @@ void K::Core::Initialize(HINSTANCE _instance, HWND _window)
 		InputManager::singleton()->Initialize();
 		WorldManager::singleton()->Initialize();
 		ObjectManager::singleton()->Initialize();
+		CollisionManager::singleton()->Initialize();
 		RegistryManager::singleton()->Initialize();
 		ReplicationManager::singleton()->Initialize();
 		ConnectionManager::singleton()->Initialize();
@@ -111,6 +113,7 @@ void K::Core::_Finalize()
 	ConnectionManager::singleton().reset();
 	ReplicationManager::singleton().reset();
 	RegistryManager::singleton().reset();
+	CollisionManager::singleton().reset();
 	ObjectManager::singleton().reset();
 	WorldManager::singleton().reset();
 	InputManager::singleton().reset();

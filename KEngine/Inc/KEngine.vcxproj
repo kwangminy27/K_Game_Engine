@@ -170,6 +170,7 @@
     <ClInclude Include="Base\enum.h" />
     <ClInclude Include="Base\macro.h" />
     <ClInclude Include="Base\term.h" />
+    <ClInclude Include="collision_manager.h" />
     <ClInclude Include="connection_manager.h" />
     <ClInclude Include="core.h" />
     <ClInclude Include="device_manager.h" />
@@ -206,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Audio\audio_manager.cpp" />
+    <ClCompile Include="collision_manager.cpp" />
     <ClCompile Include="connection_manager.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="device_manager.cpp" />

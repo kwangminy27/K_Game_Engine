@@ -2,8 +2,6 @@
 
 namespace K
 {
-	class Actor;
-
 	class K_ENGINE_DLL Component : public Tag
 	{
 		friend class ObjectManager;

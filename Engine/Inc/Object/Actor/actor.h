@@ -4,7 +4,6 @@ namespace K
 {
 	class Level;
 	class Layer;
-	class Component;
 
 	class K_ENGINE_DLL Actor : public Tag, public std::enable_shared_from_this<Actor>
 	{

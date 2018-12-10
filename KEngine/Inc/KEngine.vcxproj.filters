@@ -70,15 +70,6 @@
     <Filter Include="12. Object\2. Component">
       <UniqueIdentifier>{609e9f7b-aab0-451d-b6cf-8e08427f34d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="13. Registry">
-      <UniqueIdentifier>{8251f841-2aba-4619-8f68-1fbfc3868291}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="14. Replication">
-      <UniqueIdentifier>{9285f524-9832-426a-b773-37fc95696ffb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="15. Connection">
-      <UniqueIdentifier>{d87a8301-dfcf-4262-9a53-c1d9259e852a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="08. Rendering\2. RenderState">
       <UniqueIdentifier>{012e1711-2f90-4fbf-9b9f-27ef60f861f5}</UniqueIdentifier>
     </Filter>
@@ -105,6 +96,18 @@
     </Filter>
     <Filter Include="12. Object\2. Component\6. Animation2D">
       <UniqueIdentifier>{8dcfec1b-22e6-4c56-98a9-b6b72e48fb1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="13. Collision">
+      <UniqueIdentifier>{0358025b-bbbf-4c4c-9705-9f972eab45d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="14. Registry">
+      <UniqueIdentifier>{8251f841-2aba-4619-8f68-1fbfc3868291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="15. Replication">
+      <UniqueIdentifier>{9285f524-9832-426a-b773-37fc95696ffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="16. Connection">
+      <UniqueIdentifier>{d87a8301-dfcf-4262-9a53-c1d9259e852a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -181,13 +184,13 @@
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="replication_manager.h">
-      <Filter>14. Replication</Filter>
+      <Filter>15. Replication</Filter>
     </ClInclude>
     <ClInclude Include="registry_manager.h">
-      <Filter>13. Registry</Filter>
+      <Filter>14. Registry</Filter>
     </ClInclude>
     <ClInclude Include="connection_manager.h">
-      <Filter>15. Connection</Filter>
+      <Filter>16. Connection</Filter>
     </ClInclude>
     <ClInclude Include="Object\Actor\actor.h">
       <Filter>12. Object\1. Actor</Filter>
@@ -218,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="Object\Component\animation_2d.h">
       <Filter>12. Object\2. Component\6. Animation2D</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_manager.h">
+      <Filter>13. Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,13 +291,13 @@
       <Filter>12. Object</Filter>
     </ClCompile>
     <ClCompile Include="replication_manager.cpp">
-      <Filter>14. Replication</Filter>
+      <Filter>15. Replication</Filter>
     </ClCompile>
     <ClCompile Include="registry_manager.cpp">
-      <Filter>13. Registry</Filter>
+      <Filter>14. Registry</Filter>
     </ClCompile>
     <ClCompile Include="connection_manager.cpp">
-      <Filter>15. Connection</Filter>
+      <Filter>16. Connection</Filter>
     </ClCompile>
     <ClCompile Include="Object\Actor\actor.cpp">
       <Filter>12. Object\1. Actor</Filter>
@@ -322,6 +328,9 @@
     </ClCompile>
     <ClCompile Include="Object\Component\animation_2d.cpp">
       <Filter>12. Object\2. Component\6. Animation2D</Filter>
+    </ClCompile>
+    <ClCompile Include="collision_manager.cpp">
+      <Filter>13. Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

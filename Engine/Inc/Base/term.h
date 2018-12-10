@@ -40,6 +40,7 @@ namespace K
 	constexpr auto MATERIAL = "Material";
 	constexpr auto RENDERER = "Renderer";
 	constexpr auto ANIMATION_2D = "Animation2D";
+	constexpr auto COLLIDER = "Collider";
 
 	struct VertexColor
 	{

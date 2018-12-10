@@ -4,6 +4,7 @@
 #include "world_manager.h"
 #include "level.h"
 #include "Object/Actor/actor.h"
+#include "collision_manager.h"
 #include "replication_manager.h"
 
 K::APTR K::Layer::actor_dummy_{};
@@ -144,7 +145,8 @@ void K::Layer::_Collision(float _time)
 		switch ((*iter)->tag_state())
 		{
 		case TAG_STATE::NORMAL:
-			(*iter)->__Collision(_time);
+			//(*iter)->__Collision(_time);
+			CollisionManager::singleton()->AddCollider(*iter);
 			++iter;
 			break;
 

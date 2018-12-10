@@ -2,9 +2,6 @@
 
 namespace K
 {
-	class Actor;
-	class Component;
-
 	class K_ENGINE_DLL ObjectManager final : public Singleton<ObjectManager>
 	{
 		friend class Singleton<ObjectManager>;

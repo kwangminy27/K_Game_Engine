@@ -2,7 +2,6 @@
 
 namespace K
 {
-	class Actor;
 	class InputMemoryStream;
 	class OutputMemoryStream;
 
