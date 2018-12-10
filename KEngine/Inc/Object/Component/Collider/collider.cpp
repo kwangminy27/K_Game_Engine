@@ -1,23 +1,23 @@
 #include "KEngine.h"
 #include "collider.h"
 
-void K::Collider::Initialize()
-{
-	try
-	{
-	}
-	catch (std::exception const& _e)
-	{
-		std::cout << _e.what() << std::endl;
-	}
-	catch (...)
-	{
-		std::cout << "Collider::Initialize" << std::endl;
-	}
-}
+#include "Resource/mesh.h"
+#include "Rendering/rendering_manager.h"
+#include "Rendering/shader.h"
 
 void K::Collider::Render(float _time)
 {
+#ifdef _DEBUG
+	if (collided_collider_list_.empty())
+		color_ = DirectX::Colors::Green.v;
+	else
+		color_ = DirectX::Colors::Red.v;
+
+	RenderingManager::singleton()->UpdateConstantBuffer(COLLIDER, &color_);
+
+	shader_->SetToShader();
+	mesh_->Render();
+#endif
 }
 
 void K::Collider::AddCallback(std::function<void(Collider*, Collider*, float)> const& _callback, COLLISION_CALLBACK_TYPE _type)
@@ -25,8 +25,22 @@ void K::Collider::AddCallback(std::function<void(Collider*, Collider*, float)> c
 	callback_list_array_.at(static_cast<int>(_type)).push_back(_callback);
 }
 
+K::COLLIDER_TYPE K::Collider::type() const
+{
+	return type_;
+}
+
+void K::Collider::set_group_tag(std::string const& _tag)
+{
+	group_tag_ = _tag;
+}
+
 K::Collider::Collider(Collider const& _other) : Component(_other)
 {
+	color_ = _other.color_;
+	mesh_ = _other.mesh_;
+	shader_ = _other.shader_;
+
 	min_ = _other.min_;
 	max_ = _other.max_;
 	type_ = _other.type_;
@@ -38,6 +52,10 @@ K::Collider::Collider(Collider const& _other) : Component(_other)
 
 K::Collider::Collider(Collider&& _other) noexcept : Component(std::move(_other))
 {
+	color_ = std::move(_other.color_);
+	mesh_ = std::move(_other.mesh_);
+	shader_ = std::move(_other.shader_);
+
 	min_ = std::move(_other.min_);
 	max_ = std::move(_other.max_);
 	type_ = std::move(_other.type_);
@@ -58,6 +76,56 @@ void K::Collider::_Finalize()
 	}
 }
 
+bool K::Collider::_CollisionPointToPoint(Vector3 const& _src, Vector3 const& _dest)
+{
+	return _src == _dest;
+}
+
+bool K::Collider::_CollisionCircleToPoint(Circle const& _src, Vector3 const& _dest)
+{
+	return false;
+}
+
+bool K::Collider::_CollisionCircleToCircle(Circle const& _src, Circle const& _dest)
+{
+	return false;
+}
+
+bool K::Collider::_CollisionAABBToPoint(AABB const& _src, Vector3 const& _dest)
+{
+	return false;
+}
+
+bool K::Collider::_CollisionAABBToCircle(AABB const& _src, Circle const& _dest)
+{
+	return false;
+}
+
+bool K::Collider::_CollisionAABBToAABB(AABB const& _src, AABB const& _dest)
+{
+	return false;
+}
+
+bool K::Collider::_CollisionOOBBToPoint(OOBB const& _src, Vector3 const& _dest)
+{
+	return false;
+}
+
+bool K::Collider::_CollisionOOBBToCircle(OOBB const& _src, Circle const& _dest)
+{
+	return false;
+}
+
+bool K::Collider::_CollisionOOBBToAABB(OOBB const& _src, AABB const& _dest)
+{
+	return false;
+}
+
+bool K::Collider::_CollisionOOBBToOOBB(OOBB const& _src, OOBB const& _dest)
+{
+	return false;
+}
+
 void K::Collider::_OnCollisionEnter(Collider* _dest, float _time)
 {
 	for (auto const& callback : callback_list_array_.at(static_cast<int>(COLLISION_CALLBACK_TYPE::ENTER)))
@@ -74,56 +142,6 @@ void K::Collider::_OnCollisionLeave(Collider* _dest, float _time)
 {
 	for (auto const& callback : callback_list_array_.at(static_cast<int>(COLLISION_CALLBACK_TYPE::LEAVE)))
 		callback(this, _dest, _time);
-}
-
-bool K::Collider::_CollisionOOBBToOOBB(OOBB const& _src, OOBB const& _dest)
-{
-	return false;
-}
-
-bool K::Collider::_CollisionOOBBToAABB(OOBB const& _src, AABB const& _dest)
-{
-	return false;
-}
-
-bool K::Collider::_CollisionOOBBToCircle(OOBB const& _src, Circle const& _dest)
-{
-	return false;
-}
-
-bool K::Collider::_CollisionOOBBToPoint(OOBB const& _src, Vector3 const& _dest)
-{
-	return false;
-}
-
-bool K::Collider::_CollisionAABBToAABB(AABB const& _src, AABB const& _dest)
-{
-	return false;
-}
-
-bool K::Collider::_CollisionAABBToCircle(AABB const& _src, Circle const& _dest)
-{
-	return false;
-}
-
-bool K::Collider::_CollisionAABBToPoint(AABB const& _src, Vector3 const& _dest)
-{
-	return false;
-}
-
-bool K::Collider::_CollisionCircleToCircle(Circle const& _src, Circle const& _dest)
-{
-	return false;
-}
-
-bool K::Collider::_CollisionCircleToPoint(Circle const& _src, Vector3 const& _dest)
-{
-	return false;
-}
-
-bool K::Collider::_CollisionPointToPoint(Vector3 const& _src, Vector3 const& _dest)
-{
-	return false;
 }
 
 void K::Collider::_AddSectionIdx(uint32_t _idx)

@@ -2,7 +2,7 @@
 #include "collision_manager.h"
 
 #include "Object/Actor/actor.h"
-#include "Object/Component/collider.h"
+#include "Object/Component/Collider/collider.h"
 
 std::unique_ptr<K::CollisionGroup> K::CollisionManager::collision_group_dummy_{};
 
@@ -10,6 +10,10 @@ void K::CollisionManager::Initialize()
 {
 	try
 	{
+		Vector3 resolution = { static_cast<float>(RESOLUTION::WIDTH), static_cast<float>(RESOLUTION::HEIGHT), 1.f };
+
+		_CreateCollisionGroup(UI, Vector3::Zero, resolution, 4, 4, 1);
+		_CreateCollisionGroup(DEFAULT, Vector3::Zero, resolution, 4, 4, 1);
 	}
 	catch (std::exception const& _e)
 	{

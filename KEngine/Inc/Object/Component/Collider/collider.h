@@ -1,16 +1,18 @@
 #pragma once
 
-#include "component.h"
+#include "Object/Component/component.h"
 
 namespace K
 {
+	class Mesh;
+	class Shader;
+
 	enum class COLLIDER_TYPE
 	{
 		POINT,
 		CIRCLE,
 		AABB,
-		OOBB,
-		PIXEL
+		OOBB
 	};
 
 	enum class COLLISION_CALLBACK_TYPE
@@ -44,9 +46,9 @@ namespace K
 	{
 		friend class CollisionManager;
 	public:
-		virtual void Initialize() override;
+		virtual void Initialize() = 0;
 
-		virtual void Render(float _time);
+		virtual void Render(float _time) override;
 
 		virtual CPTR Clone() const = 0;
 
@@ -54,6 +56,10 @@ namespace K
 		virtual void Serialize(OutputMemoryStream& _omstream)  = 0;
 
 		void AddCallback(std::function<void(Collider*, Collider*, float)> const& _callback, COLLISION_CALLBACK_TYPE _type);
+
+		COLLIDER_TYPE type() const;
+
+		void set_group_tag(std::string const& _tag);
 
 	protected:
 		Collider() = default;
@@ -67,23 +73,23 @@ namespace K
 
 		virtual bool _Collision(Collider* _dest, float _time) = 0;
 
+		static bool _CollisionPointToPoint(Vector3 const& _src, Vector3 const& _dest);
+
+		static bool _CollisionCircleToPoint(Circle const& _src, Vector3 const& _dest);
+		static bool _CollisionCircleToCircle(Circle const& _src, Circle const& _dest);
+
+		static bool _CollisionAABBToPoint(AABB const& _src, Vector3 const& _dest);
+		static bool _CollisionAABBToCircle(AABB const& _src, Circle const& _dest);
+		static bool _CollisionAABBToAABB(AABB const& _src, AABB const& _dest);
+
+		static bool _CollisionOOBBToPoint(OOBB const& _src, Vector3 const& _dest);
+		static bool _CollisionOOBBToCircle(OOBB const& _src, Circle const& _dest);
+		static bool _CollisionOOBBToAABB(OOBB const& _src, AABB const& _dest);
+		static bool _CollisionOOBBToOOBB(OOBB const& _src, OOBB const& _dest);
+
 		void _OnCollisionEnter(Collider* _dest, float _time);
 		void _OnCollisionStay(Collider* _dest, float _time);
 		void _OnCollisionLeave(Collider* _dest, float _time);
-
-		bool _CollisionOOBBToOOBB(OOBB const& _src, OOBB const& _dest);
-		bool _CollisionOOBBToAABB(OOBB const& _src, AABB const& _dest);
-		bool _CollisionOOBBToCircle(OOBB const& _src, Circle const& _dest);
-		bool _CollisionOOBBToPoint(OOBB const& _src, Vector3 const& _dest);
-
-		bool _CollisionAABBToAABB(AABB const& _src, AABB const& _dest);
-		bool _CollisionAABBToCircle(AABB const& _src, Circle const& _dest);
-		bool _CollisionAABBToPoint(AABB const& _src, Vector3 const& _dest);
-
-		bool _CollisionCircleToCircle(Circle const& _src, Circle const& _dest);
-		bool _CollisionCircleToPoint(Circle const& _src, Vector3 const& _dest);
-
-		bool _CollisionPointToPoint(Vector3 const& _src, Vector3 const& _dest);
 
 		void _AddSectionIdx(uint32_t _idx);
 
@@ -92,6 +98,10 @@ namespace K
 		bool _IsCollidedCollider(Collider* _dest);
 		void _AddCollidedCollider(Collider* _dest);
 		void _RemoveCollidedCollider(Collider* _dest);
+
+		Vector4 color_{};
+		std::shared_ptr<Mesh> mesh_{};
+		std::shared_ptr<Shader> shader_{};
 
 		Vector3 min_{};
 		Vector3 max_{};

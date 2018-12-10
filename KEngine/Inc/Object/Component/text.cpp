@@ -35,13 +35,13 @@ void K::Text::Render(float _time)
 	auto const& transform = static_cast<Transform*>(owner()->FindComponent(TAG{ TRANSFORM, 0 }).get());
 	auto position = transform->world().Translation();
 
-	if (!ui_flag_)
+	if (false == ui_flag_)
 	{
-		auto const& main_camera = WorldManager::singleton()->FindCamera({ "MainCamera", 0 });
-		auto const& main_camera_transform = static_cast<Transform*>(main_camera->FindComponent(TAG{ TRANSFORM, 0 }).get());
-		auto main_camera_position = main_camera_transform->world().Translation();
+		auto const& default_camera = WorldManager::singleton()->FindCamera({ DEFAULT_CAMERA, 0 });
+		auto const& default_camera_transform = static_cast<Transform*>(default_camera->FindComponent(TAG{ TRANSFORM, 0 }).get());
+		auto default_camera_position = default_camera_transform->world().Translation();
 
-		position -= main_camera_position;
+		position -= default_camera_position;
 	}
 
 	auto render_area = text_area_;

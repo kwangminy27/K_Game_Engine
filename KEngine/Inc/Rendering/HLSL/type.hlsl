@@ -1,3 +1,13 @@
+struct VS_INPUT_POSITION
+{
+	float3 position : POSITION;
+};
+
+struct VS_OUTPUT_POSITION
+{
+	float4 position : SV_POSITION;
+};
+
 struct VS_INPUT_POSITION_COLOR
 {
 	float3 position : POSITION;
@@ -44,6 +54,11 @@ cbuffer Animation2D : register(b2)
 {
 	float2 g_LT;
 	float2 g_RB;
+}
+
+cbuffer Collider : register(b3)
+{
+	float4 g_color;
 }
 
 Texture2D g_texture : register(t0);

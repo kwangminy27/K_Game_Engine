@@ -15,11 +15,11 @@ void K::WorldManager::Initialize()
 	{
 		auto const& object_manager = ObjectManager::singleton();
 
-		auto ui_camera = std::static_pointer_cast<CameraActor>(object_manager->CreateActor<CameraActor>({ "UICamera", 0 }));
+		auto ui_camera = std::static_pointer_cast<CameraActor>(object_manager->CreateActor<CameraActor>({ UI_CAMERA, 0 }));
 		camera_list_.push_back(ui_camera);
 
-		auto main_camera = std::static_pointer_cast<CameraActor>(object_manager->CreateActor<CameraActor>({ "MainCamera", 0 }));
-		camera_list_.push_back(main_camera);
+		auto default_camera = std::static_pointer_cast<CameraActor>(object_manager->CreateActor<CameraActor>({ DEFAULT_CAMERA, 0 }));
+		camera_list_.push_back(default_camera);
 	}
 	catch (std::exception const& _e)
 	{

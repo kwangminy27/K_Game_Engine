@@ -20,6 +20,7 @@ namespace K
 	//////////////////// Mesh Key ////////////////////
 	constexpr auto COLOR_TRI = "ColorTri";
 	constexpr auto TEX_RECT = "TexRect";
+	constexpr auto COLLIDER_RECT = "CollideRect";
 
 	//////////////////// Sampler Key ////////////////////
 	constexpr auto LINEAR_SAMPLER = "LinearSampler";
@@ -28,6 +29,7 @@ namespace K
 	constexpr auto BASIC_SHADER = "BasicShader";
 	constexpr auto BASIC_TEX_SHADER = "BasicTexShader";
 	constexpr auto BASIC_ANIMATION_2D_SHADER = "BasicAnimation2DShader";
+	constexpr auto COLLIDER_SHADER = "ColliderShader";
 
 	//////////////////// RenderState Key ////////////////////
 	constexpr auto ALPHA_BLEND = "AlphaBlend";
@@ -41,6 +43,14 @@ namespace K
 	constexpr auto RENDERER = "Renderer";
 	constexpr auto ANIMATION_2D = "Animation2D";
 	constexpr auto COLLIDER = "Collider";
+
+	//////////////////// Camera Key ////////////////////
+	constexpr auto DEFAULT_CAMERA = "DefaultCamera";
+	constexpr auto UI_CAMERA = "UICamera";
+
+	//////////////////// Common Key ////////////////////
+	constexpr auto DEFAULT = "Default";
+	constexpr auto UI = "UI";
 
 	struct VertexColor
 	{

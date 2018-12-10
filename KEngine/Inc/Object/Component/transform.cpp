@@ -123,12 +123,12 @@ void K::Transform::Serialize(OutputMemoryStream& _omstream)
 
 void K::Transform::UpdateConstantBuffer()
 {
-	auto const& main_camera = WorldManager::singleton()->FindCamera({ "MainCamera", 0 });
+	auto const& default_camera = WorldManager::singleton()->FindCamera({ DEFAULT_CAMERA, 0 });
 
 	TransformConstantBuffer transform_CB{};
 	transform_CB.world = world_;
-	transform_CB.view = main_camera->view();
-	transform_CB.projection = main_camera->projection();
+	transform_CB.view = default_camera->view();
+	transform_CB.projection = default_camera->projection();
 	transform_CB.WVP = transform_CB.world * transform_CB.view * transform_CB.projection;
 
 	transform_CB.world = transform_CB.world.Transpose();

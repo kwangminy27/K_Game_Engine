@@ -44,6 +44,19 @@ void K::ResourceManager::Initialize()
 			tex_rect_vertices, sizeof(VertexTex), 4, D3D11_USAGE_DEFAULT,
 			tex_rect_indices, sizeof(uint16_t), 6, D3D11_USAGE_DEFAULT, DXGI_FORMAT_R16_UINT
 		);
+
+		Vector3 collider_rect[5]{
+			{ 0.f, 0.f, 0.f },
+			{ 0.f, 1.f, 0.f },
+			{ 1.f, 1.f, 0.f },
+			{ 1.f, 0.f, 0.f },
+			{ 0.f, 0.f, 0.f }
+		};
+
+		_CreateMesh(
+			COLLIDER_RECT, D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP,
+			collider_rect, sizeof(Vector3), 5, D3D11_USAGE_DEFAULT
+		);
 #pragma endregion
 
 #pragma region Texture

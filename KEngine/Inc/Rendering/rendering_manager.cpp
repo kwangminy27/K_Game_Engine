@@ -45,6 +45,15 @@ void K::RenderingManager::Initialize()
 		input_element_desc_vector.push_back({ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 });
 
 		_CreateShader(BASIC_ANIMATION_2D_SHADER, cso_desc_vector, input_element_desc_vector, SHADER_PATH);
+
+		cso_desc_vector.clear();
+		cso_desc_vector.push_back({ SHADER_TYPE::VERTEX, L"ColliderVS.cso" });
+		cso_desc_vector.push_back({ SHADER_TYPE::PIXEL, L"ColliderPS.cso" });
+
+		input_element_desc_vector.clear();
+		input_element_desc_vector.push_back({ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 });
+
+		_CreateShader(COLLIDER_SHADER, cso_desc_vector, input_element_desc_vector, SHADER_PATH);
 #pragma endregion
 
 #pragma region RenderState
@@ -87,6 +96,7 @@ void K::RenderingManager::Initialize()
 		_CreateConstantBuffer(TRANSFORM, sizeof(TransformConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 0);
 		_CreateConstantBuffer(MATERIAL, sizeof(MaterialConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 1);
 		_CreateConstantBuffer(ANIMATION_2D, sizeof(Animation2DConstantBuffer), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 2);
+		_CreateConstantBuffer(COLLIDER, sizeof(Vector4), static_cast<uint8_t>(SHADER_TYPE::VERTEX) | static_cast<uint8_t>(SHADER_TYPE::PIXEL), 3);
 #pragma endregion
 	}
 	catch (std::exception const& _e)
