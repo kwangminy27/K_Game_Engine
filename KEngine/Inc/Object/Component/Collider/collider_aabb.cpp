@@ -11,6 +11,7 @@
 #include "Object/Component/transform.h"
 #include "collider_point.h"
 #include "collider_circle.h"
+#include "collider_oobb.h"
 
 void K::ColliderAABB::Initialize()
 {
@@ -36,15 +37,7 @@ void K::ColliderAABB::Update(float _time)
 {
 	auto position = CPTR_CAST<Transform>(owner()->FindComponent(TAG{ TRANSFORM, 0 }))->world().Translation();
 
-	if (UI == group_tag_)
-	{
-		auto const& default_camera = WorldManager::singleton()->FindCamera(TAG{ DEFAULT_CAMERA, 0 });
-
-		position -= CPTR_CAST<Transform>(default_camera->FindComponent(TAG{ TRANSFORM, 0 }))->world().Translation();
-	}
-
 	absolute_info_.center = position + relative_info_.center;
-	absolute_info_.extent = relative_info_.extent;
 
 	min_ = absolute_info_.center - absolute_info_.extent;
 	max_ = absolute_info_.center + absolute_info_.extent;
@@ -57,13 +50,13 @@ void K::ColliderAABB::Render(float _time)
 
 	if (UI == group_tag_)
 		camera = WorldManager::singleton()->FindCamera(TAG{ UI_CAMERA, 0 });
-	else
+	else if(DEFAULT == group_tag_)
 		camera = WorldManager::singleton()->FindCamera(TAG{ DEFAULT_CAMERA, 0 });
 
-	auto const& transform = owner()->FindComponent(TAG{ TRANSFORM, 0 });
+	auto collider_position = absolute_info_.center;
 
 	TransformConstantBuffer transform_CB{};
-	transform_CB.world = Matrix::CreateScaling(CPTR_CAST<Transform>(transform)->world_scaling()) * Matrix::CreateTranslation(min_);
+	transform_CB.world = Matrix::CreateScaling(CPTR_CAST<Transform>(owner()->FindComponent(TAG{ TRANSFORM, 0 }))->world_scaling()) * Matrix::CreateTranslation(collider_position);
 	transform_CB.view = camera->view();
 	transform_CB.projection = camera->projection();
 	transform_CB.WVP = transform_CB.world * transform_CB.view * transform_CB.projection;
@@ -103,6 +96,7 @@ K::AABB const& K::ColliderAABB::absolute_info() const
 void K::ColliderAABB::set_relative_info(AABB const& _info)
 {
 	relative_info_ = _info;
+	absolute_info_ = _info;
 }
 
 K::ColliderAABB::ColliderAABB(ColliderAABB const& _other) : Collider(_other)
@@ -131,7 +125,7 @@ bool K::ColliderAABB::_Collision(Collider* _dest, float _time)
 		return Collider::_CollisionAABBToAABB(absolute_info(), static_cast<ColliderAABB*>(_dest)->absolute_info());
 
 	case COLLIDER_TYPE::OOBB:
-		break;
+		return Collider::_CollisionOOBBToAABB(static_cast<ColliderOOBB*>(_dest)->absolute_info(), absolute_info());
 	}
 
 	return false;

@@ -11,6 +11,7 @@
 #include "Object/Component/transform.h"
 #include "collider_point.h"
 #include "collider_aabb.h"
+#include "collider_oobb.h"
 
 void K::ColliderCircle::Initialize()
 {
@@ -36,15 +37,7 @@ void K::ColliderCircle::Update(float _time)
 {
 	auto position = CPTR_CAST<Transform>(owner()->FindComponent(TAG{ TRANSFORM, 0 }))->world().Translation();
 
-	if (UI == group_tag_)
-	{
-		auto const& default_camera = WorldManager::singleton()->FindCamera(TAG{ DEFAULT_CAMERA, 0 });
-
-		position -= CPTR_CAST<Transform>(default_camera->FindComponent(TAG{ TRANSFORM, 0 }))->world().Translation();
-	}
-
 	absolute_info_.center = position + relative_info_.center;
-	absolute_info_.radius = relative_info_.radius;
 
 	min_ = absolute_info_.center - Vector3{ absolute_info_.radius, absolute_info_.radius, 0.f };
 	max_ = absolute_info_.center + Vector3{ absolute_info_.radius, absolute_info_.radius, 0.f };
@@ -57,13 +50,13 @@ void K::ColliderCircle::Render(float _time)
 
 	if (UI == group_tag_)
 		camera = WorldManager::singleton()->FindCamera(TAG{ UI_CAMERA, 0 });
-	else
+	else if(DEFAULT == group_tag_)
 		camera = WorldManager::singleton()->FindCamera(TAG{ DEFAULT_CAMERA, 0 });
 
-	auto const& transform = owner()->FindComponent(TAG{ TRANSFORM, 0 });
+	auto collider_position = absolute_info_.center;
 
 	TransformConstantBuffer transform_CB{};
-	transform_CB.world = Matrix::CreateScaling(CPTR_CAST<Transform>(transform)->world_scaling()) * Matrix::CreateTranslation(min_);
+	transform_CB.world = Matrix::CreateScaling(CPTR_CAST<Transform>(owner()->FindComponent(TAG{ TRANSFORM, 0 }))->world_scaling()) * Matrix::CreateTranslation(collider_position);
 	transform_CB.view = camera->view();
 	transform_CB.projection = camera->projection();
 	transform_CB.WVP = transform_CB.world * transform_CB.view * transform_CB.projection;
@@ -103,6 +96,7 @@ K::Circle const& K::ColliderCircle::absolute_info() const
 void K::ColliderCircle::set_relative_info(Circle const& _info)
 {
 	relative_info_ = _info;
+	absolute_info_ = _info;
 }
 
 K::ColliderCircle::ColliderCircle(ColliderCircle const& _other) : Collider(_other)
@@ -131,7 +125,7 @@ bool K::ColliderCircle::_Collision(Collider* _dest, float _time)
 		return Collider::_CollisionAABBToCircle(static_cast<ColliderAABB*>(_dest)->absolute_info(), absolute_info());
 
 	case COLLIDER_TYPE::OOBB:
-		break;
+		return Collider::_CollisionOOBBToCircle(static_cast<ColliderOOBB*>(_dest)->absolute_info(), absolute_info());
 	}
 
 	return false;

@@ -18,7 +18,6 @@ namespace K
 	constexpr auto SHADER_PATH = "ShaderPath";
 
 	//////////////////// Mesh Key ////////////////////
-	constexpr auto COLOR_TRI = "ColorTri";
 	constexpr auto TEX_RECT = "TexRect";
 	constexpr auto COLLIDER_RECT = "ColliderRect";
 	constexpr auto COLLIDER_CIRCLE = "ColliderCircle";

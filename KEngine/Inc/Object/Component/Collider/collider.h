@@ -39,7 +39,7 @@ namespace K
 	{
 		Vector3 center;
 		Vector3 extent;
-		Matrix rotation;
+		Quaternion rotation;
 	};
 
 	class K_ENGINE_DLL Collider : public Component

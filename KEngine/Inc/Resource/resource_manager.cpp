@@ -16,25 +16,11 @@ void K::ResourceManager::Initialize()
 	try
 	{
 #pragma region Mesh
-		VertexColor color_tri_vertices[3]{
-			{ { 0.f, 0.f, 0.f }, DirectX::Colors::Red.v },
-			{ { 0.5f, 1.f, 0.f }, DirectX::Colors::Green.v },
-			{ { 1.f, 0.f, 0.f }, DirectX::Colors::Blue.v }
-		};
-
-		uint16_t color_tri_indices[3]{ 0, 1, 2 };
-
-		_CreateMesh(
-			COLOR_TRI, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			color_tri_vertices, sizeof(VertexColor), 3, D3D11_USAGE_DEFAULT,
-			color_tri_indices, sizeof(uint16_t), 3, D3D11_USAGE_DEFAULT, DXGI_FORMAT_R16_UINT
-		);
-
 		VertexTex tex_rect_vertices[4]{
-			{ { 0.f, 0.f, 0.f }, { 0.f, 1.f } },
-			{ { 0.f, 1.f, 0.f }, { 0.f, 0.f } },
-			{ { 1.f, 0.f, 0.f }, { 1.f, 1.f } },
-			{ { 1.f, 1.f, 0.f }, { 1.f, 0.f } }
+			{ { -0.5f, -0.5f, 0.f }, { 0.f, 1.f } },
+			{ { -0.5f, 0.5f, 0.f }, { 0.f, 0.f } },
+			{ { 0.5f, 0.5f, 0.f }, { 1.f, 1.f } },
+			{ { 0.5f, -0.5f, 0.f }, { 1.f, 0.f } }
 		};
 
 		uint16_t tex_rect_indices[6]{ 0, 1, 2, 1, 3, 2 };
@@ -46,11 +32,11 @@ void K::ResourceManager::Initialize()
 		);
 
 		Vector3 collider_rect_vertices[5]{
-			{ 0.f, 0.f, 0.f },
-			{ 0.f, 1.f, 0.f },
-			{ 1.f, 1.f, 0.f },
-			{ 1.f, 0.f, 0.f },
-			{ 0.f, 0.f, 0.f }
+			{ -0.5f, -0.5f, 0.f },
+			{ -0.5f, 0.5f, 0.f },
+			{ 0.5f, 0.5f, 0.f },
+			{ 0.5f, -0.5f, 0.f },
+			{ -0.5f, -0.5f, 0.f }
 		};
 
 		_CreateMesh(
@@ -60,7 +46,7 @@ void K::ResourceManager::Initialize()
 
 		Vector3 collider_circle_vertices[37]{};
 		for (auto i = 0; i < 37; ++i)
-			collider_circle_vertices[i] = { (cos(DirectX::XMConvertToRadians(i * 10.f)) + 1) * 0.5f, (sin(DirectX::XMConvertToRadians(i * 10.f)) + 1) * 0.5f, 0.f };
+			collider_circle_vertices[i] = { cos(DirectX::XMConvertToRadians(i * 10.f)) * 0.5f, sin(DirectX::XMConvertToRadians(i * 10.f)) * 0.5f, 0.f };
 
 		_CreateMesh(
 			COLLIDER_CIRCLE, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST,

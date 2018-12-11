@@ -117,13 +117,10 @@ bool K::Collider::_CollisionAABBToCircle(AABB const& _src, Circle const& _dest)
 	auto src_min = _src.center - _src.extent;
 	auto src_max = _src.center + _src.extent;
 
-	auto proximity_point = _dest.center;
+	auto closest_point = _dest.center;
+	closest_point.Clamp(src_min, src_max);
 
-	proximity_point.Clamp(src_min, src_max);
-
-	auto distance = Vector3::Distance(proximity_point, _dest.center);
-
-	return distance <= _dest.radius;
+	return Vector3::Distance(closest_point, _dest.center) <= _dest.radius;
 }
 
 bool K::Collider::_CollisionAABBToAABB(AABB const& _src, AABB const& _dest)
@@ -152,22 +149,149 @@ bool K::Collider::_CollisionAABBToAABB(AABB const& _src, AABB const& _dest)
 
 bool K::Collider::_CollisionOOBBToPoint(OOBB const& _src, Vector3 const& _dest)
 {
-	return false;
+	auto rotation_matrix = Matrix::CreateFromQuaternion(_src.rotation);
+	auto right = rotation_matrix.Right();
+	auto up = rotation_matrix.Up();
+	auto forward = rotation_matrix.Forward();
+
+	if (right.Dot(_dest) - right.Dot(_src.center + right * _src.extent) > 0.f)
+		return false;
+	if (-right.Dot(_dest) + right.Dot(_src.center - right * _src.extent) > 0.f)
+		return false;
+	if (up.Dot(_dest) - up.Dot(_src.center + up * _src.extent) > 0.f)
+		return false;
+	if (-up.Dot(_dest) + up.Dot(_src.center - up * _src.extent) > 0.f)
+		return false;
+	if (forward.Dot(_dest) - forward.Dot(_src.center + forward * _src.extent) > 0.f)
+		return false;
+	if (-forward.Dot(_dest) + forward.Dot(_src.center - forward * _src.extent) > 0.f)
+		return false;
+
+	return true;
 }
 
 bool K::Collider::_CollisionOOBBToCircle(OOBB const& _src, Circle const& _dest)
 {
-	return false;
+	AABB aabb{};
+	aabb.center = _src.center;
+	aabb.extent = _src.extent;
+
+	auto rotation_matrix = Matrix::CreateFromQuaternion(_src.rotation);
+
+	Circle circle{};
+	circle.center = _src.center + Vector3::TransformNormal(_dest.center - _src.center, rotation_matrix.Inverse());
+	circle.radius = _dest.radius;
+
+	return _CollisionAABBToCircle(aabb, circle);
 }
 
 bool K::Collider::_CollisionOOBBToAABB(OOBB const& _src, AABB const& _dest)
 {
-	return false;
+	OOBB oobb{};
+	oobb.center = _dest.center;
+	oobb.extent = _dest.extent;
+	oobb.rotation = Quaternion::Identity;
+
+	return _CollisionOOBBToOOBB(_src, oobb);
 }
 
 bool K::Collider::_CollisionOOBBToOOBB(OOBB const& _src, OOBB const& _dest)
 {
-	return false;
+	auto src_rotation_matrix = Matrix::CreateFromQuaternion(_src.rotation);
+	auto src_right = src_rotation_matrix.Right();
+	auto src_up = src_rotation_matrix.Up();
+	auto src_forward = src_rotation_matrix.Forward();
+
+	auto dest_rotation_matrix = Matrix::CreateFromQuaternion(_dest.rotation);
+	auto dest_right = dest_rotation_matrix.Right();
+	auto dest_up = dest_rotation_matrix.Up();
+	auto dest_forward = dest_rotation_matrix.Forward();
+
+	auto src_length_on_dest_right = fabsf((src_right * _src.extent.x).Dot(dest_right)) + fabsf((src_up * _src.extent.y).Dot(dest_right)) + fabsf((src_forward * _src.extent.z).Dot(dest_right));
+	auto src_length_on_dest_up = fabsf((src_right * _src.extent.x).Dot(dest_up)) + fabsf((src_up * _src.extent.y).Dot(dest_up)) + fabsf((src_forward * _src.extent.z).Dot(dest_up));
+	auto src_length_on_dest_forward = fabsf((src_right * _src.extent.x).Dot(dest_forward)) + fabsf((src_up * _src.extent.y).Dot(dest_forward)) + fabsf((src_forward * _src.extent.z).Dot(dest_forward));
+
+	auto dest_length_on_src_right = fabsf((dest_right * _dest.extent.x).Dot(src_right)) + fabsf((dest_up * _dest.extent.y).Dot(src_right)) + fabsf((dest_forward * _dest.extent.z).Dot(src_right));
+	auto dest_length_on_src_up = fabsf((dest_right * _dest.extent.x).Dot(src_up)) + fabsf((dest_up * _dest.extent.y).Dot(src_up)) + fabsf((dest_forward * _dest.extent.z).Dot(src_up));
+	auto dest_length_on_src_forward = fabsf((dest_right * _dest.extent.x).Dot(src_forward)) + fabsf((dest_up * _dest.extent.y).Dot(src_forward)) + fabsf((dest_forward * _dest.extent.z).Dot(src_forward));
+
+	float src_length{};
+	float dest_length{};
+	float src_to_dest_length{};
+
+	auto src_to_dest = _dest.center - _src.center;
+
+	// case 1: src_right
+	src_length = _src.extent.x;
+	dest_length = dest_length_on_src_right;
+	src_to_dest_length = fabsf(src_to_dest.Dot(src_right));
+
+	if (src_length + dest_length < src_to_dest_length)
+		return false;
+
+	// case 2: src_up
+	src_length = _src.extent.y;
+	dest_length = dest_length_on_src_up;
+	src_to_dest_length = fabsf(src_to_dest.Dot(src_up));
+
+	if (src_length + dest_length < src_to_dest_length)
+		return false;
+
+	// case 3: src_forward
+	src_length = _src.extent.z;
+	dest_length = dest_length_on_src_forward;
+	src_to_dest_length = fabsf(src_to_dest.Dot(src_forward));
+
+	if (src_length + dest_length < src_to_dest_length)
+		return false;
+
+	// case 4: dest_right
+	src_length = src_length_on_dest_right;
+	dest_length = _dest.extent.x;
+	src_to_dest_length = fabsf(src_to_dest.Dot(dest_right));
+
+	if (src_length + dest_length < src_to_dest_length)
+		return false;
+
+	// case 5: dest_up
+	src_length = src_length_on_dest_up;
+	dest_length = _dest.extent.y;
+	src_to_dest_length = fabsf(src_to_dest.Dot(dest_up));
+
+	if (src_length + dest_length < src_to_dest_length)
+		return false;
+
+	// case 6: dest_forward
+	src_length = src_length_on_dest_forward;
+	dest_length = _dest.extent.z;
+	src_to_dest_length = fabsf(src_to_dest.Dot(dest_forward));
+
+	if (src_length + dest_length < src_to_dest_length)
+		return false;
+
+	// case 7 ~ 15: other axis
+	Vector3 axis[9]{};
+	axis[0] = src_right.Cross(dest_right);
+	axis[1] = src_right.Cross(dest_up);
+	axis[2] = src_right.Cross(dest_forward);
+	axis[3] = src_up.Cross(dest_right);
+	axis[4] = src_up.Cross(dest_up);
+	axis[5] = src_up.Cross(dest_forward);
+	axis[6] = src_forward.Cross(dest_right);
+	axis[7] = src_forward.Cross(dest_up);
+	axis[8] = src_forward.Cross(dest_forward);
+
+	for (auto i = 0; i < 9; ++i)
+	{
+		src_length = fabsf((src_right * _src.extent.x).Dot(axis[i])) + fabsf((src_up * _src.extent.y).Dot(axis[i])) + fabsf((src_forward * _src.extent.z).Dot(axis[i]));
+		dest_length = fabsf((dest_right * _dest.extent.x).Dot(axis[i])) + fabsf((dest_up * _dest.extent.y).Dot(axis[i])) + fabsf((dest_forward * _dest.extent.z).Dot(axis[i]));
+		src_to_dest_length = fabsf(src_to_dest.Dot(axis[i]));
+
+		if (src_length + dest_length < src_to_dest_length)
+			return false;
+	}
+
+	return true;
 }
 
 void K::Collider::_OnCollisionEnter(Collider* _dest, float _time)
